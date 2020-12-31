@@ -1,0 +1,14 @@
+.userOrders-container{
+    max-height: 30rem;
+    overflow: scroll;
+}
+
+.user-order img{
+    min-height: 9rem;
+    min-width: 9rem;
+    object-fit: cover;
+}
+
+.user-order p{
+    margin: 0;
+}

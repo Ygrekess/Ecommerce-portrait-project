@@ -1,0 +1,30 @@
+.modele-page-content{
+    height: 30rem;
+}
+
+.modele-page-img{
+   height: 30rem;
+   width: 30rem; 
+}
+.modele-page-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modele-page-details{
+    height: 100%;
+}
+
+.modele-page-cart-button{
+    background-color: #FFFF;
+    border: none;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
+}
+.modele-page-cart-button:hover .cart-icon, .modele-page-cart-button:hover .add-to-cart {
+    color: #F39D91; 
+}
+.cart-icon{
+    color: black;    
+}
