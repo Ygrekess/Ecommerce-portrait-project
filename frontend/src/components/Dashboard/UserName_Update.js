@@ -11,7 +11,7 @@ export default function UserName_Update(props) {
     const updateUsernameState = useSelector(state => state.updateUserName)
     const { errorUsernameUpdate, success } = updateUsernameState;
 
-    const passwordCheckState = useSelector(state => state.passwordCheck)
+    const passwordCheckState = useSelector(state => state.checkPassword)
     const { error, validate } = passwordCheckState;
 
     const [passwordCheck, setPasswordCheck] = useState("")

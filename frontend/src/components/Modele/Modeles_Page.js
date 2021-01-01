@@ -9,6 +9,7 @@ export default function Modeles_Page(props) {
 
     const productList = useSelector(state => state.listProducts);
     const { error, loading, products } = productList;
+    const [add, setAdd] = useState(false)
 
     /** Pagination */ 
     const countDb = useSelector(state => state.countData)
@@ -31,6 +32,15 @@ export default function Modeles_Page(props) {
 
     return (
         <div className="container">
+            { add ? 
+                <div className="add-test rounded d-flex justify-content-center align-items-center">
+                    <div className="add-border rounded border-success">
+                        <h5 className="m-0 text-success">Ajouté au panier !</h5>
+                    </div>
+                </div>
+                :
+                null
+            }
             <h1 className="text-left">Nos modèles</h1>
             <div className="container">
                 <div className="row">
@@ -41,7 +51,7 @@ export default function Modeles_Page(props) {
                     {
                     products.map(product => (
                         <div className="col-md-4 col-10" key={product._id}>
-                            <Modele_Card product={product}/>
+                            <Modele_Card setAdd={setAdd} product={product}/>
                         </div>
                     ))
                     }

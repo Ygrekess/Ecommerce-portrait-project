@@ -68,4 +68,10 @@ const savePayment = (data) => (dispatch, getState) => {
     Cookie.set("payment", JSON.stringify(payment));
 }
 
-export { addToCart, removeFromCart, setQty, saveShipping, savePayment };
+const resetCart = () => (dispatch, getState) => {
+    dispatch({ type: "CART_RESET_ITEMS" })
+    const { cart: { cartItems } } = getState();
+    Cookie.set("cartItems", JSON.stringify(cartItems));
+}
+
+export { addToCart, removeFromCart, setQty, saveShipping, savePayment, resetCart };

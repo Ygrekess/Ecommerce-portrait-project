@@ -1,5 +1,29 @@
-.cart-image img {
+.placeorder-page{
+    
+}
+
+.placeorder-info{
+    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);       
+}
+
+.numb-order{
+    font-size: 20px;
+}
+
+.cart-image {
     width: 5rem;
-    height: auto;
+    height: 5rem;
+}
+.cart-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+}
+
+.placeorder-action{
+    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);   
+}
+
+.total-price{
+    font-size: 30px;
 }

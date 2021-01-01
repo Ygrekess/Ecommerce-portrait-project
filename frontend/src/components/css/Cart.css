@@ -14,8 +14,10 @@
 .empty-cart{
     font-size: 20px;
 }
-
-
+.cart-item-container{
+    max-height: 15rem;
+    overflow: scroll;
+}
 
 .cart-component-img{
     width: 5rem;

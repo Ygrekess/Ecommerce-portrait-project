@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CartItems from './CartItems';
 
-export default function Cart() {
+export default function Cart({isVisible, setIsVisible}) {
 
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
@@ -36,7 +36,7 @@ export default function Cart() {
         {
             cartItems.length > 0 ?
             <div className="col-12 p-0">
-                <div className="px-4 mt-2 mb-3">
+                <div className="cart-item-container px-4 mt-2 mb-3">
                     {                
                         cartItems.map((product) => (    
                         <CartItems product={product} key={product._id}/>
@@ -46,7 +46,7 @@ export default function Cart() {
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">TVA : </span>{ tva }€</h4></div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Livraison : </span>{ shipping }€</h4></div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Total : </span>{ total }€ TTC</h4></div>
-                <div className="my-3 cart-total col-12"><Link to="/connexion?redirect=shipping" className="btn btn-dark text-white my-3">Valider mon panier</Link></div>
+                <div className="my-3 cart-total col-12"><Link to="/connexion?redirect=shipping" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white my-3">Valider mon panier</Link></div>
             </div>
             :
             <h4 className="empty-cart col-12 m-0 my-5 font-weight-light text-center">Votre panier est vide.</h4>

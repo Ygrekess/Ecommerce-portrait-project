@@ -1,4 +1,5 @@
 import Axios from "axios";
+import Cookie from 'js-cookie';
 
 const createOrder = (order) => async (dispatch, getState) => {
     const { userSignin: { userInfo } } = getState();
@@ -6,6 +7,7 @@ const createOrder = (order) => async (dispatch, getState) => {
     try {        
         const { data: { data: newOrder } } = await Axios.post("http://localhost:5000/api/orders", { order: order, userInfo: userInfo });
         dispatch({ type: "ORDER_CREATE_SUCCESS", payload: newOrder });
+        dispatch({ type: "ORDER_CREATE_RESET" });
     } catch (error) {
         dispatch({ type: "ORDER_CREATE_FAIL", payload: error.message });
     }
@@ -51,4 +53,8 @@ const payOrder = (order, paymentResult) => async (dispatch, getState) => {
   }
 }
 
-export { createOrder , detailsOrder, payOrder, importImage, recupUserOrders/*, listMyOrders, listOrders, deleteOrder  */};
+const resetPayOrder = () => (dispatch) => {
+    dispatch({ type: "ORDER_PAY_RESET" })
+}
+
+export { createOrder, resetPayOrder, detailsOrder, payOrder, importImage, recupUserOrders/*, listMyOrders, listOrders, deleteOrder  */};

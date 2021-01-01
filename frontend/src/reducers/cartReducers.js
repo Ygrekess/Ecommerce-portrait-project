@@ -32,6 +32,9 @@ function cartReducer(state = { cartItems: [], shipping: {}, payment: {} }, actio
         case "CART_SAVE_PAYMENT":
             return { ...state, payment: action.payload };
         
+        case "CART_RESET_ITEMS":
+            return { cartItems: [], shipping: {}, payment: {} }; 
+        
         default:
             return state;
     }

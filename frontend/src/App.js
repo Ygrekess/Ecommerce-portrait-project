@@ -17,11 +17,12 @@ import Order_Page from './components/Order/Order_Page';
 import PhotoImport_Page from './components/Order/PhotoImport_Page';
 import Dashboard from './components/Dashboard/Dashboard';
 import OrderDetails_Page from './components/Dashboard/OrderDetails_Page';
+import useVisible from "./components/Cart/useVisible"
 
 
 function App() {
 
-  const [openCart, setOpenCart] = useState(false);
+  const { ref, isVisible, setIsVisible } = useVisible(false);
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -37,15 +38,8 @@ function App() {
     }, 0)
   }
 
-  const displayCart = () => {
-    setOpenCart(!openCart)
-  }
-
   useEffect(() => {
-    return () => {
-      //
-    }
-  }, [openCart, cartItems])
+  }, [cartItems])
 
   const handleLogout = () => {
     dispatch(logout());
@@ -53,7 +47,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="app container-fluid d-flex flex-column justify-content-between">
+      <div className="app container-fluid d-flex flex-column justify-content-between min-vh-100">
         <header className="header row justify-content-between ">
           <div className="brand">
             <Link to="/">amazona</Link>
@@ -77,7 +71,7 @@ function App() {
               : null
               }
               <li>
-                <div className="cart d-flex flex-column align-items-center" onClick={() => displayCart()}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
+                <div className="cart d-flex flex-column align-items-center" onClick={e => setIsVisible(!isVisible)}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
               </li>
               {userInfo ? 
               <li>
@@ -100,11 +94,10 @@ function App() {
             )} */}
           </div>
         </header>
-        {
-        openCart === true ?
-          <Cart/>
-        : null
-        }
+
+      {isVisible && <div ref={ref}>
+        <Cart isVisible={isVisible} setIsVisible={setIsVisible} />
+      </div>}
 
         <div className="d-flex justify-content-center align-items-start">
           <Route path="/" exact component={Home_Page} />
@@ -116,8 +109,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrder_Page} />
           <Route path="/order/:id" component={Order_Page} />
           <Route path="/image" component={PhotoImport_Page} />
-
-          <Route path="/mon-compte" component={Dashboard} />
+          <Route path="/mon-compte/" component={Dashboard} />
           <Route path="/mes-commandes/:id" component={OrderDetails_Page} />
         </div>
         <footer className="footer">All right reserved.</footer>

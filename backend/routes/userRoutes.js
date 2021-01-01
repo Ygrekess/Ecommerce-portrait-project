@@ -16,7 +16,6 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    console.log(req.body)
     //Hash the password
     const salt = await bcrypt.genSaltSync(10)
     const hashedPassword = await bcrypt.hashSync(req.body.password, salt);
@@ -30,7 +29,6 @@ router.post('/register', async (req, res) => {
         newsletter: req.body.newsletter,
         password: hashedPassword,
     });
-    console.log(user)
     try {
         const savedUser = await user.save();
         res.send(savedUser);       
@@ -41,7 +39,6 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     //Checking if user is already in DB
-    console.log(req.body)
     const user = await User.findOne({ email: req.body.email });
     console.log(user)
     if (!user) {
@@ -54,9 +51,6 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ _id: user._id, isAdmin: user.isAdmin }, process.env.TOKEN_SECRET)
     res.send({
         _id: user._id,
-        lastname: user.lastname,
-        email: user.email,
-        password: user.password,
         isAdmin: user.isAdmin,
         token: token
     });

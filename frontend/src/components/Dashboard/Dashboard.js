@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom'
 import Password_Update from './Password_Update'
 import UserName_Update from './UserName_Update'
 import Infos_Update from './Infos_Update'
+import OrderDetails_Page from './OrderDetails_Page'
 
 
 export default function Dashboard(props) {

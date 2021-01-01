@@ -12,16 +12,13 @@ export default function Dashboard_Menu({props}) {
     }
 
   const checkActive = (url) => {
-
         if (props.location.pathname === url) {
             return true
         } 
         return false
     }
 
-    useEffect(() => {
-        return () => {
-        }
+  useEffect(() => {
     }, [])
 
     return (

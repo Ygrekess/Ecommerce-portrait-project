@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Modele_Card.css';
 import { FiShoppingCart } from 'react-icons/fi'
@@ -6,11 +6,17 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../actions/cartActions';
 import { AiOutlineRight } from "react-icons/ai"
 
-export default function Modele_Card({ product }) {
+export default function Modele_Card({ product, setAdd }) {
 
     const dispatch = useDispatch()
     const handleAddToCart = () => {
+        addItem();
         dispatch(addToCart(product._id, 1));
+    }
+    
+    const addItem = () => {
+        setAdd(true);
+        setTimeout(() => setAdd(false), 3000)
     }
 
     useEffect(() => {

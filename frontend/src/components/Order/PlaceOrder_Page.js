@@ -44,7 +44,7 @@ export default function PlaceOrder_Page(props) {
     
     useEffect(() => {
         if (success) {
-            props.history.push("/order/" + order._id);
+            props.history.push(`/order/${order._id}`)
         }
         return () => {
             //
@@ -54,43 +54,39 @@ export default function PlaceOrder_Page(props) {
 
 
     return (
-    <div>
+    <div className="container placeorder-page">
         <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
-        <div className="placeorder">
-                <div className="placeorder-info">
-
-                <div>
+        <div className="placeorder-resume d-flex justify-content-between align-items-center mt-5 text-left">
+            <div className="placeorder-info col-6">
+                <div className="border-bottom pb-3">
                     <h3>Livraison</h3>
-                        <div>
-                            {shipping.address}, {shipping.city},
-                            {shipping.postalCode}, {shipping.country},
-                        </div>
+                    <div>
+                        {shipping.address}, <br />
+                        {shipping.postalCode} {shipping.city}, {shipping.country}.
+                    </div>
                 </div>
-                <div>
+                <div className="border-bottom py-3">
                     <h3>Règlement</h3>
-                        <div>Méthode de paiement : { payment.paymentMethod }</div>
+                    <div>Méthode de paiement : { payment.paymentMethod }</div>
                 </div>         
-                <div>
-                    <ul className="cart-list-container">
-                        <li>
-                            <h3>Votre panier</h3>
-                            <div>Price</div>
-                        </li>
+                <div className="py-3">
+                    <div className="cart-list-container p-0">
+                        <h3>Votre panier</h3>
+                    </div>
+                    <ul className="cart-list-container row flex-wrap p-0">
                         {
                         cartItems.length === 0 ?
-                            <div>Votre panier est vide</div>
+                            <li>Votre panier est vide</li>
                             :
                             cartItems.map(item =>
-                            <li key={item._id}>
+                            <li className="col-3" key={item._id}>
                                 <div className="cart-image">
                                     <img src={item.image} alt="product"/>
                                 </div>
                                 <div className="cart-name">
+                                    <h5 className="mx-0 my-1 font-weight-bold">{item.name}</h5>
                                     <div>
-                                        <Link to={"/product/" + item.product}>{item.name}</Link>
-                                    </div>
-                                    <div>
-                                        Quantité: {item.qty}
+                                        Qté : {item.qty}
                                     </div>
                                 </div>
                                 <div className="cart-price">{item.price}€</div>
@@ -100,31 +96,25 @@ export default function PlaceOrder_Page(props) {
                     </ul>
                 </div>
             </div>       
-            <div className="placeorder-action">
-                <ul>
+            <div className="placeorder-action col-4 d-flex flex-column align-items-start justify-content-center pl-5">
+                <h3>Votre commande</h3>
+                <ul className="p-0">
                     <li>
-                        <button className="button primary full-width" onClick={placeOrderHandler} >Place Order</button>
+                        <div>Produit{itemsNumb > 1 ? "s" : ""} : <span className="numb-items">{itemsNumb}</span></div>
                     </li>
                     <li>
-                        <h3>Order Summary</h3>
+                        <div>Frais de livraison : <span className="shipping-price">{shippingPrice}€</span></div>
                     </li>
                     <li>
-                        <div>Produit(s)</div>
-                        <div>{itemsNumb}</div>
+                        <div>TVA : <span className="tva-price">{tva}€</span></div>
                     </li>
                     <li>
-                        <div>Livraison</div>
-                        <div>{shippingPrice}€</div>
-                    </li>
-                    <li>
-                        <div>TVA</div>
-                        <div>{tva}€</div>
-                    </li>
-                    <li>
-                        <div>Total</div>
-                        <div>${total}</div>
+                        <div>Total : <br/>
+                            <span className="total-price">{total}€</span>
+                        </div>
                     </li>
                 </ul>
+                <button className="btn btn-primary" onClick={placeOrderHandler} >Valider</button>
             </div>
         </div>
     </div>

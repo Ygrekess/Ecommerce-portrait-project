@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { productDetails } from '../../actions/productActions';
 import { FiShoppingCart } from 'react-icons/fi'
@@ -10,11 +10,18 @@ export default function Modele_Page(props) {
 
     const details = useSelector((state) => state.detailsProduct);
     const { loading, product, error } = details;
+    const [add, setAdd] = useState(false)
 
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
-        dispatch(addToCart(product._id, 1))
+        addItem();
+        dispatch(addToCart(product._id, 1));
+    }
+
+    const addItem = () => {
+        setAdd(true);
+        setTimeout(() => setAdd(false), 3000);
     }
 
     useEffect(() => {
@@ -25,6 +32,15 @@ export default function Modele_Page(props) {
 
     return (
         <div className="d-flex align-items-center">
+            { add ? 
+                <div className="add-test rounded d-flex justify-content-center align-items-center">
+                    <div className="add-border rounded border-success">
+                        <h5 className="m-0 text-success">Ajouté au panier !</h5>
+                    </div>
+                </div>
+                :
+                null
+            }
             <div className="row">
                 {loading && <h4 className="text-center mx-auto">Chargement...</h4>}
                 {error && <h4 className="text-center mx-auto">{error}</h4>}

@@ -6,6 +6,8 @@ function orderCreateReducer(state = {}, action) {
       return { loading: false, order: action.payload, success: true };
     case "ORDER_CREATE_FAIL":
       return { loading: false, error: action.payload };
+    case "ORDER_CREATE_RESET":
+      return { loading: false, order: {}, success: false};
     default: return state;
   }
 }
@@ -60,6 +62,8 @@ function orderPayReducer(state = {
       return { loading: false, success: true };
     case "ORDER_PAY_FAIL":
       return { loading: false, error: action.payload };
+    case "ORDER_PAY_RESET":
+      return { loading: false, success: false };
     default: return state;
   }
 }

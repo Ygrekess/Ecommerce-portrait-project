@@ -52,3 +52,51 @@
   justify-content: center;
   align-items: center;
 }
+
+.modal-background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(44, 43, 44, 0.5);
+}
+
+.modal-test{
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 30rem;
+  height: 15rem;
+  background-color: #FFFF;
+  animation: display .75s linear normal;
+}
+
+@keyframes display {
+    0% {
+      transform: translateY(-10rem);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  .add-test{
+    position: fixed;
+    z-index: 1000;
+    top: 2rem;
+    right: 2rem;
+    width: 15rem;
+    height: 3rem;
+    background-color: #FFFF;
+    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
+    animation: display .5s linear normal;
+   
+  }
+
+  .add-border{
+  }

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { recupUserOrders } from '../../actions/orderActions';
 import '../css/UserOrders.css';
 
-export default function UserOrders(props) {
+export default function UserOrders() {
 
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
@@ -15,21 +15,18 @@ export default function UserOrders(props) {
     const { loading, orders, error } = userOrders;
 
     useEffect(() => {
-        if (userInfo) {
-            if (!orders) {
-                dispatch(recupUserOrders(userInfo._id))
-            }            
-        }
+        dispatch(recupUserOrders(userInfo._id))
         return () => {
         }
-    }, [orders])
+    }, [])
 
     return ( loading ? <div>Loading</div> :
         <div className="col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
                 <h1 className="mb-5 text-uppercase w-100">Mes commandes</h1>
                 <div className={"userOrders-container"}>
-                {
+                { orders.length === 0 ? 
+                    <div>Vous n'avez passé aucune commande.</div> :
                     orders.map((order, i) => (
                         order.orderItems.map((item, i) => (
                             <div key={i} className="user-order d-flex w-100 mb-2 p-3">

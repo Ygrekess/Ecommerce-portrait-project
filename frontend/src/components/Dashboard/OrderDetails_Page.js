@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 export default function OrderDetails_Page(props) {
     useEffect(() => {
-        return () => {
-        }
     }, [])
     return (
         <div className="container">
