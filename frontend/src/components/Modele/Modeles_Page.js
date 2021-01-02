@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
 import { listProducts } from '../../actions/productActions';
 import Modele_Card from './Modele_Card';
+import { ImSpinner8 } from "react-icons/im"
 
 export default function Modeles_Page(props) {
 
@@ -44,7 +45,7 @@ export default function Modeles_Page(props) {
             <h1 className="text-left">Nos modèles</h1>
             <div className="container">
                 <div className="row">
-                    {loading && <h4 className="text-center mx-auto">Loading...</h4>}
+                    {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }
                     {error && <h4 className="text-center mx-auto">{error}</h4>}
                 </div>
                 <div className="row d-flex justify-content-between flex-wrap">

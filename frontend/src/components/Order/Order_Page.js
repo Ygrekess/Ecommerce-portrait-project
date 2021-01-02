@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {PayPalButton} from 'react-paypal-button-v2';
 import '../css/PlaceOrder_Page.css'
-import { detailsOrder, payOrder, resetPayOrder } from '../../actions/orderActions';
+import { detailsOrder, payOrder } from '../../actions/orderActions';
 import Axios from 'axios';
-import Cookie from 'js-cookie';
 import { resetCart } from '../../actions/cartActions';
-
+import { ImSpinner8 } from "react-icons/im"
+import {FiCheckSquare} from "react-icons/fi"
 
 export default function Order_Page(props) {
-    const dispatch = useDispatch()
+
     const orderId = props.match.params.id;
+    const [modal, setModal] = useState(false)
     const [sdkReady, setSdkReady] = useState(false)
-    const [wantPay, setWantPay] = useState(false)
+    const [wait, setWait] = useState(false)
 
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails;
@@ -21,8 +21,9 @@ export default function Order_Page(props) {
     const orderPay = useSelector(state => state.payOrder);
     const { loading: loadingPay, success: successPay, error: errorPay } = orderPay;
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        console.log(order)
         const addPaypalScript = async () => {
             const { data } = await Axios.get('http://localhost:5000/api/config/paypal');
             const script = document.createElement('script');
@@ -35,10 +36,9 @@ export default function Order_Page(props) {
             document.body.appendChild(script);
         }
         if (successPay) {
-            dispatch(detailsOrder(orderId));
             dispatch(resetCart())
-            props.history.push("/mon-compte/mes-commandes")
-            dispatch(resetPayOrder())
+            displayModal();
+            setTimeout(() => props.history.push("/mon-compte/mes-commandes"), 3000) 
         }
 
         if (!order) {
@@ -53,25 +53,39 @@ export default function Order_Page(props) {
             }
         }
 
-        return () => {
-            
-        }
-    }, [order, dispatch, sdkReady, successPay])
+    }, [order, sdkReady, successPay, wait])
 
     const handleSuccessPayment = (paymentResult) => {
         dispatch(payOrder(order, paymentResult));
     }
 
-    const makePayment = () => {
-        setWantPay(!wantPay);
+    const setPayment = () => {
+        setWait(true)
     }
 
-    return (loading ? <div>Loading ...</div> : error ? <div>{error}</div> :
-        <div className="container order-page">
-            <h1>Votre commande <span className="numb-order">(n° {order._id})</span></h1>
+    const cancelPayment = () => {
+        setWait(false)  
+    }
 
-            <div className={"placeorder-resume d-flex align-items-center mt-5 text-left " + (wantPay ? "justify-content-center" : "justify-content-between")}>
-                { !wantPay ?
+    const displayModal = () => {
+        setModal(!modal);
+    }
+
+    return (loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60} /></div> : error ? <div>{error}</div> :
+        <div className="container order-page">
+            { modal ? 
+                <div className="modal-background">
+                    <div className="modal-test m-auto rounded d-flex flex-column justify-content-center align-items-center p-3">
+                        <h3>Votre commande a bien été validée !</h3>
+                        <div className="order-check-icon text-success my-3 d-flex justify-content-center w-100"><FiCheckSquare size={60}/></div>
+                        <p>Veuillez patienter, vous allez être redirigé.</p>
+                    </div>
+                </div>
+                :
+                null
+            }
+            { !successPay ?
+            <div className={"placeorder-resume d-flex align-items-center mt-5 text-left justify-content-between"}>
                 <div className="placeorder-info rounded p-4 col-6">
                     <div className="border-bottom pb-3">
                         <h3>Livraison</h3>
@@ -111,10 +125,7 @@ export default function Order_Page(props) {
                         </ul>
                     </div>
                 </div>
-                    :
-                null
-                }    
-                <div className={"placeorder-action d-flex flex-column align-items-start rounded justify-content-center p-4 " + (!wantPay ? "col-4" : "")}>
+                <div className={"placeorder-action d-flex flex-column align-items-start rounded justify-content-center p-4 col-4"}>
                     <h3>Résumé</h3>
                     <ul className="p-0">
                         <li>
@@ -134,20 +145,18 @@ export default function Order_Page(props) {
                                 <span className="total-price">{order.totalPrice}€</span>
                             </div>
                         </li>
-                    </ul>
-                    { wantPay ?                     
-                        <div className="d-flex flex-column align-items-center justify-content-center">
-                            { !sdkReady ? <h5>Veuillez patienter...</h5> : 
-                                <PayPalButton amount={order.totalPrice} onSuccess={handleSuccessPayment}/>
-                            }
-                            <button className="btn btn-outline-primary m-auto" onClick={() => makePayment()} >Annuler</button>
-                        </div>
-                        :
-                        <button className="btn btn-primary m-auto" onClick={() => makePayment()} >Payer</button>
-                    }
+                    </ul> 
+                    <div className="d-flex flex-column align-items-center justify-content-center w-100">
+                        { !sdkReady ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : 
+                            <PayPalButton onClick={() => setPayment()} amount={order.totalPrice} onSuccess={handleSuccessPayment} onCancel={cancelPayment} />
+                        }
+                        { wait && <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div>}
+                    </div>
                 </div>
             </div>
-            
+                :
+            null
+            }
         </div>
     )
 }

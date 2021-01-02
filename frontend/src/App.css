@@ -73,30 +73,46 @@
   background-color: #FFFF;
   animation: display .75s linear normal;
 }
+.loading-spinner-div svg{
+  animation: rotate .75s linear infinite;
+  color: lightgray;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 @keyframes display {
-    0% {
-      transform: translateY(-10rem);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0px);
-      opacity: 1;
-    }
+  0% {
+    transform: translateY(-10rem);
+    opacity: 0;
   }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 
-  .add-test{
-    position: fixed;
-    z-index: 1000;
-    top: 2rem;
-    right: 2rem;
-    width: 15rem;
-    height: 3rem;
-    background-color: #FFFF;
-    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
-    animation: display .5s linear normal;
-   
-  }
+.add-test{
+  position: fixed;
+  z-index: 1000;
+  top: 2rem;
+  right: 2rem;
+  width: 15rem;
+  height: 3rem;
+  background-color: #FFFF;
+  box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
+  animation: display .5s linear normal;
+  
+}
 
-  .add-border{
-  }
+.add-border{
+}
+
+.loading-spinner{
+}

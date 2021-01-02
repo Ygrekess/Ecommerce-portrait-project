@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { ImSpinner8 } from "react-icons/im"
 import "../App.css"
+import {FiCheckSquare} from "react-icons/fi"
 
 export default function Home_Page() {
 
@@ -24,8 +26,10 @@ export default function Home_Page() {
             <h1>HOMEPAGE</h1>
             { modal ? 
                 <div className="modal-background">
-                    <div className="modal-test m-auto rounded d-flex flex-column justify-content-center align-items-center">
+                    <div className="modal-test m-auto rounded d-flex flex-column justify-content-center align-items-center p-3">
                         <h3>Votre commande a bien été validée !</h3>
+                        <div className="order-check-icon text-success my-3 d-flex justify-content-center w-100"><FiCheckSquare size={60}/></div>
+                        <p>Veuillez patienter, vous allez être redirigé ...</p>
                         <button className="btn btn-primary " onClick={() => displayModal()}>Fermer</button>
                     </div>
                 </div>

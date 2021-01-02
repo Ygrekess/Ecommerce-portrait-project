@@ -8,7 +8,7 @@ const shippingSchema = {
 };
 
 const paymentSchema = {
-  paymentMethod: { type: String, required: true }
+  paymentMethod: { type: String }
 };
 
 const orderItemSchema = new mongoose.Schema({

@@ -18,6 +18,7 @@ import PhotoImport_Page from './components/Order/PhotoImport_Page';
 import Dashboard from './components/Dashboard/Dashboard';
 import OrderDetails_Page from './components/Dashboard/OrderDetails_Page';
 import useVisible from "./components/Cart/useVisible"
+import Order from './components/Order/Order';
 
 
 function App() {
@@ -106,6 +107,7 @@ function App() {
           <Route path="/modele/:productId" component={Modele_Page} />
           <Route path="/shipping" component={Shipping_Page} />
           <Route path="/payment" component={Payment_Page} />
+          <Route path="/testorder" component={Order} />
           <Route path="/placeorder" component={PlaceOrder_Page} />
           <Route path="/order/:id" component={Order_Page} />
           <Route path="/image" component={PhotoImport_Page} />

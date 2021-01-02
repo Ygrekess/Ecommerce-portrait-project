@@ -16,12 +16,13 @@ router.post('/', async (req, res) => {
         shippingPrice: req.body.order.shippingPrice,
         totalPrice: req.body.order.total,
     })
-
+    console.log(newOrder)
     try {
-        const savedOrder = await newOrder.save();
-        res.status(201).send({ message: "New Order Created", data: savedOrder })
+      const savedOrder = await newOrder.save();
+      console.log(savedOrder)
+      res.status(201).send({ message: "New Order Created", data: savedOrder })
     } catch (error) {
-        res.status(400).send({message : "La commande n'a pas pu être validée"});
+      res.status(400).send({message : "La commande n'a pas pu être validée"});
     }
 })
 

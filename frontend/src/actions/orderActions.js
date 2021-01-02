@@ -7,7 +7,7 @@ const createOrder = (order) => async (dispatch, getState) => {
     try {        
         const { data: { data: newOrder } } = await Axios.post("http://localhost:5000/api/orders", { order: order, userInfo: userInfo });
         dispatch({ type: "ORDER_CREATE_SUCCESS", payload: newOrder });
-        dispatch({ type: "ORDER_CREATE_RESET" });
+        //dispatch({ type: "ORDER_CREATE_RESET" });
     } catch (error) {
         dispatch({ type: "ORDER_CREATE_FAIL", payload: error.message });
     }

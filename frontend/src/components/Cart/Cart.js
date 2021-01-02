@@ -6,7 +6,7 @@ import CartItems from './CartItems';
 export default function Cart({isVisible, setIsVisible}) {
 
     const cart = useSelector((state) => state.cart);
-    const { cartItems } = cart;
+    const { cartItems, shipping, payment } = cart;
         
     const totalCart = () => {
         return cartItems.reduce((total, cartItems) => {
@@ -19,10 +19,11 @@ export default function Cart({isVisible, setIsVisible}) {
         return total + (1 * cartItems.qty)
         }, 0)
     }
-    
+
+    const itemsNumb = numbItemsCart();
     const tva = ((Number(totalCart()) / 120) * 20).toFixed(2);
-    const shipping = Number(totalCart()) > 50 ? 0 : 4.99;
-    const total = (Number(totalCart()) + Number(shipping)).toFixed(2);
+    const shippingPrice = Number(totalCart()) > 50 ? 0 : 4.99;
+    const total = (Number(totalCart()) + Number(shippingPrice)).toFixed(2);
     
     useEffect(() => {
         return () => {
@@ -44,10 +45,10 @@ export default function Cart({isVisible, setIsVisible}) {
                     }
                 </div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">TVA : </span>{ tva }€</h4></div>
-                <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Livraison : </span>{ shipping }€</h4></div>
+                <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Livraison : </span>{ shippingPrice }€</h4></div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Total : </span>{ total }€ TTC</h4></div>
-                <div className="my-3 cart-total col-12"><Link to="/connexion?redirect=shipping" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white my-3">Valider mon panier</Link></div>
-            </div>
+                <div className="my-3 cart-total col-12"><Link /* to="/connexion?redirect=shipping" */ to="/testorder" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white my-3 rounded-0 p-2">Valider mon panier</Link></div>
+                </div>
             :
             <h4 className="empty-cart col-12 m-0 my-5 font-weight-light text-center">Votre panier est vide.</h4>
         }

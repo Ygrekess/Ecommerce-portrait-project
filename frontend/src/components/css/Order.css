@@ -1,0 +1,116 @@
+/* Colors
+
+Teinte gris
+{
+    clair : #FFFFFF;
+    moyen : #FDFDFD;
+    foncé : #F8F8F8;
+    trés foncé : #EEEEEE
+}
+*/
+
+/* TABLE */
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th,
+.table-bordered
+{
+    border: 0;
+}
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th
+{
+    vertical-align: middle;
+}
+
+/* CART RESUME */
+.cart-resume{
+    height: auto;
+    background-color: #F8F8F8;
+}
+.cart-resume .table-bordered > thead > tr
+{
+    background-color: #EEEEEE
+}
+.cart-resume .table-bordered > tbody > tr
+{
+    background-color: #FDFDFD;
+}
+
+
+
+
+
+/* ORDER RESUME */
+.order-resume{
+    position: relative;
+    height: auto;
+}
+.order-resume .table-bordered{
+    position: relative;
+    background-color: #FFFFFF;
+    height: 20rem;
+    vertical-align: center;
+    z-index: 2;
+}
+.order-resume .table-bordered > tbody > .table-product-row{
+    background-color: #FDFDFD;
+}
+.order-resume .table-bordered > thead > tr, 
+.order-resume .table-bordered > tbody > tr > th 
+{
+    background-color: #F8F8F8;
+}
+.order-resume .table-bordered > tbody > tr > .table-total-th
+{
+    vertical-align: top;
+}
+.order-resume .table-bordered > tbody > tr > .table-total-td
+{
+    background-color: #FDFDFD;
+}
+.span-qty{
+    font-size: 15px;
+}
+.span-tva{
+    font-size: 10px;
+}
+
+/* ORDER PAY DIV */
+
+.order-pay-div{
+    position: relative;
+    z-index: 1;
+    height: 10rem;
+    background-color: #F8F8F8;
+    animation: display .5s linear normal;
+}
+.paypal-button, .credit-card-button{
+    height: 50%;
+    cursor: pointer;
+}
+.paypal-button:hover, .credit-card-button:hover{
+    background-color:  #EEEEEE;
+    transition: .25s;
+    box-shadow:0px 0px 5px 0px rgba(133, 132, 132, 0.25);   
+}
+/* .credit-card-button{
+    height: 50%;
+    cursor: pointer;
+
+} */
+.cancel-order-button{
+    animation: display .5s linear normal;
+}
+
+@keyframes display {
+  0% {
+    transform: translateY(-10rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

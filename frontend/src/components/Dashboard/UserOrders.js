@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { recupUserOrders } from '../../actions/orderActions';
+import { recupUserOrders, resetPayOrder } from '../../actions/orderActions';
 import '../css/UserOrders.css';
 
 export default function UserOrders() {
@@ -15,6 +15,7 @@ export default function UserOrders() {
     const { loading, orders, error } = userOrders;
 
     useEffect(() => {
+        dispatch(resetPayOrder())
         dispatch(recupUserOrders(userInfo._id))
         return () => {
         }
