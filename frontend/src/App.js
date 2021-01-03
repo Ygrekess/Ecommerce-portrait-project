@@ -10,16 +10,15 @@ import { VscAccount } from 'react-icons/vsc';
 import Modele_Page from './components/Modele/Modele_Page';
 import { useEffect, useState } from 'react';
 import Cart from './components/Cart/Cart';
-import Shipping_Page from './components/Order/Shipping_Page';
-import Payment_Page from './components/Order/Payment_Page';
-import PlaceOrder_Page from './components/Order/PlaceOrder_Page';
-import Order_Page from './components/Order/Order_Page';
-import PhotoImport_Page from './components/Order/PhotoImport_Page';
 import Dashboard from './components/Dashboard/Dashboard';
 import OrderDetails_Page from './components/Dashboard/OrderDetails_Page';
 import useVisible from "./components/Cart/useVisible"
-import Order from './components/Order/Order';
+import PlaceOrder_Page from './components/Order/PlaceOrder_Page';
+import { loadStripe } from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import Upload_Page from './components/Order/Upload_Page';
 
+const stripePromise = loadStripe('pk_test_51I5SwjCkP1aIaUis7r9xPfgttfwYd9Dbz6joX9VcgV4KX1PnxFofxQS0Z1vSHZ1Q4UMUqO5ZIVBMiNYLFuILznKd00ElOrsevC');
 
 function App() {
 
@@ -48,6 +47,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Elements stripe={stripePromise}>
       <div className="app container-fluid d-flex flex-column justify-content-between min-vh-100">
         <header className="header row justify-content-between ">
           <div className="brand">
@@ -105,18 +105,14 @@ function App() {
           <Route path="/connexion" component={Connexion_Page} />
           <Route path="/modeles/:page?" component={Modeles_Page} />
           <Route path="/modele/:productId" component={Modele_Page} />
-          <Route path="/shipping" component={Shipping_Page} />
-          <Route path="/payment" component={Payment_Page} />
-          <Route path="/testorder" component={Order} />
-          <Route path="/placeorder" component={PlaceOrder_Page} />
-          <Route path="/order/:id" component={Order_Page} />
-          <Route path="/image" component={PhotoImport_Page} />
+          <Route path="/commande" component={PlaceOrder_Page} />
+          <Route path="/envoyer-photos/:id" component={Upload_Page} />
           <Route path="/mon-compte/" component={Dashboard} />
           <Route path="/mes-commandes/:id" component={OrderDetails_Page} />
         </div>
         <footer className="footer">All right reserved.</footer>
       </div>
-
+    </Elements>
     </BrowserRouter>
 
   );

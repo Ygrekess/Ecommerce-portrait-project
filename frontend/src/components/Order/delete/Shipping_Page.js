@@ -3,7 +3,7 @@ import Cookie from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import CheckoutSteps from './CheckoutSteps';
 import '../css/Shipping_Page.css'
-import { saveShipping } from '../../actions/cartActions';
+import { saveShipping } from '../../../actions/cartActions';
 
 export default function Shipping_page(props) {
 

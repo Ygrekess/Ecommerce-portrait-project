@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes'
 import orderRoutes from './routes/orderRoutes'
 import productRoutes from './routes/productRoutes'
 import fileUpload from 'express-fileupload';
+import cors from 'cors'
 
 const app = express()
 
@@ -22,6 +23,7 @@ mongoose.connect(
 
 app.use(fileUpload());
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { savePayment } from '../../actions/cartActions';
-import CheckoutSteps from '../Order/CheckoutSteps'
+import { savePayment } from '../../../actions/cartActions';
+import CheckoutSteps from './CheckoutSteps'
 import { GrPaypal } from 'react-icons/gr'
 import { MdPayment } from 'react-icons/md'
 

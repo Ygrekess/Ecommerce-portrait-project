@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {PayPalButton} from 'react-paypal-button-v2';
 import '../css/PlaceOrder_Page.css'
-import { detailsOrder, payOrder } from '../../actions/orderActions';
+import { detailsOrder, payOrder } from '../../../actions/orderActions';
 import Axios from 'axios';
-import { resetCart } from '../../actions/cartActions';
+import { resetCart } from '../../../actions/cartActions';
 import { ImSpinner8 } from "react-icons/im"
 import {FiCheckSquare} from "react-icons/fi"
 

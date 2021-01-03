@@ -1,14 +1,16 @@
 import express from 'express';
 import Order from '../model/Order';
 import Image from '../model/Image';
+import Stripe from "stripe";
 
 const router = express.Router();
+const stripe = new Stripe("sk_test_51I5SwjCkP1aIaUisfuL4W5e4TgooYrqxvrGXpvA20bQZTNbyxE7QnFEEDmItCkcW2c1H5lLwhheprl7TAyvGDbLI00yU4IKtTx");
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
     const newOrder = new Order({
         orderItems: req.body.order.orderItems,
         user: req.body.userInfo._id,
+        isPaid: true,
         shipping: req.body.order.shipping,
         payment: req.body.order.payment,
         itemsNumb: req.body.order.itemsNumb,
@@ -16,7 +18,6 @@ router.post('/', async (req, res) => {
         shippingPrice: req.body.order.shippingPrice,
         totalPrice: req.body.order.total,
     })
-    console.log(newOrder)
     try {
       const savedOrder = await newOrder.save();
       console.log(savedOrder)
@@ -24,6 +25,24 @@ router.post('/', async (req, res) => {
     } catch (error) {
       res.status(400).send({message : "La commande n'a pas pu être validée"});
     }
+})
+
+router.post('/checkout', async (req, res) => {
+  
+  const {amount} = req.body;
+  console.log(amount)
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'eur',
+    })
+    console.log(paymentIntent)
+    res.status(200).send(paymentIntent.client_secret)
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
+  }
 })
 
 router.post('/upload', async (req, res) => {

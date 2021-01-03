@@ -47,7 +47,7 @@ export default function Cart({isVisible, setIsVisible}) {
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">TVA : </span>{ tva }€</h4></div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Livraison : </span>{ shippingPrice }€</h4></div>
                 <div className="cart-total col-12"><h4 className="text-left font-weight-lighter"><span className="font-weight-bold">Total : </span>{ total }€ TTC</h4></div>
-                <div className="my-3 cart-total col-12"><Link /* to="/connexion?redirect=shipping" */ to="/testorder" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white my-3 rounded-0 p-2">Valider mon panier</Link></div>
+                <div className="my-3 cart-total col-12"><Link /* to="/connexion?redirect=shipping" */ to="/commande" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white my-3 rounded-0 p-2">Valider mon panier</Link></div>
                 </div>
             :
             <h4 className="empty-cart col-12 m-0 my-5 font-weight-light text-center">Votre panier est vide.</h4>
