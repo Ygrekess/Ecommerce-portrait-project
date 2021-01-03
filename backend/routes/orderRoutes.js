@@ -2,9 +2,10 @@ import express from 'express';
 import Order from '../model/Order';
 import Image from '../model/Image';
 import Stripe from "stripe";
+import dotenv from 'dotenv'
 
 const router = express.Router();
-const stripe = new Stripe("sk_test_51I5SwjCkP1aIaUisfuL4W5e4TgooYrqxvrGXpvA20bQZTNbyxE7QnFEEDmItCkcW2c1H5lLwhheprl7TAyvGDbLI00yU4IKtTx");
+const stripe = new Stripe(process.env.STRIPE_CLIENT_ID);
 
 router.post('/', async (req, res) => {
     const newOrder = new Order({
