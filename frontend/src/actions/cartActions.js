@@ -8,9 +8,6 @@ const addToCart = (productId, qty) => async (dispatch, getState) => {
         type: "CART_ADD_ITEM",
         payload: {
             _id: data.product._id,
-            name: data.product.name,
-            image: data.product.image,
-            price: data.product.price,
             qty
         }
         });  
@@ -41,6 +38,7 @@ const recupCartDetails = () => async (dispatch, getState) => {
                     name: data.products[i].name,
                     slug: data.products[i].slug,
                     faceNumber: data.products[i].faceNumber,
+                    category: data.products[i].category,
                     image: data.products[i].image,
                     price: data.products[i].price,
                     qty: x.qty

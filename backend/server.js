@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes'
 import orderRoutes from './routes/orderRoutes'
 import productRoutes from './routes/productRoutes'
-import fileUpload from 'express-fileupload';
 import cors from 'cors'
+import uploadRouter from './routes/uploadRouter';
 
 const app = express()
 
@@ -20,11 +20,10 @@ mongoose.connect(
 )
 
 //Middleware
-
-app.use(fileUpload());
 app.use(express.json());
 app.use(cors());
 
+app.use('/api/upload', uploadRouter)
 app.use('/api/users', userRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/orders', orderRoutes)

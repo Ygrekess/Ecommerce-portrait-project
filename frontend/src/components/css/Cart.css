@@ -53,7 +53,7 @@
     border: none;
     outline: none;
 }
-.add-icon{
+.add-icon, .minus-icon{
     background-color: black;
     color: white;
     height: 1.2rem;
@@ -61,23 +61,10 @@
     border: none;
     border-radius: 50%;
 }
-.add-icon:hover{
+.add-icon:hover, .minus-icon:hover{
     background-color: white;
     color: black;
     border: 1px solid black;
-}
-.minus-icon{
-    background-color: white;
-    height: 1.2rem;
-    width: 1.2rem;
-    border: 1px solid black;
-    border-radius: 50%;
-}
-.minus-icon:hover{
-    background-color: black;
-    color: white;
-}
-.add-icon:hover, .minus-icon:hover{
     cursor: pointer;
 }
 .icon-close{

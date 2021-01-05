@@ -59,7 +59,7 @@ function cartReducer(state = { cartItems: [], cookieItems: [], shipping: {}, pay
             return { ...state, payment: action.payload };
         
         case "CART_RESET_ITEMS":
-            return { cookieItems: [], shipping: {}, payment: {} }; 
+            return { cartItems: [], cookieItems: [], shipping: {}, payment: {} }; 
         
         default:
             return state;

@@ -159,7 +159,10 @@ export default function PlaceOrder_Page(props) {
             setSdkReady(true)
         }
         if (order) {
-            setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
+            if (Object.entries(order).length !== 0) {
+                console.log('order')
+                setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
+            }
         }
         return () => {
         }
