@@ -8,13 +8,14 @@ import { recupCountReducer } from './reducers/dataReducers';
 import { orderCreateReducer, orderDetailsReducer, orderImageReducer, orderPayReducer, ordersUserReducer } from './reducers/orderReducers';
 
 const userInfo = Cookie.getJSON('userInfo') || null;
-const cartItems = Cookie.getJSON('cartItems') || [];
+const cookieItems = Cookie.getJSON('cartItems') || [];
 const shipping = Cookie.getJSON('shipping') || {};
 const payment = Cookie.getJSON('payment') || {};
 
 const initialState = {
     cart: { 
-        cartItems,
+        cartItems: [],
+        cookieItems,
         shipping, 
         payment
     },

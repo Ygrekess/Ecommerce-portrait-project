@@ -4,6 +4,9 @@ import Image from '../model/Image';
 import Stripe from "stripe";
 import dotenv from 'dotenv'
 
+//Dotenv
+dotenv.config();
+
 const router = express.Router();
 const stripe = new Stripe(process.env.STRIPE_CLIENT_ID);
 
@@ -21,17 +24,14 @@ router.post('/', async (req, res) => {
     })
     try {
       const savedOrder = await newOrder.save();
-      console.log(savedOrder)
       res.status(201).send({ message: "New Order Created", data: savedOrder })
     } catch (error) {
       res.status(400).send({message : "La commande n'a pas pu être validée"});
     }
 })
 
-router.post('/checkout', async (req, res) => {
-  
+router.post('/checkout', async (req, res) => {  
   const {amount} = req.body;
-  console.log(amount)
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,

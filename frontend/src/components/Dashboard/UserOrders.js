@@ -15,8 +15,8 @@ export default function UserOrders() {
     const { loading, orders, error } = userOrders;
 
     useEffect(() => {
-        dispatch(resetPayOrder())
-        dispatch(recupUserOrders(userInfo._id))
+/*         dispatch(resetPayOrder())
+ */        dispatch(recupUserOrders(userInfo._id))
         return () => {
         }
     }, [])

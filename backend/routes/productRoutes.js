@@ -3,7 +3,7 @@ import Product from '../model/Product';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/list', async (req, res) => {
   const offset = Number(req._parsedUrl.query.split("=")[1]);
   const products = await Product.find().skip(offset).limit(6);
   if (products) {
@@ -23,24 +23,48 @@ router.get('/count', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
-  console.log(req);
-    const product = await Product.findOne({ _id: req.params.id });
+router.get('/details', async (req, res) => {
+  if (req.query.id) {
+    const product = await Product.findOne({ _id: req.query.id });
     if (product) {
-      res.send(product);
+      res.send({product : product, faceNumber: []});
+    } else {
+        res.status(404).send({ message: 'Modèle non trouvé.' });
+    }    
+  } else {
+    const faceNumberReq = req.query.faceNumber.split('-')[0];
+    const product = await Product.findOne({ slug: req.query.slug, faceNumber: faceNumberReq });
+    const faceNumber = await Product.find({ slug: req.query.slug });
+    if (product) {
+      res.send({product : product, faceNumber: faceNumber});
     } else {
         res.status(404).send({ message: 'Modèle non trouvé.' });
     }
+  }
+})
+
+router.get('/cartDetails', async (req, res) => {
+
+  const products = await Product.find({ _id: { $in: req.query.ids} });
+  
+  if (products) {
+    console.log(products)
+    res.send({products : products,});
+  } else {
+      res.status(404).send({ message: 'Modèle non trouvé.' });
+  }    
+
 })
 
 router.post('/', async (req, res) => {
   const product = new Product({
-    name: req.body.name,
-    price: req.body.price,
-    image: req.body.image,
-    category: req.body.category,
-    countInStock: req.body.countInStock,
-    description: req.body.description,
+    name: req.body.product.name,
+    slug: req.body.product.slug,
+    faceNumber: req.body.product.faceNumber,
+    price: req.body.product.price,
+    image: req.body.product.image,
+    category: req.body.product.category,
+    description: req.body.product.description,
   });
   const newProduct = await product.save();
   if (newProduct) {

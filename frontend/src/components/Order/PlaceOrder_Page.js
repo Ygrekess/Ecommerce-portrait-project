@@ -13,7 +13,10 @@ import { FiCheckSquare } from "react-icons/fi";
 import { ImSpinner8 } from "react-icons/im"
 
 export default function PlaceOrder_Page(props) {
-    
+
+    const orderCreate = useSelector((state) => state.orderCreate);
+    const { order } = orderCreate;
+
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false)
     const [orderIsValidate, setOrderIsValidate] = useState(false);////// REMETTRE A FALSE
@@ -102,7 +105,7 @@ export default function PlaceOrder_Page(props) {
                     total
                 }))
                 setModal(true)
-                setTimeout(() => props.history.push(`/envoyer-photos/${123}`), 4000)
+                //setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
             }
         } catch (error) {
             setIsProcessingCard(false);
@@ -124,7 +127,7 @@ export default function PlaceOrder_Page(props) {
             total
         }))
         setModal(true)
-        setTimeout(() => props.history.push(`/envoyer-photos/${123}`), 4000)
+        
     }
     
     const setPayment = () => {
@@ -138,6 +141,7 @@ export default function PlaceOrder_Page(props) {
     
     
     useEffect(() => {
+        console.log(order)
         const addPaypalScript = async () => {
             const { data } = await Axios.get('http://localhost:5000/api/config/paypal');
             const script = document.createElement('script');
@@ -154,9 +158,12 @@ export default function PlaceOrder_Page(props) {
         } else {
             setSdkReady(true)
         }
+        if (order) {
+            setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
+        }
         return () => {
         }
-    }, [orderIsValidate, sdkReady, cartItems])
+    }, [orderIsValidate, sdkReady, order, cartItems])
 
     return (
         <div className="checkout-page container">
@@ -191,7 +198,7 @@ export default function PlaceOrder_Page(props) {
                                 <td>{product.name}</td>
                                 <td>{product.price}€</td>
                                 <td>{product.qty}</td>
-                                <td>{product.price * product.qty}€</td>
+                                <td>{(product.price * product.qty).toFixed(2)}€</td>
                             </tr>
                             ))
                         }
@@ -396,7 +403,7 @@ export default function PlaceOrder_Page(props) {
                                     <div className="credit-card-input d-flex flex-wrap align-items-center justify-content-around my-3 w-100">
                                         <form className="d-flex flex-wrap align-items-center" onSubmit={onSubmitCheckout}>
                                         <div className="col-12">
-                                            <p className="text-left px-0 mb-1">Numéro de carte <span className="text-danger">*</span></p>
+                                            <p className="text-left px-0 mb-1">Numéro de carte 4242 4242 4242 4242<span className="text-danger">*</span></p>
                                                 <CardNumberElement  
                                                 className={"border col-12 p-2 bg-white " + (!checkErrorMessage &&  "mb-4")}
                                                 options={{

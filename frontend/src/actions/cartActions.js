@@ -3,20 +3,55 @@ import Cookie from 'js-cookie';
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
     try {
-        const { data } = await Axios.get('http://localhost:5000/api/products/' + productId);
+        const { data } = await Axios.get('http://localhost:5000/api/products/details', { params: { id: productId } });
         dispatch({
         type: "CART_ADD_ITEM",
         payload: {
-            _id: data._id,
-            name: data.name,
-            image: data.image,
-            price: data.price,
-            countInStock: data.countInStock,
+            _id: data.product._id,
+            name: data.product.name,
+            image: data.product.image,
+            price: data.product.price,
             qty
         }
+        });  
+        dispatch({ type: "CHECK_CART_ITEM_EMPTY" })
+        const { cart: { cookieItems } } = getState();
+        Cookie.set("cartItems", JSON.stringify(cookieItems));
+    } catch (error) {
+        //
+    }
+}
+
+const recupCartDetails = () => async (dispatch, getState) => {
+    const { cart: { cookieItems } } = getState();
+    let payload = []
+    let ids = [];
+    for (let i = 0; i < cookieItems.length; i++) {
+        let item = cookieItems[i];
+        ids = [...ids, item._id]
+    }
+
+    try {
+        const { data } = await Axios.get('http://localhost:5000/api/products/cartDetails', { params: { ids: ids } })
+        for (let i = 0; i < data.products.length; i++) {
+            cookieItems.map(x => x._id === data.products[i]._id ?
+                payload = [...payload,
+                {
+                    _id: data.products[i]._id,
+                    name: data.products[i].name,
+                    slug: data.products[i].slug,
+                    faceNumber: data.products[i].faceNumber,
+                    image: data.products[i].image,
+                    price: data.products[i].price,
+                    qty: x.qty
+                }]
+                : payload
+            )
+        }
+        dispatch({
+            type: "CART_DETAILS_ITEM",
+            payload: payload
         });    
-        const { cart: { cartItems } } = getState();
-        Cookie.set("cartItems", JSON.stringify(cartItems));
     } catch (error) {
         //
     }
@@ -31,8 +66,8 @@ const setQty = (productId, qty) => (dispatch, getState) => {
             qty
         }
         });    
-        const { cart: { cartItems } } = getState();
-        Cookie.set("cartItems", JSON.stringify(cartItems));
+        const { cart: { cookieItems } } = getState();
+        Cookie.set("cartItems", JSON.stringify(cookieItems));
     } catch (error) {
         //
     }
@@ -45,8 +80,9 @@ const removeFromCart = (product) => (dispatch, getState) => {
             _id: product._id,
         }
     });
-    const { cart: { cartItems } } = getState();
-    Cookie.set("cartItems", JSON.stringify(cartItems));
+    const { cart: { cookieItems } } = getState();
+
+    Cookie.set("cartItems", JSON.stringify(cookieItems));
 }
 
 const saveShipping = (data) => (dispatch, getState) => {
@@ -70,8 +106,8 @@ const savePayment = (data) => (dispatch, getState) => {
 
 const resetCart = () => (dispatch, getState) => {
     dispatch({ type: "CART_RESET_ITEMS" })
-    const { cart: { cartItems } } = getState();
-    Cookie.set("cartItems", JSON.stringify(cartItems));
+    const { cart: { cookieItems } } = getState();
+    Cookie.set("cartItems", JSON.stringify(cookieItems));
 }
 
-export { addToCart, removeFromCart, setQty, saveShipping, savePayment, resetCart };
+export { addToCart, removeFromCart, setQty, saveShipping, savePayment, resetCart, recupCartDetails };

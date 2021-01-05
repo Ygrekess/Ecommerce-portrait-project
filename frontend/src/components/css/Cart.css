@@ -1,64 +1,90 @@
 .cart-component{
-    width: 21rem;
+    width: 24rem;
     height: auto;
-    top: 10%;
+    top: 15%;
     right: 1rem;
     z-index: 3;
     background-color: white;
     box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
 }
+.cart-title{
+    font-size: 22px; 
+}
 .cart-title span{
     font-weight: 200;
-    font-size: 20px;
+    font-size: 18px;
 }
 .empty-cart{
     font-size: 20px;
 }
-.cart-item-container{
-    max-height: 15rem;
-    overflow: scroll;
+.cart-component .table-bordered > tbody > .table-product-row{
+    background-color: #FDFDFD;
 }
-
-.cart-component-img{
-    width: 5rem;
-    height: 5rem;
-}
-.cart-component-img img {
-    width: 5rem;
-    height: 5rem;
-    object-fit: cover;
+.cart-component .table-bordered > thead > tr, 
+.cart-component .table-bordered > tbody > tr > th 
+{
+    background-color: #F8F8F8;
 }
 
 /* .cart-component-select-qty:active{
     position: relative;
     z-index: 101;   
 } */
-.cart-product-title{
+
+.cart-product-title a{
     color: black;
     font-weight: 500;
-}
-.cart-product-title:hover{
-    color: #F39D91; 
     text-decoration: none;
 }
 .cart-product-price{
-    font-size: 20px;
+    font-size: 23px;
+}
+.cart-product-price span{
+    font-size: 15px;
+}
+.cart-product-detail{
+    height: 3.5rem;
+    overflow: hidden;
 }
 .cart-product-qty{
-    overflow: hidden;
+    height: 3.5rem;
 }
 .cart-product-input{
     border: none;
     outline: none;
 }
-.add-icon, .minus-icon{
+.add-icon{
+    background-color: black;
+    color: white;
+    height: 1.2rem;
+    width: 1.2rem;
+    border: none;
+    border-radius: 50%;
+}
+.add-icon:hover{
+    background-color: white;
     color: black;
-    cursor: pointer;
+    border: 1px solid black;
+}
+.minus-icon{
+    background-color: white;
+    height: 1.2rem;
+    width: 1.2rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+.minus-icon:hover{
+    background-color: black;
+    color: white;
 }
 .add-icon:hover, .minus-icon:hover{
-    color: #F39D91; 
+    cursor: pointer;
 }
 .icon-close{
     cursor: pointer;
     color: #b0da91;
+}
+.icon-close:hover{
+    cursor: pointer;
+    color: #73b940;
 }

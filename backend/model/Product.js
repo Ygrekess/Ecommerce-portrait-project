@@ -5,6 +5,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    slug: {
+        type: String,
+        required: true,
+    },
     image: {
         type: String,
         required: true
@@ -21,11 +25,15 @@ const productSchema = new mongoose.Schema({
         type: Array, 
         required: true 
     },
-    countInStock: {
+    faceNumber: { 
+        type: Number, 
+        required: true 
+    },
+/*     countInStock: {
         type: Number,
         default: 0,
         required: true
-    },
+    }, */
     created_at: {
         type: Date,
         default: Date.now

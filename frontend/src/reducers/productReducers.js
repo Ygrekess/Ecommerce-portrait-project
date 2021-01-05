@@ -1,4 +1,4 @@
-function recupProductsReducer(state = { products: [] }, action) {
+function recupProductsReducer(state = { loading: true, products: [] }, action) {
   switch (action.type) {
     case "PRODUCT_LIST_REQUEST":
       return { loading: true, products: [] };
@@ -11,12 +11,12 @@ function recupProductsReducer(state = { products: [] }, action) {
   }
 }
 
-function recupProductDetails(state = { product: {} }, action) {
+function recupProductDetails(state = { loading: true, product: {}, faceNumber: [] }, action) {
   switch (action.type) {
     case "PRODUCT_DETAILS_REQUEST":
-      return { loading: true, product: [] };
+      return { loading: true, product: {} };
     case "PRODUCT_DETAILS_SUCCESS":
-      return { loading: false, product: action.payload };
+      return { loading: false, product: action.payload.product, faceNumber: action.payload.faceNumber.filter( faceNumb => faceNumb.faceNumber !== action.payload.product.faceNumber) };
     case "PRODUCT_DETAILS_FAIL":
       return { loading: false, error: action.payload };
     default:
