@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { productDetails } from '../../actions/productActions';
+import { productDetails, resetListProducts } from '../../actions/productActions';
 import { FiShoppingCart } from 'react-icons/fi'
 import { addToCart } from '../../actions/cartActions';
 import '../css/Modele_Page.css'
@@ -26,14 +26,14 @@ export default function Modele_Page(props) {
     }
 
     useEffect(() => {
+        dispatch(resetListProducts());
         dispatch(productDetails(props.match.params.slug, props.match.params.faceNumber))
-
         return () => {
         }
     }, [props.match.params.faceNumber])
 
     return ( loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="d-flex align-items-center">
+        <div className="model-page-container container d-flex align-items-start">
             { add ? 
                 <div className="add-test rounded d-flex justify-content-center align-items-center">
                     <div className="add-border rounded border-success">
@@ -43,10 +43,10 @@ export default function Modele_Page(props) {
                 :
                 null
             }
-            <div className="row">
+{/*             <div className="row">
                 {loading && <h4 className="text-center mx-auto">Chargement...</h4>}
                 {error && <h4 className="text-center mx-auto">{error}</h4>}
-            </div>
+            </div> */}
 
             <div className="modele-page-content d-flex flex-wrap align-items-center">
                 <div className="modele-page-img col-6">
@@ -57,7 +57,7 @@ export default function Modele_Page(props) {
                     {product.category.map((category, i ) => (
                         <div key={i} className="row text-left"><span className="badge badge-warning m-O">{category}</span></div>
                     ))}
-                    <div className="row text-left"><p className="m-O">{product.description}</p></div>
+                    <div className="row text-left"><p className="m-O">{product.description}{product.description}</p></div>
                     <div className="row text-left">
                         <h2 className="m-0 card-price">{String(product.price).split('.')[0]}<span>.{String(product.price).split('.')[1]}€</span></h2>
                     </div>

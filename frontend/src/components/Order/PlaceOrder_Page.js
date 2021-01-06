@@ -118,7 +118,7 @@ export default function PlaceOrder_Page(props) {
 
     const handleSuccessPayment = (paymentResult) => {
         dispatch(createOrder({
-            orderItems: cartItems, 
+            orderItems: cartItems,
             shipping, 
             payment : { paymentMethod : paymentMethod }, 
             itemsNumb, 
@@ -196,7 +196,7 @@ export default function PlaceOrder_Page(props) {
                     <tbody>
                         {                
                         cartItems.map((product) => (  
-                            <tr key={product._id}>
+                            <tr key={product.cartItemId}>
                                 <td className="text-danger"><GoTrashcan style={{cursor:"pointer"}} size={20} onClick={() => removeItemFromCart(product)}/></td>
                                 <td>{product.name}</td>
                                 <td>{product.price}€</td>
@@ -349,7 +349,7 @@ export default function PlaceOrder_Page(props) {
                         <tbody>
                             {                
                             cartItems.map((product) => (  
-                                <tr className="table-product-row" key={product._id}>
+                                <tr className="table-product-row" key={product.cartItemId}>
                                     <td >{product.name} <span className="span-qty font-weight-bold">(x {product.qty})</span></td>
                                     <td >{product.price}€</td>
                                 </tr>

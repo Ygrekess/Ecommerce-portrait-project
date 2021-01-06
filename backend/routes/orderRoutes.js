@@ -79,7 +79,7 @@ router.get('/user/:id', async (req, res) => {
     res.status(201).send({ message: "Commandes trouvées", data: order })
 })
 
-router.put("/:id/pay", async (req, res) => {
+/* router.put("/photoupload/pay", async (req, res) => {
   const order = await Order.findById(req.params.id);
   if (order) {
     order.isPaid = true;
@@ -93,6 +93,24 @@ router.put("/:id/pay", async (req, res) => {
       }
     }
     const updatedOrder = await order.save();
+    res.send({ message: 'Order Paid.', order: updatedOrder });
+  } else {
+    res.status(404).send({ message: 'Order not found.' })
+  }
+}); */
+
+router.put("/photoupload/:orderId&:itemName", async (req, res) => {
+	const cartItemId = req.params.itemName.split('-')[1];
+  const order = await Order.findById(req.params.orderId);
+  if (order) {
+    const cartItem = order.orderItems.find(x => x.cartItemId === cartItemId)
+    cartItem.photoUpload = true;
+    cartItem.photo = req.body.filesName;
+    const newOrderItems = order.orderItems.map(x => x.cartItemId === cartItemId ? cartItem : x)
+    order.orderItems = newOrderItems;
+
+    const updatedOrder = await order.save(); 
+    
     res.send({ message: 'Order Paid.', order: updatedOrder });
   } else {
     res.status(404).send({ message: 'Order not found.' })

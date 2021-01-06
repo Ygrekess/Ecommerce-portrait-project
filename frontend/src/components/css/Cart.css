@@ -1,4 +1,5 @@
 .cart-component{
+    position: fixed;
     width: 24rem;
     height: auto;
     top: 15%;

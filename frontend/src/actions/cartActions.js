@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import Cookie from 'js-cookie';
+import uniqid from 'uniqid';
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
     try {
@@ -8,10 +9,11 @@ const addToCart = (productId, qty) => async (dispatch, getState) => {
         type: "CART_ADD_ITEM",
         payload: {
             _id: data.product._id,
+            cartItemId: uniqid(),
             qty
         }
         });  
-        dispatch({ type: "CHECK_CART_ITEM_EMPTY" })
+        dispatch({ type: "CHECK_QTY_ITEM_NULL" })
         const { cart: { cookieItems } } = getState();
         Cookie.set("cartItems", JSON.stringify(cookieItems));
     } catch (error) {
@@ -35,6 +37,7 @@ const recupCartDetails = () => async (dispatch, getState) => {
                 payload = [...payload,
                 {
                     _id: data.products[i]._id,
+                    cartItemId: x.cartItemId,
                     name: data.products[i].name,
                     slug: data.products[i].slug,
                     faceNumber: data.products[i].faceNumber,
@@ -55,15 +58,16 @@ const recupCartDetails = () => async (dispatch, getState) => {
     }
 }
 
-const setQty = (productId, qty) => (dispatch, getState) => {
+const setQty = (cartItemId, qty) => (dispatch, getState) => {
     try {
         dispatch({
         type: "CART_SET_QTY",
         payload: {
-            _id: productId,
+            cartItemId: cartItemId,
             qty
         }
         });    
+        dispatch({ type: "CHECK_QTY_ITEM_NULL" })
         const { cart: { cookieItems } } = getState();
         Cookie.set("cartItems", JSON.stringify(cookieItems));
     } catch (error) {
@@ -75,7 +79,7 @@ const removeFromCart = (product) => (dispatch, getState) => {
     dispatch({
         type: "CART_REMOVE_ITEM",
         payload: {
-            _id: product._id,
+            cartItemId: product.cartItemId,
         }
     });
     const { cart: { cookieItems } } = getState();

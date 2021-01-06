@@ -17,6 +17,10 @@ const getInfos = (userId) => async (dispatch) => {
   }
 }
 
+const resetInfos = () => (dispatch) => {
+  dispatch({ type: "USER_INFOS_RESET"});
+}
+
 const updateInfos = (userId, lastname, firstname, phone, newsletter) => async (dispatch) => {
   dispatch({ type: "USER_UPDATE_INFOS_REQUEST"});
   try {
@@ -92,4 +96,4 @@ const logout = () => (dispatch) => {
   dispatch({ type: "USER_LOGOUT" })
 }
 
-export { getInfos, updateInfos, signin, register, checkPassword, passwordCheckReset, logout, updatePassword, updateUserName};
+export { getInfos, updateInfos, resetInfos, signin, register, checkPassword, passwordCheckReset, logout, updatePassword, updateUserName};

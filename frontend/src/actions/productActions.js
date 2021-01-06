@@ -11,6 +11,10 @@ const listProducts = (skip) => async (dispatch) => {
   }
 }
 
+const resetListProducts = () => (dispatch) => {
+    dispatch({ type: "PRODUCT_LIST_RESET" });
+}
+
 const productDetails = (slug, faceNumber) => async (dispatch) => {
     dispatch({ type: "PRODUCT_DETAILS_REQUEST" });
     try {
@@ -21,4 +25,4 @@ const productDetails = (slug, faceNumber) => async (dispatch) => {
   }
 }
 
-export { listProducts, productDetails };
+export { listProducts, productDetails, resetListProducts };

@@ -2,7 +2,9 @@
   text-align: center;
   min-height: 100vh;
 }
-
+.header{
+  height: 15vh;
+}
 .header-links ul{
   height: 4rem;
 }
@@ -115,4 +117,8 @@
 }
 
 .loading-spinner{
+}
+
+.footer{
+  height: 10vh;
 }

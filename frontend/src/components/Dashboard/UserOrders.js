@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { recupUserOrders, resetPayOrder } from '../../actions/orderActions';
+import { recupUserOrders, resetOrder } from '../../actions/orderActions';
 import '../css/UserOrders.css';
+import { ImSpinner8 } from 'react-icons/im';
 
 export default function UserOrders() {
 
@@ -15,17 +16,17 @@ export default function UserOrders() {
     const { loading, orders, error } = userOrders;
 
     useEffect(() => {
-/*         dispatch(resetPayOrder())
- */        dispatch(recupUserOrders(userInfo._id))
+        dispatch(resetOrder());
+        dispatch(recupUserOrders(userInfo._id));
         return () => {
         }
     }, [])
 
-    return ( loading ? <div>Loading</div> :
-        <div className="col-8">
+    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+        <div className="user-orders-page col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
                 <h1 className="mb-5 text-uppercase w-100">Mes commandes</h1>
-                <div className={"userOrders-container"}>
+                <div className={"user-orders-container"}>
                 { orders.length === 0 ? 
                     <div>Vous n'avez passé aucune commande.</div> :
                     orders.map((order, i) => (
@@ -38,7 +39,7 @@ export default function UserOrders() {
                                     <p className="order-number">Commande : {order._id}</p>
                                     <p className="order-date font-italic">{order.created_at}</p>
                                 </div>
-                                <Link to={`/mes-commandes/${order._id}`} className="col-2 btn btn-warning rounded-0 my-auto">Plus d'infos</Link>
+                                <Link to={`/mon-compte/mes-commandes/${order._id}`} className="col-2 btn btn-dark rounded-0 my-auto">Plus d'infos</Link>
                             </div>
                         ))
                     ))

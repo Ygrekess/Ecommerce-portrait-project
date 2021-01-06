@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { checkPassword, passwordCheckReset, updatePassword } from '../../actions/userActions';
+import { checkPassword, passwordCheckReset, resetInfos, updatePassword } from '../../actions/userActions';
 
 export default function Password_Update(props) {
 
@@ -57,6 +57,7 @@ export default function Password_Update(props) {
             setErrorPassword("")
         }
         if (success) {
+            dispatch(resetInfos());
             props.history.push('/mon-compte/compte')
         }
         return () => {
@@ -65,7 +66,7 @@ export default function Password_Update(props) {
 
 
     return (
-        <div className="col-8">
+        <div className="user-account-page-update col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
                 <h1 className="mb-5 text-uppercase w-100">Modifier mon mot de passe</h1>
                 <form className="w-100" onSubmit={(e) => e.preventDefault()}>
@@ -79,11 +80,11 @@ export default function Password_Update(props) {
                     <li className="col-8 mb-4 m-auto">
                         <label htmlFor="country">Saisissez votre nouveau mot de passe</label>
                         <div className="input-group mb-3">
-                            <input type="password" onChange={(e) => setNewPassword1(e.target.value)} className="form-control text-center" value={newPassword1} />
+                            <input type="password" onChange={(e) => setNewPassword1(e.target.value)} className="form-control text-center p-2 rounded-0 col-6 m-auto" value={newPassword1} />
                         </div>
                         <label htmlFor="country">Confirmez votre nouveau mot de passe</label>
                         <div className="input-group">
-                            <input type="password" onChange={(e) => setNewPassword2(e.target.value)} className="form-control text-center" value={newPassword2} />
+                            <input type="password" onChange={(e) => setNewPassword2(e.target.value)} className="form-control text-center p-2 rounded-0 col-6 m-auto" value={newPassword2} />
                             <div className="input-group-prepend"></div>
                         </div>
                         <button className="btn btn-primary update-button mt-3" onClick={() => submitNewPassword()}>Valider</button>                                        
@@ -93,7 +94,7 @@ export default function Password_Update(props) {
                     <li className="col-8 mb-4 m-auto">
                         <label htmlFor="country">Veuillez confirmer votre mot de passe</label>
                         <div className="input-group">
-                            <input type="password" onChange={(e) => setPasswordCheck(e.target.value)} className="form-control text-center" value={passwordCheck}/>
+                            <input type="password" onChange={(e) => setPasswordCheck(e.target.value)} className="form-control text-center p-2 rounded-0 col-6 m-auto" value={passwordCheck}/>
                         </div>
                         <button className="btn btn-primary update-button mt-3" onClick={() => signinUserCheck()}>Valider</button>
                     </li>
@@ -101,7 +102,7 @@ export default function Password_Update(props) {
 
                 </ul>
                 </form>
-                <Link className="btn btn-outline-primary" to="#" onClick={() => goBack()}>Annuler</Link>
+                <Link className="btn btn-outline-primary m-auto" to="#" onClick={() => goBack()}>Annuler</Link>
             </div>
         </div>
     )

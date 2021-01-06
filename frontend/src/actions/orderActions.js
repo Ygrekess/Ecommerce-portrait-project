@@ -13,7 +13,7 @@ const createOrder = (order) => async (dispatch, getState) => {
 }
 
 const resetOrder = () => (dispatch) => {
-    dispatch({ type: "ORDER_CREATE_RESET" });
+    dispatch({ type: "ORDER_RESET" });
 } 
 
 const recupUserOrders = (userId) => async (dispatch, getState) => {
@@ -26,11 +26,12 @@ const recupUserOrders = (userId) => async (dispatch, getState) => {
     }
 }
 
-const importImage = (file) => async (dispatch, getState) => {
-    dispatch({ type: "ORDER_PHOTO_REQUEST", payload : file })
+const importImage = (orderId, itemName, filesName) => async (dispatch, getState) => {
+    dispatch({ type: "ORDER_PHOTO_REQUEST" })
     try {
-        const { data } = await Axios.post(`http://localhost:5000/api/orders/upload`);
+        const { data } = await Axios.put(`http://localhost:5000/api/orders/photoupload/${orderId}&${itemName}`, { filesName: filesName });
         dispatch({ type: "ORDER_PHOTO_SUCCESS", payload: data });
+        dispatch(detailsOrder(orderId));
     } catch (error) {
         dispatch({ type: "ORDER_PHOTO_FAIL", payload: error.message });
     }
@@ -60,4 +61,4 @@ const resetPayOrder = () => (dispatch) => {
     dispatch({ type: "ORDER_PAY_RESET" })
 } */
 
-export { createOrder, /* resetPayOrder, */ detailsOrder, resetOrder, importImage, recupUserOrders/*, listMyOrders, listOrders, deleteOrder  */};
+export { createOrder, /* resetPayOrder, */  detailsOrder, resetOrder, importImage, recupUserOrders/*, listMyOrders, listOrders, deleteOrder  */};

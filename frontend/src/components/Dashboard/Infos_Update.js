@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateInfos } from '../../actions/userActions';
+import { resetInfos, updateInfos } from '../../actions/userActions';
 
 export default function Infos_Update(props) {
 
@@ -23,6 +23,7 @@ export default function Infos_Update(props) {
             props.history.push("/mon-compte/infos-perso")  
         }
         if (success) {
+            dispatch(resetInfos());
             props.history.push("/mon-compte/infos-perso")  
         }
         return () => {
@@ -35,7 +36,7 @@ export default function Infos_Update(props) {
     }
 
     return ( loading ? <div>Loading...</div> :
-        <div className="col-8">
+        <div className="user-infos-page-update col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
                 <h1 className="mb-5 text-uppercase w-100">Mes infos</h1>
                 <form className="w-100" onSubmit={(e) => e.preventDefault()}>
@@ -43,25 +44,25 @@ export default function Infos_Update(props) {
                         <li className="col-6 mb-4">
                             <label htmlFor="address">Nom</label>
                             <div className="input-group">
-                                <input type="text" className="form-control text-center" defaultValue={lastname} onChange={(e) => setLastname(e.target.value)} aria-describedby="inputGroupPrepend2" />
+                                <input type="text" className="form-control text-center p-2 rounded-0" defaultValue={lastname} onChange={(e) => setLastname(e.target.value)} aria-describedby="inputGroupPrepend2" />
                             </div>
                         </li>
                         <li className="col-6 mb-4">
                             <label htmlFor="city">Prénom</label>
                             <div className="input-group">
-                                <input type="text" className="form-control text-center" defaultValue={firstname} onChange={(e) => setFirstname(e.target.value)} aria-describedby="inputGroupPrepend2" />
+                                <input type="text" className="form-control text-center p-2 rounded-0" defaultValue={firstname} onChange={(e) => setFirstname(e.target.value)} aria-describedby="inputGroupPrepend2" />
                             </div>
                         </li>
                         <li className="col-6 mb-4">
                             <label htmlFor="postalCode">Email</label>
                             <div className="input-group">
-                                <input type="email" className="form-control text-center" defaultValue={userDetails.email} disabled={true} aria-describedby="inputGroupPrepend2" />
+                                <input type="email" className="form-control text-center p-2 rounded-0" defaultValue={userDetails.email} disabled={true} aria-describedby="inputGroupPrepend2" />
                             </div>
                         </li>
                         <li className="col-6 mb-4">
                             <label htmlFor="address">Téléphone</label>
                             <div className="input-group">
-                                <input type="phone" className="form-control text-center" defaultValue={phone} onChange={(e) => setPhone(e.target.value)} placeholder="XX-XX-XX-XX-XX" aria-describedby="inputGroupPrepend2" />
+                                <input type="phone" className="form-control text-center p-2 rounded-0" defaultValue={phone} onChange={(e) => setPhone(e.target.value)} placeholder="XX-XX-XX-XX-XX" aria-describedby="inputGroupPrepend2" />
                             </div>
                         </li>
                         <li className="user-infos-newsletter-div col-6 mb-4 d-flex align-items-center">

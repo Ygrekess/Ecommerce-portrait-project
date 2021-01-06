@@ -1,5 +1,17 @@
+/* MODELES PAGE */
+.modeles-page-container{
+    min-height: 90vh;
+}
+
+
+
+/* MODELE PAGE */
+
+.model-page-container{
+    min-height: 90vh; 
+}
 .modele-page-content{
-    height: 30rem;
+    min-height: 100%; 
 }
 
 .modele-page-img{
@@ -13,7 +25,7 @@
 }
 
 .modele-page-details{
-    height: 100%;
+    height: 30rem;
 }
 
 .modele-page-cart-button{

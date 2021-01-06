@@ -32,7 +32,7 @@ export default function Modeles_Page(props) {
 
 
     return (
-        <div className="container">
+        <div className="container modeles-page-container">
             { add ? 
                 <div className="add-test rounded d-flex justify-content-center align-items-center">
                     <div className="add-border rounded border-success">
@@ -43,7 +43,7 @@ export default function Modeles_Page(props) {
                 null
             }
             <h1 className="text-left">Nos modèles</h1>
-            <div className="container">
+            <div className="modeles-page-content">
                 <div className="row">
                     {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }
                     {error && <h4 className="text-center mx-auto">{error}</h4>}

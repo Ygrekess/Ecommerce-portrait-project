@@ -3,9 +3,11 @@ import { ImSpinner8 } from "react-icons/im"
 import "../App.css"
 import { FiCheckSquare } from "react-icons/fi"
 import Axios from "axios";
+import { resetListProducts } from '../actions/productActions';
+import { useDispatch } from 'react-redux';
 
 export default function Home_Page() {
-
+    const dispatch = useDispatch();
     const [modal, setModal] = useState(false)
     const [add, setAdd] = useState(false)
     
@@ -35,7 +37,7 @@ export default function Home_Page() {
     }
 
     useEffect(() => {
-        //addProduct()
+        dispatch(resetListProducts());
         return () => {
         }
     }, [add])

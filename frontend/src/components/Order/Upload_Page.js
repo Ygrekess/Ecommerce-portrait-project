@@ -15,13 +15,25 @@ export default function Upload_Page(props) {
 	const orderDetails = useSelector(state => state.orderDetails);
 	const { loading, order } = orderDetails;
 
+	const [ orderPhotoToUpload, setOrderPhotoToUpload ] = useState(null)
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(resetCart());
-		dispatch(resetOrder());
-		dispatch(detailsOrder(props.match.params.id));
-	}, [])
+		if (order) {
+			setOrderPhotoToUpload(order.orderItems.filter( x => x.photoUpload === false))
+		} else {
+			dispatch(resetCart());
+			dispatch(resetOrder());
+			dispatch(detailsOrder(props.match.params.id));
+		}
+		if (orderPhotoToUpload) {
+			if (orderPhotoToUpload.length === 0) {
+				setTimeout(() => props.history.push('/mon-compte/mes-commandes'), 3000)
+			}
+		}
+
+	}, [order])
 
 	return ( loading ? <div className="loading-spinner-div d-flex justify-content-center"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :  
 		<div className="upload-container py-2 container d-flex flex-column align-items-center">

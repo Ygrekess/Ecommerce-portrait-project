@@ -11,19 +11,21 @@ import { MdPhotoSizeSelectActual } from 'react-icons/md'
 import { GrTextAlignLeft } from 'react-icons/gr';
 import { FiCheckSquare } from 'react-icons/fi';
 import { AiOutlineDash } from 'react-icons/ai';
+import { detailsOrder, importImage } from '../../../actions/orderActions';
+import { useDispatch } from 'react-redux';
 
 
 export default function Upload_Part({item, orderId}) {
 
+	const dispatch = useDispatch();
 /* FILES */
 	const [files, setFiles] = useState([]);
-	const [compteur, setCompteur] = useState(item.faceNumber);
-	const [progress, setProgress] = useState(0);
+	const [compteur, setCompteur] = useState(item.photoUpload === true ? 0 : item.faceNumber);
+	const [progress, setProgress] = useState(item.photoUpload === true ? 100 : 0);
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		accept: "image/*",
 		onDrop: (acceptedFiles) => {
-			console.log(acceptedFiles)
 			setFiles(
 				acceptedFiles.concat(files).map((file, i) => Object.assign(file, {
 					preview: URL.createObjectURL(file),
@@ -49,13 +51,14 @@ export default function Upload_Part({item, orderId}) {
 	))
 
 	const sendFiles = async () => {
-
-		const itemName = `${item.name}-${uniqid()}`
+		const itemName = `${item.name}-${item.cartItemId}`
 		const bodyFormData = new FormData();
+		const filesName = [];
 		files.map(file => {
+			filesName.push(file.name)
 			bodyFormData.append('image', file)
 		})
-		
+	
 		try {
 			const { data } = await Axios.post(`http://localhost:5000/api/upload/${orderId}&${itemName}`, bodyFormData, {
 				headers: {
@@ -65,6 +68,7 @@ export default function Upload_Part({item, orderId}) {
 					setProgress(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
 				}
 			});
+			dispatch(importImage(orderId, itemName, filesName))
 		} catch (error) {
 			console.log(error)
 		}
@@ -84,16 +88,18 @@ export default function Upload_Part({item, orderId}) {
 		return myDiv
 	}
 	useEffect(() => {
-		setCompteur(item.faceNumber - files.length)
+		if (!item.photoUpload) {
+			setCompteur(item.faceNumber - files.length)
+		}
 	}, [files, progress])
 
 	return (
 		<Fragment>
 		<div className="upload-part w-100 d-flex flex-column align-items-center justify-content-center my-2">
-			{ progress === 100 &&
+			{ (progress === 100 || item.photoUpload === true) &&
 				<div className="validate-mask d-flex align-items-center justify-content-around w-100">
 					<div className="validate-modal m-auto rounded d-flex flex-column justify-content-center align-items-center p-3">
-                        <h3>{item.faceNumber > 1 ? "Vos photos ont bien été envoyées !" : "Votre photo a bien été envoyée !"}</h3>
+                        <h3>{item.faceNumber > 1 ? "Vos photos ont été envoyées !" : "Votre photo a été envoyée !"}</h3>
                         <div className="order-check-icon text-success my-3 d-flex justify-content-center w-100">
 							<FiCheckSquare size={60}/>
 						</div>
@@ -105,7 +111,7 @@ export default function Upload_Part({item, orderId}) {
 					<div {...getRootProps()} className="upload-zone col-md-4 m-0 d-flex flex-column align-items-center justify-content-center">
 								
 					{ compteur === 0 ?
-						progress < 100 ?
+						progress === 0 ?
 						<Fragment>
 							<GoCloudUpload size={80} className=""/>
 							<button className="btn btn-dark p-2 text-uppercase rounded-0 mt-3" onClick={() => sendFiles()}>Envoyer</button>
@@ -121,6 +127,7 @@ export default function Upload_Part({item, orderId}) {
 							<Fragment>
 								<IoMdAdd size={80} className=""/>
 								<p>Cliquez ou déposez {item.faceNumber > 1 ? "vos photos" : "votre photo"} ici.</p>
+								<p>Photo{files.length > 1 && "s"} : {files.length}/{item.faceNumber}</p>
 							</Fragment>
 						}
 						</Fragment>
@@ -128,7 +135,10 @@ export default function Upload_Part({item, orderId}) {
 					</div>
 					
 					<div className="upload-detail d-flex flex-column col-md-6">
-						<h2 className="upload-title bg-dark text-white p-2 text-left text-uppercase font-weight-lighter">{item.name} <span className="span-number-file text-lowercase">{item.faceNumber > 1 ? `- (${item.faceNumber} photos)` : `- (${item.faceNumber} photo)` }</span></h2>
+						<div className="upload-title text-white p-2  bg-dark d-flex justify-content-between align-items-center">
+							<h2 className="text-uppercase font-weight-lighter">{item.name} <span className="span-number-file text-lowercase">{item.faceNumber > 1 ? `- (${item.faceNumber} photos)` : `- (${item.faceNumber} photo)` }</span></h2>
+							<h6 className="m-0">{ item.photoUpload ? "Terminé" : "En attente"}</h6>
+						</div>
 						<div className="upload-img-container d-flex flex-column align-self-stretch">
 							{images}
 							{example()}

@@ -51,7 +51,7 @@ function App() {
   return (
     <BrowserRouter>
       <Elements stripe={stripePromise}>
-      <div className="app container-fluid d-flex flex-column justify-content-between min-vh-100">
+      <div className="app container-fluid d-flex flex-column justify-content-start min-vh-100">
         <header className="header row justify-content-between ">
           <div className="brand">
             <Link to="/">amazona</Link>
@@ -70,7 +70,7 @@ function App() {
               {
               userInfo ?
               <li>
-                <NavLink to="/mon-compte/compte" activeClassName="selected"><VscAccount size={22} /></NavLink>
+                <NavLink to="/mon-compte" activeClassName="selected"><VscAccount size={22} /></NavLink>
               </li> 
               : null
               }
@@ -111,7 +111,6 @@ function App() {
           <Route path="/commande" component={PlaceOrder_Page} />
           <Route path="/envoyer-photos/:id" component={Upload_Page} />
           <Route path="/mon-compte/" component={Dashboard} />
-          <Route path="/mes-commandes/:id" component={OrderDetails_Page} />
         </div>
         <footer className="footer">All right reserved.</footer>
       </div>
