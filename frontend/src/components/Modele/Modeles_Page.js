@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
-import { listProducts } from '../../actions/productActions';
+import { listProducts, resetListProducts } from '../../actions/productActions';
 import Modele_Card from './Modele_Card';
 import { ImSpinner8 } from "react-icons/im";
 import '../css/Modeles_Page.css'
@@ -27,7 +27,7 @@ export default function Modeles_Page(props) {
         dispatch(countCollection("products"));
         dispatch(listProducts(skip));
         return () => {
-        //
+        dispatch(resetListProducts());
         };
     }, [page]);
 

@@ -1,9 +1,10 @@
-function userInfosReducer(state = { loading: true, userDetails: {} }, action) {
+function userInfosReducer(state = { loading: true, userDetails: {}, userOrders: [] }, action) {
   switch (action.type) {
     case "USER_INFOS_REQUEST":
       return { loading: true, userDetails: {} };
     case "USER_INFOS_SUCCESS":
-      return { loading: false, userDetails: action.payload.user };
+      console.log(action.payload)
+      return { loading: false, userDetails: action.payload.user, userOrders: action.payload.orders };
     case "USER_INFOS_FAIL":
       return { loading: false, error: action.payload };
     case "USER_INFOS_RESET":

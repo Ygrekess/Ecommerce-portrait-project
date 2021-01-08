@@ -27,7 +27,7 @@ export default function Menu({props}) {
           <div className="dashboard-menu-links w-100 h-100">
             <ul className="d-flex flex-column justify-content-center align-items-center h-100 w-100 py-5 p-0">
               <li className="d-flex border-top w-100">
-                <Link className={"py-2 text-left w-100 " /* + (checkActive("compte") ? "active" : "") */} to="/mon-compte/compte">Mon compte</Link>
+                <Link className={"py-2 text-left w-100 " /* + (checkActive("compte") ? "active" : "") */} to="/mon-compte">Mon compte</Link>
               </li>
               <li className="d-flex border-top w-100">
                 <Link className={"py-2 text-left w-100 " /* + (checkActive("infos-perso") ? "active" : "") */} to="/mon-compte/infos-perso">Mes infos</Link>

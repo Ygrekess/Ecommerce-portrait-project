@@ -2,13 +2,21 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../model/User';
 import bcrypt from 'bcrypt';
+import Order from '../model/Order';
 
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
-  if (user) {
-    res.send({ message: 'Client trouvé.', user: user });
+    const orders = await Order.find( { user: req.params.id } );
+    if (user) {
+        console.log("user")
+        console.log(user)
+        if (orders) {
+            console.log("orders")
+            console.log(orders)
+            res.send({ message: 'Client trouvé.', user: user, orders: orders });
+        }
   } else {
     res.status(404).send({ message: 'Impossible de trouver le client.' })
   }

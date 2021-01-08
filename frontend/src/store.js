@@ -5,7 +5,7 @@ import { passwordCheckReducer, passwordUpdateReducer, userInfosReducer, userInfo
 import { recupProductDetails, recupProductsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { recupCountReducer } from './reducers/dataReducers';
-import { orderCreateReducer, orderDetailsReducer, orderImageReducer, orderPayReducer, ordersUserReducer } from './reducers/orderReducers';
+import { orderCreateReducer, orderDetailsReducer, orderImageReducer, orderPayReducer /* ordersUserReducer */ } from './reducers/orderReducers';
 
 const userInfo = Cookie.getJSON('userInfo') || null;
 const cookieItems = Cookie.getJSON('cartItems') || [];
@@ -41,7 +41,7 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     payOrder: orderPayReducer,
     photoImport: orderImageReducer,
-    userOrders: ordersUserReducer
+    //userOrders: ordersUserReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

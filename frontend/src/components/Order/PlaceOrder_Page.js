@@ -6,7 +6,7 @@ import {PayPalButton} from 'react-paypal-button-v2';
 import "../css/Order.css"
 import { CgDanger } from "react-icons/cg"
 import { GoTrashcan } from 'react-icons/go'
-import { createOrder } from '../../actions/orderActions';
+import { createOrder, resetOrder } from '../../actions/orderActions';
 import { CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Axios from 'axios';
 import { FiCheckSquare } from "react-icons/fi";
@@ -160,7 +160,6 @@ export default function PlaceOrder_Page(props) {
         }
         if (order) {
             if (Object.entries(order).length !== 0) {
-                console.log('order')
                 setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
             }
         }

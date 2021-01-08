@@ -9,6 +9,8 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import { TiTick } from 'react-icons/ti';
 import { ImCross } from 'react-icons/im';
 import { CgDanger } from 'react-icons/cg';
+import { getInfos } from '../../actions/userActions';
+import { Link } from 'react-router-dom';
 
 export default function Upload_Page(props) {
 
@@ -24,7 +26,6 @@ export default function Upload_Page(props) {
 			setOrderPhotoToUpload(order.orderItems.filter( x => x.photoUpload === false))
 		} else {
 			dispatch(resetCart());
-			dispatch(resetOrder());
 			dispatch(detailsOrder(props.match.params.id));
 		}
 		if (orderPhotoToUpload) {
@@ -32,11 +33,13 @@ export default function Upload_Page(props) {
 				setTimeout(() => props.history.push('/mon-compte/mes-commandes'), 3000)
 			}
 		}
-
-	}, [order])
+		return () => {
+			dispatch(resetOrder())
+		}
+	}, [orderPhotoToUpload])
 
 	return ( loading ? <div className="loading-spinner-div d-flex justify-content-center"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :  
-		<div className="upload-container py-2 container d-flex flex-column align-items-center">
+		<div className="upload-container py-2 container d-flex flex-column align-items-center mb-5">
 			<div className="upload-advice d-flex w-100 align-items-around my-5">
 				<div className="d-flex flex-column justify-content-center align-items-center col-8">
 					<div className="bad-way-upload d-flex align-items-center justify-content-around pb-3">
@@ -65,9 +68,12 @@ export default function Upload_Page(props) {
 			</div>
 			{
 				order.orderItems.map((item, i) => (
-					<Upload_Part key={i} item={item} orderId={order._id}/>
+					<Upload_Part order={order} key={i} item={item} orderId={order._id} userId={order.user}/>
 				))
 			}
+			<div className="d-flex justify-content-center">
+				<Link to="/mon-compte/envoyer-photo">Envoyer mes photos plus tard.</Link>
+			</div>
 		</div>
 	)
 }

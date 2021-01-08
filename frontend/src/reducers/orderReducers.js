@@ -26,7 +26,7 @@ function orderDetailsReducer(state = { loading: true }, action) {
   }
 }
 
-function ordersUserReducer(state = { loading: true }, action) {
+/* function ordersUserReducer(state = { loading: true }, action) {
   switch (action.type) {
     case "ORDERS_USER_REQUEST":
       return { loading: true };
@@ -36,7 +36,7 @@ function ordersUserReducer(state = { loading: true }, action) {
       return { loading: false, error: action.payload };
     default: return state;
   }
-}
+} */
 
 function orderImageReducer(state = { loading: true }, action) {
   switch (action.type) {
@@ -70,4 +70,4 @@ function orderPayReducer(state = {
   }
 }
 
-export { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderImageReducer, ordersUserReducer };
+export { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderImageReducer, /* ordersUserReducer */ };

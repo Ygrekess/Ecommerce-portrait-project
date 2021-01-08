@@ -7,9 +7,8 @@ import "../css/Dashboard.css"
 import { Route } from 'react-router-dom'
 import Infos from './Infos'
 import OrderDetails_Page from './OrderDetails_Page'
-import { resetListProducts } from '../../actions/productActions'
-import Upload_Photo from './Upload_Photo'
-import { getInfos } from '../../actions/userActions'
+import Upload_Photo from './Upload_Photo_Dashboard'
+import { getInfos, resetInfos } from '../../actions/userActions'
 import { ImSpinner8 } from "react-icons/im"
 
 
@@ -24,8 +23,6 @@ export default function Dashboard(props) {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(resetListProducts());
-
         if (Object.keys(userDetails).length === 0) {
             dispatch(getInfos(userInfo._id))
         }
@@ -33,6 +30,7 @@ export default function Dashboard(props) {
             props.history.push("/");
         }
         return () => {
+            dispatch(resetInfos())
         }
     }, [userInfo])
 
@@ -43,7 +41,7 @@ export default function Dashboard(props) {
             </div>
             { loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
             <Fragment>
-                <Route path="/mon-compte/compte" component={Account} />
+                <Route path="/mon-compte" exact component={Account} />
                 <Route path="/mon-compte/infos-perso" component={Infos} />
                 <Route path="/mon-compte/mes-commandes" exact component={UserOrders} />
                 <Route path="/mon-compte/mes-commandes/:id" component={OrderDetails_Page} />

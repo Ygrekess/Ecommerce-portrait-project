@@ -26,7 +26,6 @@ export default function Modele_Page(props) {
     }
 
     useEffect(() => {
-        dispatch(resetListProducts());
         dispatch(productDetails(props.match.params.slug, props.match.params.faceNumber))
         return () => {
         }

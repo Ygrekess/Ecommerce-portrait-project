@@ -64,6 +64,7 @@ export default function Account() {
             setPasswordCheck("")
             setNewPassword1("")
             setNewPassword2("")
+            setTimeout(() => setSuccessPassword(""), 4000)
         }
         if (success) {
             setErrorUsernameUpdate("");
@@ -108,7 +109,7 @@ export default function Account() {
                             <button form="username-update-form" className={"submit-update-username btn btn-outline-dark rounded-0 p-2 col-8"}>Modifier l'identifiant de connexion.</button>
                         </div>
                     }
-                    <Link to="#" onClick={() => { setUpdateUsername(!updateUsername); setSuccessUsernameUpdate("")}}>{updateUsername ? "Annuler la modification." : "Modifier l'identifiant de connexion."}</Link>
+                    <Link className="mt-2" to="#" onClick={() => { setUpdateUsername(!updateUsername); setSuccessUsernameUpdate("")}}>{updateUsername ? "Annuler la modification." : "Modifier l'identifiant de connexion."}</Link>
                 </form>
                 <form id="password-update-form" className="d-flex flex-column col-8 px-4 py-2 mt-4" onSubmit={handleSubmit(onSubmitPassword)}>
                     <h6 className="font-weight-bold mb-3">Modifier mon mot de passe</h6>
