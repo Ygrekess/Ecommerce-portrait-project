@@ -1,26 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Dashboard_Menu from './Dashboard_Menu'
-import UserAccount from './UserAccount'
-import UserInfos from './UserInfos'
+import Menu from './Menu'
+import Account from './Account'
 import UserOrders from './UserOrders'
 import "../css/Dashboard.css"
 import { Route } from 'react-router-dom'
-import Password_Update from './Password_Update'
-import UserName_Update from './UserName_Update'
-import Infos_Update from './Infos_Update'
+import Infos from './Infos'
 import OrderDetails_Page from './OrderDetails_Page'
 import { resetListProducts } from '../../actions/productActions'
+import Upload_Photo from './Upload_Photo'
+import { getInfos } from '../../actions/userActions'
+import { ImSpinner8 } from "react-icons/im"
 
 
 export default function Dashboard(props) {
+    
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
+
+    const userInfos = useSelector(state => state.userInfos)
+    const { loading, userDetails } = userInfos;
 
     const dispatch = useDispatch();
     
     useEffect(() => {
         dispatch(resetListProducts());
+
+        if (Object.keys(userDetails).length === 0) {
+            dispatch(getInfos(userInfo._id))
+        }
         if (!userInfo) {
             props.history.push("/");
         }
@@ -28,18 +36,22 @@ export default function Dashboard(props) {
         }
     }, [userInfo])
 
-    return ( !userInfo ? <h1>Impossible d'afficher la page</h1> : //loading
+    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
         <div className="container col-12 d-flex justify-content-center">
             <div className="col-2 d-flex justify-content-center">
-                <Dashboard_Menu props={props} />
+                <Menu props={props} />
             </div>
-            <Route path="/mon-compte/compte" component={UserAccount} />
-            <Route path="/mon-compte/infos-perso" component={UserInfos} />
-            <Route path="/mon-compte/mes-commandes" exact component={UserOrders} />
-            <Route path="/mon-compte/mes-commandes/:id" component={OrderDetails_Page} />
-            <Route path="/mon-compte/modifier-motdepasse" component={Password_Update} />
-            <Route path="/mon-compte/modifier-nomdecompte" component={UserName_Update} />
-            <Route path="/mon-compte/modifier-infos" component={Infos_Update} />
+            { loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+            <Fragment>
+                <Route path="/mon-compte/compte" component={Account} />
+                <Route path="/mon-compte/infos-perso" component={Infos} />
+                <Route path="/mon-compte/mes-commandes" exact component={UserOrders} />
+                <Route path="/mon-compte/mes-commandes/:id" component={OrderDetails_Page} />
+                <Route path="/mon-compte/envoyer-photo" component={Upload_Photo} />
+                <div className="col-2 d-flex justify-content-center">
+                </div>
+            </Fragment>
+            }
         </div>
     )
 }

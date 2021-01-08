@@ -24,10 +24,10 @@ export default function UserInfos() {
     }, [])
     
 
-    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+    return ( loading ? <div className="col-6 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
         <div className="user-infos-page col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
-                <h1 className="mb-5 text-uppercase w-100">Mes infos</h1>
+                <h1 className="mb-5 text-left text-uppercase w-100">Mes infos</h1>
                 <form className="w-100">
                     <ul className="d-flex flex-column justify-content-center align-items-center p-0 w-100">
                         <li className="col-6 mb-4">

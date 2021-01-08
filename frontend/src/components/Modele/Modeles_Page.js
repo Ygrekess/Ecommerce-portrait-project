@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
 import { listProducts } from '../../actions/productActions';
 import Modele_Card from './Modele_Card';
-import { ImSpinner8 } from "react-icons/im"
+import { ImSpinner8 } from "react-icons/im";
+import '../css/Modeles_Page.css'
 
 export default function Modeles_Page(props) {
 
@@ -42,8 +43,9 @@ export default function Modeles_Page(props) {
                 :
                 null
             }
-            <h1 className="text-left">Nos modèles</h1>
+            
             <div className="modeles-page-content">
+                <h1 className="text-left">Nos modèles</h1>
                 <div className="row">
                     {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }
                     {error && <h4 className="text-center mx-auto">{error}</h4>}
@@ -51,7 +53,7 @@ export default function Modeles_Page(props) {
                 <div className="row d-flex justify-content-between flex-wrap">
                     {
                     products.map(product => (
-                        <div className="col-md-4 col-10" key={product._id}>
+                        <div className="col-md-4 col-sm-6 col-12 mb-5 d-flex justify-content-center align-items-center" key={product._id}>
                             <Modele_Card setAdd={setAdd} product={product}/>
                         </div>
                     ))

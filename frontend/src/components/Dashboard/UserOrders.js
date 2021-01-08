@@ -25,8 +25,8 @@ export default function UserOrders() {
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
         <div className="user-orders-page col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
-                <h1 className="mb-5 text-uppercase w-100">Mes commandes</h1>
-                <div className={"user-orders-container"}>
+                <h4 className="text-left font-weight-light">Mes commandes</h4>
+                <div className={"user-orders-container mt-2"}>
                 { orders.length === 0 ? 
                     <div>Vous n'avez passé aucune commande.</div> :
                     orders.map((order, i) => (
@@ -37,9 +37,9 @@ export default function UserOrders() {
                                     <h4>{item.name}</h4>
                                     <p className="order-number">Quantité : {item.qty}</p>
                                     <p className="order-number">Commande : {order._id}</p>
-                                    <p className="order-date font-italic">{order.created_at}</p>
+                                    <p className="order-date font-italic">{"Le " + order.created_at.split('T')[0] + " à " + order.created_at.split('T')[1].split('.')[0]}</p>
                                 </div>
-                                <Link to={`/mon-compte/mes-commandes/${order._id}`} className="col-2 btn btn-dark rounded-0 my-auto">Plus d'infos</Link>
+                                <Link to={`/mon-compte/mes-commandes/${order._id}`} className="col-2 btn btn-outline-dark rounded-0 my-auto">Plus d'infos</Link>
                             </div>
                         ))
                     ))

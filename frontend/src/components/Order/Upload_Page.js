@@ -63,7 +63,6 @@ export default function Upload_Page(props) {
 					</ul>
 				</div>
 			</div>
-			
 			{
 				order.orderItems.map((item, i) => (
 					<Upload_Part key={i} item={item} orderId={order._id}/>

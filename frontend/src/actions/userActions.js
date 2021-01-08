@@ -18,7 +18,9 @@ const getInfos = (userId) => async (dispatch) => {
 }
 
 const resetInfos = () => (dispatch) => {
-  dispatch({ type: "USER_INFOS_RESET"});
+  dispatch({ type: "USER_INFOS_RESET" });
+    dispatch({ type: "USER_UPDATE_INFOS_RESET" });
+
 }
 
 const updateInfos = (userId, lastname, firstname, phone, newsletter) => async (dispatch) => {
@@ -26,7 +28,6 @@ const updateInfos = (userId, lastname, firstname, phone, newsletter) => async (d
   try {
     await Axios.put(`http://localhost:5000/api/users/${userId}/updateinfos`, { lastname, firstname, phone, newsletter });
     dispatch({ type: "USER_UPDATE_INFOS_SUCCESS" });
-    dispatch({ type: "USER_UPDATE_INFOS_RESET" });
   } catch (error) {
     dispatch({ type: "USER_UPDATE_INFOS_FAIL", payload: error.message });
   }

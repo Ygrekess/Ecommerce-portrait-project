@@ -72,7 +72,6 @@ router.get('/:id', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   const order = await Order.find({ user: req.params.id });
-    console.log(order)
     if (!order) {
         return res.status(404).send('Impossible de trouver les commandes du client.')
     }

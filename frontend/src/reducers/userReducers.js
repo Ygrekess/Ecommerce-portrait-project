@@ -1,13 +1,13 @@
-function userInfosReducer(state = { loading: true }, action) {
+function userInfosReducer(state = { loading: true, userDetails: {} }, action) {
   switch (action.type) {
     case "USER_INFOS_REQUEST":
-      return { loading: true };
+      return { loading: true, userDetails: {} };
     case "USER_INFOS_SUCCESS":
       return { loading: false, userDetails: action.payload.user };
     case "USER_INFOS_FAIL":
       return { loading: false, error: action.payload };
     case "USER_INFOS_RESET":
-      return { loading: true };
+      return { loading: true, userDetails: {} };
     default: return state;
   }
 }
@@ -21,7 +21,7 @@ function userInfosUpdateReducer(state = { loading: true, success : false }, acti
     case "USER_UPDATE_INFOS_FAIL":
       return { loading: false, error: action.payload };
     case "USER_UPDATE_INFOS_RESET":
-      return { success: false };
+      return {};
     default: return state;
   }
 }
@@ -87,7 +87,7 @@ function userNameUpdateReducer(state = { success : false}, action) {
     case "UPDATE_USERNAME_SUCCESS":
       return { loading: false, success: true };
     case "UPDATE_USERNAME_FAIL":
-      return { loading: false, errorUsernameUpdate: action.payload.message };
+      return { loading: false, error: action.payload.message };
     case "UPDATE_USERNAME_RESET":
       return { loading : true, success : false}
     default: return state;

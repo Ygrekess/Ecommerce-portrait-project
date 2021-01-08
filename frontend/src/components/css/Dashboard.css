@@ -4,14 +4,11 @@
     min-height: 40rem;
     max-height: 40rem;
     width: 15rem;
-/*     border-left: 1px solid #F8F8F8;
- */    box-shadow: -1px 0px 5px 0px rgba(133, 132, 132, 0.25);
-
 }
 .dashboard-menu-links{
     min-height: 20rem;
     max-height: 20rem;
-    font-size: 20px;  
+    font-size: 15px;  
 }
 .dashboard-menu li,  .dashboard-menu li a{
 
@@ -56,3 +53,23 @@
 }
 
 /* USER ACCOUNT */
+.submit-update-username{
+    animation: display1 .5s linear normal;
+}
+@keyframes display1 {
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+#password-update-form{
+    background-color: #F8F8F8;
+}

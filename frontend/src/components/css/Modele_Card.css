@@ -1,11 +1,18 @@
 .card-product{
     border: none;
-    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25); 
+    max-width: 19rem;
+    min-width: 13rem;
+/*     box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);  */
+}
+.card-product a{
+    color: black;
+    text-decoration: none;
 }
 .card-image{
+    border: 10px solid #252623;
     margin: auto;
-    height: 20rem;
-    width: 20rem;
+    height: 19rem;
+    width: 19rem;
 }
 .card-image img {
     width: 100%;
@@ -34,36 +41,40 @@
     color: black;    
 }
 .add-to-cart{
-    font-family: 'Montserrat', sans-serif;
     color: black;
 }
-.card-title a{
+.card-title {
     color: black;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Barlow', sans-serif;
     text-decoration: none;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 27px;
 }
-.card-description{
-    font-family: 'Montserrat', sans-serif;
-    color: #bcbaba;
+.card-product-name{
+    font-weight: 500;
+    font-size: 27px;
+}
+.card-product-name span{
+    font-weight: 100;
+    font-size: 20px;
 }
 .card-price {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bolder;
-    font-size: 75px;
+    font-weight: 500;
+    font-size: 27px;
 }
 .card-price span {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
+    font-size: 15px;
+}
+.card-description{
+   font-size: 15px; 
 }
 
-.card-details-button{
+/* .card-details-button{
     color: #b0da91;
     border: 1px solid #b0da91;
-}
-.card-details-button:hover{
-    background-color: #b0da91;
-    color: white;
-    border: 1px solid white;
-}
+}*/
+.card-details-button:hover svg{
+/*     background-color: #b0da91;
+ */    color: white;
+/*     border: 1px solid white;
+ */} 

@@ -44,11 +44,9 @@ router.get('/details', async (req, res) => {
 })
 
 router.get('/cartDetails', async (req, res) => {
-
-  const products = await Product.find({ _id: { $in: req.query.ids} });
+  const products = await Product.find({ _id: { $in: req.query.ids } });
   
   if (products) {
-    console.log(products)
     res.send({products : products,});
   } else {
       res.status(404).send({ message: 'Modèle non trouvé.' });
