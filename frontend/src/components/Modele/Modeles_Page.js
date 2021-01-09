@@ -6,6 +6,7 @@ import { listProducts, resetListProducts } from '../../actions/productActions';
 import Modele_Card from './Modele_Card';
 import { ImSpinner8 } from "react-icons/im";
 import '../css/Modeles_Page.css'
+import Pagination from '../Pagination';
 
 export default function Modeles_Page(props) {
 
@@ -25,7 +26,7 @@ export default function Modeles_Page(props) {
     
     useEffect(() => {
         dispatch(countCollection("products"));
-        dispatch(listProducts(skip));
+        dispatch(listProducts(skip, per_page));
         return () => {
         dispatch(resetListProducts());
         };
@@ -59,16 +60,7 @@ export default function Modeles_Page(props) {
                     ))
                     }
                 </div>
-                <div className="row justify-content-between my-5">
-                    {Number(page) > 1 ?
-                        <Link to={"/modeles/page=" + (Number(page) - 1)} className="btn btn-primary">Précedent</Link>
-                        : null
-                    }
-                    { Number(page) < Math.floor((totalProductsInDb/per_page) + 1) ? 
-                        <Link to={"/modeles/page=" + (Number(page) + 1)} className="btn btn-outline-primary ml-auto">Suivant</Link>
-                        : null
-                    }
-                </div>
+                <Pagination pageName={"modeles"} page={page} totalProductsInDb={totalProductsInDb} per_page={per_page}/>
             </div>
         </div>
     )

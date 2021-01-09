@@ -18,6 +18,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import Upload_Page from './components/Order/Upload_Page';
 import { recupCartDetails } from './actions/cartActions';
+import Admin_dashboard from './components/Admin/Admin_dashboard';
 
 const stripePromise = loadStripe('pk_test_51I5SwjCkP1aIaUis7r9xPfgttfwYd9Dbz6joX9VcgV4KX1PnxFofxQS0Z1vSHZ1Q4UMUqO5ZIVBMiNYLFuILznKd00ElOrsevC');
 
@@ -67,6 +68,9 @@ function App() {
               <li>
                 <NavLink to="/contact" activeClassName="selected">Nous contacter</NavLink>
               </li>
+              <li>
+                <NavLink to="/admin" activeClassName="selected">Admin</NavLink>
+              </li>
               {
               userInfo ?
               <li>
@@ -103,14 +107,15 @@ function App() {
         <Cart isVisible={isVisible} setIsVisible={setIsVisible} />
       </div>}
 
-        <div className="d-flex justify-content-center align-items-start">
+        <div className="page-content d-flex justify-content-center align-items-start">
           <Route path="/" exact component={Home_Page} />
           <Route path="/connexion" component={Connexion_Page} />
           <Route path="/modeles/:page?" component={Modeles_Page} />
           <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
           <Route path="/commande" component={PlaceOrder_Page} />
           <Route path="/envoyer-photos/:id" component={Upload_Page} />
-          <Route path="/mon-compte/" component={Dashboard} />
+          <Route path="/mon-compte" component={Dashboard} />
+          <Route path="/admin" component={Admin_dashboard} />
         </div>
         <footer className="footer">All right reserved.</footer>
       </div>

@@ -29,12 +29,12 @@
     
 }
 .dashboard-menu li:hover a{
-    background-color: #b0da91;
+    background-color: #5DB8F8;
     color:white;
     transition: .15s;
 }
 .dashboard-menu li .active{
-    background-color: #b0da91;
+    background-color: #5DB8F8;
     color: white;
 }
 

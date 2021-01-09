@@ -1,0 +1,76 @@
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { countCollection } from '../../actions/dataActions';
+import { listProducts, resetListProducts } from '../../actions/productActions';
+import Pagination from '../Pagination';
+import { ImSpinner8 } from "react-icons/im";
+import '../css/Admin.css'
+import { Link } from 'react-router-dom';
+
+export default function Products(props) {
+
+    const productList = useSelector(state => state.listProducts);
+    const { error, loading, products } = productList;
+    const [add, setAdd] = useState(false)
+
+    /** Pagination */ 
+    const countDb = useSelector(state => state.countData)
+    const { count } = countDb;
+    const totalProductsInDb = count.count;
+    const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
+    const per_page = 8;
+    const skip = (page * per_page) - per_page
+
+    const dispatch = useDispatch();
+    
+	useEffect(() => {
+        dispatch(countCollection("products"));
+        dispatch(listProducts(skip, per_page));
+        return () => {
+        dispatch(resetListProducts());
+        };
+	}, [page]);
+	
+	return (
+		<div className="col-8 d-flex flex-column products-page">
+			<div className="d-flex justify-content-between align-items-center mb-5">
+				<h4 className="text-left m-0">Liste produits</h4>
+				<button className="btn btn-primary my-auto">Ajouter</button>
+			</div>
+			{
+            	loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+				<table className="table table-striped">
+				<thead>
+					<tr>
+					<th scope="col">#</th>
+					<th scope="col">_id</th>
+					<th scope="col">Montant</th>
+					<th scope="col">Nom</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						products.map((product, i) => (
+						<tr key={i}>
+						<th scope="row">{i + 1}</th>
+						<td>{product._id}</td>
+						<td>{product.price}</td>
+						<td>{product.name}</td>
+						<td>
+							<Link to={`/admin/liste-produits/produit/id=${product._id}`} className="btn btn-outline-dark">Détails</Link >
+						</td>
+						<td>
+							<button className="btn btn-outline-danger">Supprimer</button>
+						</td>
+						</tr>							
+						))
+					}
+				</tbody>
+				</table>
+			}	
+            <Pagination pageName={"admin/liste-produits"} page={page} totalProductsInDb={totalProductsInDb} per_page={per_page}/>
+		</div>
+	)
+}

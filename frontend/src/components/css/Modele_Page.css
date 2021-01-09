@@ -8,7 +8,7 @@
 /* MODELE PAGE */
 
 .model-page-container{
-    min-height: 90vh; 
+    min-height: 70vh; 
 }
 .modele-page-content{
     min-height: 100%; 
@@ -17,6 +17,7 @@
 .modele-page-img{
    height: 30rem;
    width: 30rem; 
+   border: 10px solid black;
 }
 .modele-page-img img {
     width: 100%;
@@ -25,17 +26,19 @@
 }
 
 .modele-page-details{
-    height: 30rem;
+    min-height: 40rem;
 }
 
 .modele-page-cart-button{
-    background-color: #FFFF;
-    border: none;
+    background-color: black;
+    border-radius: 25px;
     cursor: pointer;
-    box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
-}
-.modele-page-cart-button:hover .cart-icon, .modele-page-cart-button:hover .add-to-cart {
-    color: #F39D91; 
+    height: 3rem;
+    width: 15rem;
+/*     box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
+ */}
+.modele-page-cart-button:hover{
+    background-color: #5DB8F8;
 }
 .cart-icon{
     color: black;    

@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+const categorySchema = {
+  style: { type: String, required: true },
+  size: { type: String, required: true },
+  colors: { type: Array, required: true },
+};
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -21,10 +27,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    category: { 
-        type: Array, 
-        required: true 
-    },
+    category: categorySchema,
     faceNumber: { 
         type: Number, 
         required: true 

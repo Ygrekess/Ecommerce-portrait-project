@@ -1,7 +1,7 @@
 .app {
   text-align: center;
-  min-height: 100vh;
-}
+/*   min-height: 100vh;
+ */}
 .header{
   height: 15vh;
 }
@@ -13,15 +13,15 @@
   font-weight: 500;
 }
 .header-links ul li a:hover{
-  background-color: #b0da91;
-  color: white;
-  border-top-left-radius: 5px;
+/*  background-color: #5DB8F8;
+ color: white;
+ */  border-top-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
 .header-links ul li .selected{
-  background-color: #b0da91;
+/*  background-color: #5DB8F8;
   color: white;
-  border-top-left-radius: 5px;
+ */  border-top-left-radius: 5px;
   border-bottom-right-radius: 5px; 
 }
 .header-links ul li:hover:nth-child(5){
@@ -118,6 +118,10 @@
 
 .loading-spinner{
 }
+
+.page-content{
+/*   min-height: 85vh;
+ */}
 
 .footer{
   height: 10vh;

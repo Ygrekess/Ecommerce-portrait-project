@@ -27,8 +27,8 @@ export default function Upload_Photo() {
 		}
 	}, [])
 	
-    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-		<div className="col-8">
+    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100 h-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+		<div className="col-8 h-100">
 			{ photoToUpload > 0 ?
             <div className="d-flex flex-column justify-content-start col-12">
                 <h4 className="text-left font-weight-light">Envoyer mes photos</h4>
@@ -45,7 +45,9 @@ export default function Upload_Photo() {
 				</div>
 			</div>
 			:
-			<h4 className="text-left font-weight-light">Vous n'avez aucune photo à nous transmettre.</h4>
+			<div className="d-flex align-items-center justify-content-center h-100">
+				<h4 className="text-center font-weight-light">Vous n'avez aucune photo à nous transmettre.</h4>
+			</div>
 			}
 		</div>
 	)

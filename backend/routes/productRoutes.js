@@ -4,8 +4,9 @@ import Product from '../model/Product';
 const router = express.Router();
 
 router.get('/list', async (req, res) => {
-  const offset = Number(req._parsedUrl.query.split("=")[1]);
-  const products = await Product.find().skip(offset).limit(6);
+  const offset = Number(req.query.offset);
+  const per_page = Number(req.query.per_page);
+  const products = await Product.find().skip(offset).limit(per_page);
   if (products) {
     res.send(products);
   } else {
@@ -24,8 +25,9 @@ router.get('/count', async (req, res) => {
 })
 
 router.get('/details', async (req, res) => {
-  if (req.query.id) {
-    const product = await Product.findOne({ _id: req.query.id });
+  console.log(req.query)
+  if (req.query.productId) {
+    const product = await Product.findOne({ _id: req.query.productId });
     if (product) {
       res.send({product : product, faceNumber: []});
     } else {

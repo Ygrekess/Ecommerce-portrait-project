@@ -20,7 +20,7 @@ export default function UserOrders() {
         <div className="user-orders-page col-8">
             <div className="d-flex flex-column justify-content-start col-12">
                 <h4 className="text-left font-weight-light">Mes commandes</h4>
-                <div className={"user-orders-container mt-2"}>
+                <div className={"user-orders-container mt-2 px-3"}>
                 { userOrders.length === 0 ? 
                     <div>Vous n'avez passé aucune commande.</div> :
                     userOrders.map((order, i) => (
