@@ -3,14 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { CgDanger } from "react-icons/cg"
 import { ImSpinner8 } from "react-icons/im"
-import { addProduct, importProductImage, productDetails, updateProduct } from '../../actions/productActions';
+import { addProduct, importProductImage, productDetails } from '../../actions/productActions';
 import { IoMdAdd } from "react-icons/io"
 import uniqid from 'uniqid'
 
-export default function Product_page(props) {
-
-    const details = useSelector((state) => state.detailsProduct);
-	const { loading, product, error, updateSuccess } = details;
+export default function AddProduct_page(props) {
 	
 	const [styles, setStyles] = useState([]);
 	const [colors, setColors] = useState([]);
@@ -18,18 +15,18 @@ export default function Product_page(props) {
 
     const dispatch = useDispatch();
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit, errors, reset } = useForm();
 
 	const onSubmit = data => {
-		console.log(data)
 		const id = uniqid();
-
-		const productItem = {
-			_id: product._id,
+		Object.assign(file, {
+			_id: id
+		})
+		const product = {
 			name: data.name,
 			slug: data.slug,
 			price: data.price,
-			image: data.image[0] ? "/product-images/" + id + ".jpg" : null,
+			image: "/product-images/" + id + ".jpg",
 			category: {
 				style: styles,
 				size: data.size,
@@ -38,20 +35,16 @@ export default function Product_page(props) {
 			faceNumber: data.faceNumber,
 			description: data.description
 		}
-		console.log(productItem)
-		dispatch(updateProduct(productItem))
-		if (Object.keys(file).length > 0) {
-			Object.assign(file, {
-				_id: id
-			})
+		dispatch(addProduct(product))
+		if (file) {
 			dispatch(importProductImage(file))
 		}
+		reset({})
+		setFile({})
+		setColors([])
+		setStyles([])
 	};
 
-	const onLoadState = () => {
-		setStyles(product.category.style)
-		setColors(product.category.colors)
-	}
 	const addStyle = (e) => {
 		e.preventDefault();
 		let style = document.getElementsByClassName('style-input')[0]
@@ -74,6 +67,7 @@ export default function Product_page(props) {
 		setColors(newColors)
 	}
 	const addFile = (e) => {
+		console.log(e.target.files[0])
 		const myFile = Object.assign(e.target.files[0], {
 			preview: URL.createObjectURL(e.target.files[0]),
 		})
@@ -81,23 +75,20 @@ export default function Product_page(props) {
 	}
 
 	useEffect(() => {
-		console.log("recharge")
-		dispatch(productDetails(props.match.params.id, null, null))
 		return () => {
 		}
-	}, [updateSuccess])
+	}, [])
 
-    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+    return (
 		<div className="col-8">
-			<form id="user-form" className="d-flex flex-column" onLoad={() => onLoadState()} onSubmit={handleSubmit(onSubmit)}>
-				<h4 className="text-left font-weight-light">Produit - {product._id}</h4>
+			<form id="user-form" className="d-flex flex-column" onSubmit={handleSubmit(onSubmit)}>
+				<h4 className="text-left font-weight-light">Ajouter un produit</h4>
 				<div className="input-group row my-4">
 					<div className="col-4 d-flex flex-column my-2">
 						<label htmlFor="name" className="text-left">Nom <span className="text-danger">*</span></label>
 						<input
 							className={"p-2 " + ( errors.name ? "border-danger" : "")}
 							name="name"
-							defaultValue={product.name}
 							placeholder=""
 							ref={register({
 							validate: value => value !== ""
@@ -110,7 +101,6 @@ export default function Product_page(props) {
 						<input
 							className={"p-2 " + ( errors.slug ? "border-danger" : "")}
 							name="slug"
-							defaultValue={product.slug}
 							placeholder=""
 							ref={register({
 							validate: value => value !== ""
@@ -123,8 +113,6 @@ export default function Product_page(props) {
 						<input
 							className={"p-2 " + ( errors.price ? "border-danger" : "")}
 							name="price"
-							defaultValue={product.price}
-							type="number"
 							ref={register({
 							validate: value => value !== ""
 							})}
@@ -138,7 +126,6 @@ export default function Product_page(props) {
 						<textarea
 							className={"p-2 " + ( errors.description ? "border-danger" : "")}
 							name="description"
-							defaultValue={product.description}
 							rows={6}
 							ref={register({
 							validate: value => value !== ""
@@ -154,9 +141,7 @@ export default function Product_page(props) {
 							className={"p-2 " + (errors.size ? "border-danger" : "")}
 							name="size"
 							placeholder=""
-							defaultValue={product.category.size}
 							ref={register({
-							validate: value => value !== ""
 							})}
 						/>
 						{errors.size && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger size={20} /><p className="m-0 ml-1">Merci de préciser la taille.</p></div>}
@@ -172,13 +157,12 @@ export default function Product_page(props) {
 									require: false
 								})}
 							/>
-							{errors.style && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger size={20} /><p className="m-0 ml-1">Merci d'indiquer le style.</p></div>}
 							<button className="btn btn-dark rounded-0 col-2 p-0" onClick={(e) => addStyle(e)}><IoMdAdd className="m-auto" size={20}/></button>
 						</div>
 						<div className="d-flex">
 						{
 							styles.map((style, i) => (
-								<span key={i} className="style-badge badge badge-warning rounded-0 px-2 py-2 mr-1" onClick={() => deleteStyle(style)}>{style}</span>
+								<span key={i} className="style-badge badge rounded-0 badge-warning px-2 py-2 mr-1" onClick={() => deleteStyle(style)}>{style}</span>
 							))
 						}
 						</div>
@@ -197,32 +181,29 @@ export default function Product_page(props) {
 							<button className="btn btn-dark rounded-0" onClick={(e) => addColor(e)}><IoMdAdd className="m-auto" size={20}/></button>
 						</div>
 						<div className="my-2 d-flex justify-content-center w-100" >
-							{
+						{
 							colors.map((color, i) => (
 								<div key={i} className="color-badge mr-1" style={{backgroundColor:`${color}`, height:"1.5rem", width:"1.5rem", borderRadius:"50%"}} onClick={() => deleteColor(color)}></div>
 							))
-							}
+						}
 						</div>
 					</div>
 				</div>
 				<div className="input-group row align-items-center my-4">
 					<div className="col-4 my-2">
 						<div className="product-img m-auto">
-							<img src={ Object.keys(file).length === 0 ? product.image : file.preview } />
+							<img src={Object.keys(file).length > 0 ? file.preview : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnews.aut.ac.nz%2F__data%2Fassets%2Fimage%2F0006%2F92328%2Fplaceholder-image10.jpg&f=1&nofb=1"}/>
 						</div>
 					</div>
 					<div className="col-4 d-flex flex-column my-2">
-						<label htmlFor="image" className="text-left">Changer l'image :<span className="text-danger">*</span></label>
+						<label htmlFor="image" className="text-left">Importer une image :<span className="text-danger">*</span></label>
 						<input
 							className={( errors.image ? "border-danger" : "")}
 							name="image"
 							onChange={(e) => addFile(e)}
-							
 							type="file"
 							placeholder=""
-							ref={register({
-								require: false
-							})}
+							ref={register({})}
 						/>
 					</div>
 
@@ -231,7 +212,6 @@ export default function Product_page(props) {
 						<input
 							className={"p-2 " + ( errors.faceNumber ? "border-danger" : "")}
 							type="number"
-							defaultValue={product.faceNumber}
 							name="faceNumber"
 							placeholder=""
 							ref={register}

@@ -18,3 +18,17 @@
 	width: 100%;
 	object-fit: cover;
 }
+input[type="color"]{
+	-webkit-appearance: none;
+	width: 3.5rem;
+	height: 2.5rem;
+}
+.row-category{
+	height: 12rem;
+}
+.style-badge{
+	cursor: pointer;
+}
+.color-badge{
+	cursor: pointer;
+}

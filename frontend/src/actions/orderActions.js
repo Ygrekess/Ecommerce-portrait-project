@@ -6,7 +6,7 @@ const createOrder = (order) => async (dispatch, getState) => {
     const { userSignin: { userInfo } } = getState();
     dispatch({ type: "ORDER_CREATE_REQUEST", payload : {order: order, userInfo: userInfo} })
     try {        
-        const { data: { data: newOrder } } = await Axios.post("http://localhost:5000/api/orders", { order: order, userInfo: userInfo });
+        const { data: { data: newOrder } } = await Axios.post("/api/orders", { order: order, userInfo: userInfo });
         dispatch({ type: "ORDER_CREATE_SUCCESS", payload: newOrder });
     } catch (error) {
         dispatch({ type: "ORDER_CREATE_FAIL", payload: error.message });
@@ -30,7 +30,7 @@ const resetOrder = () => (dispatch) => {
 const importImage = (userId, orderId, itemName, filesName) => async (dispatch, getState) => {
     dispatch({ type: "ORDER_PHOTO_REQUEST" })
     try {
-        const { data } = await Axios.put(`http://localhost:5000/api/orders/photoupload/${orderId}&${itemName}`, { filesName: filesName });
+        const { data } = await Axios.put(`/api/orders/photoupload/${orderId}&${itemName}`, { filesName: filesName });
         dispatch({ type: "ORDER_PHOTO_SUCCESS", payload: data });
         dispatch(detailsOrder(orderId));
         dispatch(getInfos(userId));
@@ -42,7 +42,7 @@ const importImage = (userId, orderId, itemName, filesName) => async (dispatch, g
 const detailsOrder = (orderId) => async (dispatch, getState) => {
     dispatch({ type: "ORDER_DETAILS_REQUEST", payload : orderId })
     try {
-        const { data } = await Axios.get(`http://localhost:5000/api/orders/${orderId}`);
+        const { data } = await Axios.get(`/api/orders/${orderId}`);
         dispatch({ type: "ORDER_DETAILS_SUCCESS", payload: data });
     } catch (error) {
         dispatch({ type: "ORDER_DETAILS_FAIL", payload: error.message });

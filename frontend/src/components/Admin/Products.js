@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
-import { listProducts, resetListProducts } from '../../actions/productActions';
+import { deleteProduct, listProducts, resetListProducts } from '../../actions/productActions';
 import Pagination from '../Pagination';
 import { ImSpinner8 } from "react-icons/im";
 import '../css/Admin.css'
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 export default function Products(props) {
 
     const productList = useSelector(state => state.listProducts);
-    const { error, loading, products } = productList;
+    const { error, loading, products, deleteSuccess } = productList;
     const [add, setAdd] = useState(false)
 
     /** Pagination */ 
@@ -21,7 +21,11 @@ export default function Products(props) {
     const per_page = 8;
     const skip = (page * per_page) - per_page
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	
+	const onDelete = (productId) => {
+		dispatch(deleteProduct(productId))
+	}
     
 	useEffect(() => {
         dispatch(countCollection("products"));
@@ -29,13 +33,13 @@ export default function Products(props) {
         return () => {
         dispatch(resetListProducts());
         };
-	}, [page]);
+	}, [page, deleteSuccess]);
 	
 	return (
 		<div className="col-8 d-flex flex-column products-page">
 			<div className="d-flex justify-content-between align-items-center mb-5">
 				<h4 className="text-left m-0">Liste produits</h4>
-				<button className="btn btn-primary my-auto">Ajouter</button>
+				<Link to="/admin/liste-produits/produit/ajouter-produit" className="btn btn-primary my-auto">Ajouter</Link>
 			</div>
 			{
             	loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
@@ -62,7 +66,7 @@ export default function Products(props) {
 							<Link to={`/admin/liste-produits/produit/id=${product._id}`} className="btn btn-outline-dark">Détails</Link >
 						</td>
 						<td>
-							<button className="btn btn-outline-danger">Supprimer</button>
+							<button className="btn btn-outline-danger" onClick={() => onDelete(product._id)}>Supprimer</button>
 						</td>
 						</tr>							
 						))

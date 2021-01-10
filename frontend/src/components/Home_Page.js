@@ -20,27 +20,12 @@ export default function Home_Page() {
         setTimeout(() => setAdd(false), 2500)
     }
 
-    const addProduct = async () => {
-        const product = {
-            name: "Test3",
-            slug: "test-3",
-            price: 69.99,
-            image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F1xjsW3tgByU%2Fmaxresdefault.jpg&f=1&nofb=1",
-            category: [
-                "Pop art"
-            ],
-            faceNumber:3,
-            description: "Parfait pour offrir. 70/100cm. Idéal pour afficher dans votre salon. Vous rendrez jaloux vos amis.",
-        };
-        const response = await Axios.post("http://localhost:5000/api/products/", { product })
-        console.log(response)
-    }
-
     useEffect(() => {
         dispatch(resetListProducts());
         return () => {
         }
     }, [add])
+    
     return (
         <div className="min-vh-100">
             <h1>HOMEPAGE</h1>

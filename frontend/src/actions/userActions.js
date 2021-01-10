@@ -10,7 +10,7 @@ import Cookie from 'js-cookie';
 const getInfos = (userId) => async (dispatch) => {
   dispatch({ type: "USER_INFOS_REQUEST"});
   try {
-    const { data } = await Axios.get(`http://localhost:5000/api/users/${userId}`);
+    const { data } = await Axios.get(`/api/users/${userId}`);
     dispatch({ type: "USER_INFOS_SUCCESS", payload: data });
   } catch (error) {
     dispatch({ type: "USER_INFOS_FAIL", payload: error.message });
@@ -26,7 +26,7 @@ const resetInfos = () => (dispatch) => {
 const updateInfos = (userId, lastname, firstname, phone, newsletter) => async (dispatch) => {
   dispatch({ type: "USER_UPDATE_INFOS_REQUEST"});
   try {
-    await Axios.put(`http://localhost:5000/api/users/${userId}/updateinfos`, { lastname, firstname, phone, newsletter });
+    await Axios.put(`/api/users/${userId}/updateinfos`, { lastname, firstname, phone, newsletter });
     dispatch({ type: "USER_UPDATE_INFOS_SUCCESS" });
   } catch (error) {
     dispatch({ type: "USER_UPDATE_INFOS_FAIL", payload: error.message });
@@ -36,7 +36,7 @@ const updateInfos = (userId, lastname, firstname, phone, newsletter) => async (d
 const register = (lastname, firstname, email, password, newsletter) => async (dispatch) => {
   dispatch({ type: "USER_REGISTER_REQUEST", payload: { lastname, firstname, email, password, newsletter } });
   try {
-    const { data } = await Axios.post("http://localhost:5000/api/users/register", { lastname, firstname, email, password, newsletter });
+    const { data } = await Axios.post("/api/users/register", { lastname, firstname, email, password, newsletter });
     dispatch({ type: "USER_REGISTER_SUCCESS", payload: data });
     Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -47,7 +47,7 @@ const register = (lastname, firstname, email, password, newsletter) => async (di
 const signin = (email, password) => async (dispatch) => {
   dispatch({ type: "USER_SIGNIN_REQUEST", payload: { email, password } });
   try {
-    const { data } = await Axios.post("http://localhost:5000/api/users/login", { email, password });
+    const { data } = await Axios.post("/api/users/login", { email, password });
     dispatch({ type: "USER_SIGNIN_SUCCESS", payload: data });
     Cookie.set('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -58,7 +58,7 @@ const signin = (email, password) => async (dispatch) => {
 const checkPassword = (userId, password) => async (dispatch) => {
   dispatch({ type: "CHECK_PASSWORD_REQUEST", payload: { userId, password } });
   try {
-    const { data } = await Axios.post("http://localhost:5000/api/users/passwordcheck", { userId, password });
+    const { data } = await Axios.post("/api/users/passwordcheck", { userId, password });
     dispatch({ type: "CHECK_PASSWORD_SUCCESS", payload: data });
   } catch (error) {
     dispatch({ type: "CHECK_PASSWORD_FAIL", payload: error.message });
@@ -68,7 +68,7 @@ const checkPassword = (userId, password) => async (dispatch) => {
 const updatePassword = (userId, newPassword) => async (dispatch) => {
   dispatch({ type: "UPDATE_PASSWORD_REQUEST" });
   try {
-    const { data } = await Axios.put(`http://localhost:5000/api/users/${userId}/updatepassword`, { newPassword });
+    const { data } = await Axios.put(`/api/users/${userId}/updatepassword`, { newPassword });
     dispatch({ type: "UPDATE_PASSWORD_SUCCESS" });
     dispatch({ type: "CHECK_PASSWORD_RESET"}); 
   } catch (error) {
@@ -83,7 +83,7 @@ const passwordCheckReset = () => (dispatch) => {
 const updateUserName = (userId, newUserName) => async (dispatch) => {
   dispatch({ type: "UPDATE_USERNAME_REQUEST" });
   try {
-    const { data } = await Axios.put(`http://localhost:5000/api/users/${userId}/updateusername`, { newUserName });
+    const { data } = await Axios.put(`/api/users/${userId}/updateusername`, { newUserName });
     dispatch({ type: "UPDATE_USERNAME_SUCCESS" });
     dispatch({ type: "UPDATE_USERNAME_RESET" });
     dispatch({ type: "CHECK_PASSWORD_RESET"});

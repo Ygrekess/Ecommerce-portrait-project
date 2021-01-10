@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
     try {
-        const { data } = await Axios.get('http://localhost:5000/api/products/details', { params: { id: productId } });
+        const { data } = await Axios.get('/api/products/details', { params: { id: productId } });
         dispatch({
         type: "CART_ADD_ITEM",
         payload: {
@@ -31,7 +31,7 @@ const recupCartDetails = () => async (dispatch, getState) => {
     }
 
     try {
-        const { data } = await Axios.get('http://localhost:5000/api/products/cartDetails', { params: { ids: ids } })
+        const { data } = await Axios.get('/api/products/cartDetails', { params: { ids: ids } })
         for (let i = 0; i < data.products.length; i++) {
             cookieItems.map(x => x._id === data.products[i]._id ?
                 payload = [...payload,

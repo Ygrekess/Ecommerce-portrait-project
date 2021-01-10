@@ -28,7 +28,7 @@ export default function Modele_Card({ product, setAdd }) {
         <div className="mt-4 card card-product">
             <Link to={`/modele/${product.slug}/${product.faceNumber}-pers`}>
             <div className="p-2 card-image row">
-                 <img className="img" alt="" src={product.image}/> 
+                 <img className="img" alt="" src={`${product.image}`}/>
             </div>
             <div className="card-content row">
 {/*                 <div className="card-cart-button mx-auto col-9 d-flex justify-content-around align-items-center rounded p-2" onClick={() => handleAddToCart()}>

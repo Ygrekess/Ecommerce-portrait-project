@@ -3,7 +3,6 @@ function userInfosReducer(state = { loading: true, userDetails: {}, userOrders: 
     case "USER_INFOS_REQUEST":
       return { loading: true, userDetails: {} };
     case "USER_INFOS_SUCCESS":
-      console.log(action.payload)
       return { loading: false, userDetails: action.payload.user, userOrders: action.payload.orders };
     case "USER_INFOS_FAIL":
       return { loading: false, error: action.payload };

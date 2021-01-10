@@ -10,6 +10,7 @@ import Users from './Users'
 import Products from './Products'
 import Stats from './Stats'
 import Product_page from './Product_page'
+import AddProduct_page from './AddProduct_page'
 
 export default function Admin_dashboard(props) {
 
@@ -46,6 +47,7 @@ export default function Admin_dashboard(props) {
 				<Route path="/admin/liste-utilisateurs/:id" component={Users} />
                 <Route path="/admin/liste-produits/:page?" exact component={Products} />
 				<Route path="/admin/liste-produits/produit/id=:id" component={Product_page} />
+                <Route path="/admin/liste-produits/produit/ajouter-produit" component={AddProduct_page} />
                 <Route path="/admin/statistiques" component={Stats} />
                 <div className="col-2 d-flex justify-content-center">
                 </div>

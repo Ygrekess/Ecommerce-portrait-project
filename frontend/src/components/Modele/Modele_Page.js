@@ -49,11 +49,11 @@ export default function Modele_Page(props) {
 
             <div className="modele-page-content d-flex justify-content-around align-items-center w-100">
                 <div className="modele-page-img col-4 p-2 align-self-start">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2F1xjsW3tgByU%2Fmaxresdefault.jpg&f=1&nofb=1"></img>
+                    <img src={product.image}></img>
                 </div>
                 <div className="modele-page-details col-5 d-flex flex-column align-items-start justify-content-around">
                     <div className="row text-left"><h2 className="m-O font-weight-bold text-uppercase">{product.name} <span className="font-weight-lighter text-lowercase">- {product.faceNumber} pers.</span></h2></div>
-                    {product.category.map((category, i ) => (
+                    {product.category.style.map((category, i ) => (
                         <div key={i} className="row text-left"><span className="badge badge-warning m-O">{category}</span></div>
                     ))}
                     <div className="row text-left">
@@ -74,10 +74,7 @@ export default function Modele_Page(props) {
                         </div>
                         <Link to={"#"} onClick={() => props.history.goBack()}>Retour</Link>
                     </div>
-                    <div className="row text-left"><span className="font-weight-bold text-uppercase">Description : </span><br/><p className="m-0 ">{product.description}{product.description}</p></div>
-                    <div className="row text-left"><br/><p className="m-0 ">{product.description}{product.description}</p></div>
-                    <div className="row text-left"><br/><p className="m-0 ">{product.description}{product.description}</p></div>
-
+                    <div className="row text-left"><span className="font-weight-bold text-uppercase">Description : </span><br/><p className="m-0 ">{product.description}</p></div>
                 </div>
             </div>
         </div>
