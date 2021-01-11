@@ -7,10 +7,23 @@ import Cookie from 'js-cookie';
         payload: infos
     }
 } */
+const listUsers = (offset, per_page) => async (dispatch) => {
+    dispatch({ type: "USER_LIST_REQUEST" });
+    try {
+      const { data } = await Axios.get('/api/users/list', { params: { offset: offset, per_page: per_page } });
+      dispatch({ type: "USER_LIST_SUCCESS", payload: data });
+  } catch (error) {
+      dispatch({ type: "USER_LIST_FAIL", payload: error.message });
+  }
+}
+const resetListUsers = () => (dispatch) => {
+    dispatch({ type: "USER_LIST_RESET" });
+}
+
 const getInfos = (userId) => async (dispatch) => {
   dispatch({ type: "USER_INFOS_REQUEST"});
   try {
-    const { data } = await Axios.get(`/api/users/${userId}`);
+    const { data } = await Axios.get(`/api/users/user/${userId}`);
     dispatch({ type: "USER_INFOS_SUCCESS", payload: data });
   } catch (error) {
     dispatch({ type: "USER_INFOS_FAIL", payload: error.message });
@@ -97,4 +110,4 @@ const logout = () => (dispatch) => {
   dispatch({ type: "USER_LOGOUT" })
 }
 
-export { getInfos, updateInfos, resetInfos, signin, register, checkPassword, passwordCheckReset, logout, updatePassword, updateUserName};
+export { listUsers, resetListUsers, getInfos, updateInfos, resetInfos, signin, register, checkPassword, passwordCheckReset, logout, updatePassword, updateUserName};

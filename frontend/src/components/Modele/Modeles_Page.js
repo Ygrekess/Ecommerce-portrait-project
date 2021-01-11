@@ -51,7 +51,7 @@ export default function Modeles_Page(props) {
                     {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }
                     {error && <h4 className="text-center mx-auto">{error}</h4>}
                 </div>
-                <div className="row d-flex justify-content-between flex-wrap">
+                <div className="row d-flex justify-content-between align-items-start flex-wrap">
                     {
                     products.map(product => (
                         <div className="col-md-4 col-sm-6 col-12 mb-5 d-flex justify-content-center align-items-center" key={product._id}>

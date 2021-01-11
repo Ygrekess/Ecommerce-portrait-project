@@ -30,6 +30,27 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/list', async (req, res) => {
+  const offset = Number(req.query.offset);
+  const per_page = Number(req.query.per_page);
+  const orders = await Order.find().skip(offset).limit(per_page);
+  if (orders) {
+    res.send(orders);
+  } else {
+      res.status(404).send({ message: 'Modèles non trouvés.' });
+  }
+})
+
+router.get('/count', async (req, res) => {
+  const number = await Order.countDocuments();
+  const data = { count: number }
+  if (data) {
+    res.send(data);
+  } else {
+      res.status(404).send({ message: 'Order count fail.' });
+  }
+})
+
 router.post('/checkout', async (req, res) => {  
   const {amount} = req.body;
   try {
@@ -99,6 +120,7 @@ router.get('/user/:id', async (req, res) => {
 }); */
 
 router.put("/photoupload/:orderId&:itemName", async (req, res) => {
+  console.log(req.body.filesName)
 	const cartItemId = req.params.itemName.split('-')[1];
   const order = await Order.findById(req.params.orderId);
   if (order) {

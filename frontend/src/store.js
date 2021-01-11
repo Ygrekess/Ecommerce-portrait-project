@@ -1,11 +1,11 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
-import { passwordCheckReducer, passwordUpdateReducer, userInfosReducer, userInfosUpdateReducer, userNameUpdateReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { passwordCheckReducer, passwordUpdateReducer, userInfosReducer, userInfosUpdateReducer, userListReducer, userNameUpdateReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 import { recupProductDetails, recupProductsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { recupCountReducer } from './reducers/dataReducers';
-import { orderCreateReducer, orderDetailsReducer, orderImageReducer, orderPayReducer /* ordersUserReducer */ } from './reducers/orderReducers';
+import { orderCreateReducer, orderDetailsReducer, orderImageReducer, orderListReducer, orderPayReducer /* ordersUserReducer */ } from './reducers/orderReducers';
 
 const userInfo = Cookie.getJSON('userInfo') || null;
 const cookieItems = Cookie.getJSON('cartItems') || [];
@@ -41,6 +41,8 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     payOrder: orderPayReducer,
     photoImport: orderImageReducer,
+    listOrders: orderListReducer,
+    listUsers: userListReducer
     //userOrders: ordersUserReducer
 })
 

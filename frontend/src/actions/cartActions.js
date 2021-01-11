@@ -4,7 +4,7 @@ import uniqid from 'uniqid';
 
 const addToCart = (productId, qty) => async (dispatch, getState) => {
     try {
-        const { data } = await Axios.get('/api/products/details', { params: { id: productId } });
+        const { data } = await Axios.get('/api/products/details', { params: { productId: productId } });
         dispatch({
         type: "CART_ADD_ITEM",
         payload: {

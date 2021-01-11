@@ -54,7 +54,7 @@ export default function Upload_Part({order, item, orderId, userId}) {
 	))
 
 	const sendFiles = async () => {
-		const itemName = `${item.name}-${item.cartItemId}`
+		const folderName = `${item.name}-${item.cartItemId}`
 		const bodyFormData = new FormData();
 		const filesName = [];
 		files.map(file => {
@@ -63,7 +63,7 @@ export default function Upload_Part({order, item, orderId, userId}) {
 		})
 	
 		try {
-			const { data } = await Axios.post(`http://localhost:5000/api/upload/${orderId}&${itemName}`, bodyFormData, {
+			const { data } = await Axios.post(`http://localhost:5000/api/upload/${orderId}&${folderName}`, bodyFormData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
@@ -71,7 +71,8 @@ export default function Upload_Part({order, item, orderId, userId}) {
 					setProgress(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)));
 				}
 			});
-			dispatch(importImage(userId, orderId, itemName, filesName))
+			console.log(filesName)
+			dispatch(importImage(userId, orderId, folderName, filesName))
 			
 		} catch (error) {
 			console.log(error)

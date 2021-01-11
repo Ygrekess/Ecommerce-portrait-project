@@ -18,7 +18,7 @@ export default function Products(props) {
     const { count } = countDb;
     const totalProductsInDb = count.count;
     const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
-    const per_page = 8;
+    const per_page = 1;
     const skip = (page * per_page) - per_page
 
 	const dispatch = useDispatch();
@@ -74,7 +74,7 @@ export default function Products(props) {
 				</tbody>
 				</table>
 			}	
-            <Pagination pageName={"admin/liste-produits"} page={page} totalProductsInDb={totalProductsInDb} per_page={per_page}/>
+            <Pagination pageName={"admin/liste-produits"} page={page} totalInDb={totalProductsInDb} per_page={per_page}/>
 		</div>
 	)
 }

@@ -32,3 +32,28 @@ input[type="color"]{
 .color-badge{
 	cursor: pointer;
 }
+
+
+/* ORDER PAGE */
+.order-item{
+	background-color: #F8F8F8;
+}
+.order-item-img{
+	height: 7rem;
+	width: 7rem;
+}
+.order-item-img img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.item-photos-img{
+	height: 10rem;
+	width: 10rem;
+}
+.item-photos-img img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}

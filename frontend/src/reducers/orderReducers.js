@@ -12,6 +12,21 @@ function orderCreateReducer(state = {}, action) {
   }
 }
 
+function orderListReducer(state = { loading: true, orders: [] }, action) {
+  switch (action.type) {
+    case "ORDER_LIST_REQUEST":
+      return { loading: true, orders: [] };
+    case "ORDER_LIST_SUCCESS":
+      return { loading: false, orders: action.payload };
+    case "ORDER_LIST_FAIL":
+      return { loading: false, error: action.payload };
+    case "ORDER_LIST_RESET":
+      return { loading: true, orders: [] };
+    default:
+      return state;
+  }
+}
+
 function orderDetailsReducer(state = { loading: true }, action) {
   switch (action.type) {
     case "ORDER_DETAILS_REQUEST":
@@ -70,4 +85,4 @@ function orderPayReducer(state = {
   }
 }
 
-export { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderImageReducer, /* ordersUserReducer */ };
+export { orderCreateReducer, orderListReducer, orderDetailsReducer, orderPayReducer, orderImageReducer, /* ordersUserReducer */ };

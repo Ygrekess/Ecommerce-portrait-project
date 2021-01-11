@@ -66,6 +66,21 @@ function passwordCheckReducer(state = { loading: true, validate : false }, actio
   }
 }
 
+function userListReducer(state = { loading: true, users: [] }, action) {
+  switch (action.type) {
+    case "USER_LIST_REQUEST":
+      return { loading: true, users: [] };
+    case "USER_LIST_SUCCESS":
+      return { loading: false, users: action.payload };
+    case "USER_LIST_FAIL":
+      return { loading: false, error: action.payload };
+    case "USER_LIST_RESET":
+      return { loading: true, users: [] };
+    default:
+      return state;
+  }
+}
+
 function passwordUpdateReducer(state = {success: false}, action) {
   switch (action.type) {
     case "UPDATE_PASSWORD_REQUEST":
@@ -93,4 +108,4 @@ function userNameUpdateReducer(state = { success : false}, action) {
     default: return state;
   }
 }
-export { userInfosReducer, userInfosUpdateReducer, userSigninReducer, userRegisterReducer, passwordCheckReducer, passwordUpdateReducer, userNameUpdateReducer };
+export { userListReducer, userInfosReducer, userInfosUpdateReducer, userSigninReducer, userRegisterReducer, passwordCheckReducer, passwordUpdateReducer, userNameUpdateReducer };

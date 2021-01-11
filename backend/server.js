@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes'
 import orderRoutes from './routes/orderRoutes'
 import productRoutes from './routes/productRoutes'
 import cors from 'cors'
+import path from 'path'
 import uploadRouter from './routes/uploadRouter';
 
 const app = express()
@@ -30,5 +31,8 @@ app.use('/api/orders', orderRoutes)
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
 })
+const __dirname = path.resolve(); 
+app.use('/product-images', express.static(path.join(__dirname, '/product-images')))
+app.use('/orders', express.static(path.join(__dirname, '/orders')))
 
 app.listen(5000, () => console.log('API server start'))

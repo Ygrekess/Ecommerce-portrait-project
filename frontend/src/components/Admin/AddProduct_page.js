@@ -214,7 +214,9 @@ export default function AddProduct_page(props) {
 							type="number"
 							name="faceNumber"
 							placeholder=""
-							ref={register}
+							ref={register({
+								validate: value => value > 0
+							})}
 						/>
 						{errors.faceNumber && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger  size={20}/><p className="m-0 ml-1">Merci de renseigner le nombre de visage(s).</p></div>}
 					</div>

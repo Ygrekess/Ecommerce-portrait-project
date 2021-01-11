@@ -22,10 +22,10 @@ export default function Menu({props}) {
                 <Link className="py-2 text-left w-100" to="/admin/mon-compte" >Mon compte</Link>
               </li>
               <li className="d-flex border-top w-100">
-                <Link className="py-2 text-left w-100" /* + (checkActive("infos-perso") ? "active" : "") */ to="/admin/liste-commandes">Liste utilisateurs</Link>
+                <Link className="py-2 text-left w-100" /* + (checkActive("infos-perso") ? "active" : "") */ to="/admin/liste-utilisateurs">Liste utilisateurs</Link>
               </li>
               <li className="d-flex border-top w-100">
-                <Link className="py-2 text-left w-100" /* + (checkActive("mes-commandes") ? "active" : "") */ to="/admin/liste-utilisateurs">Listes commandes</Link>
+                <Link className="py-2 text-left w-100" /* + (checkActive("mes-commandes") ? "active" : "") */ to="/admin/liste-commandes">Listes commandes</Link>
               </li>
               <li className="d-flex border-top w-100">
                 <Link className="py-2 text-left w-100" /* + (checkActive("envoyer-photo") ? "active" : "") */ to="/admin/liste-produits">Liste produits</Link>

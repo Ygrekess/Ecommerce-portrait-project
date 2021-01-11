@@ -6,15 +6,11 @@ import Order from '../model/Order';
 
 const router = express.Router();
 
-router.get('/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
     const user = await User.findById(req.params.id);
     const orders = await Order.find( { user: req.params.id } );
     if (user) {
-        console.log("user")
-        console.log(user)
         if (orders) {
-            console.log("orders")
-            console.log(orders)
             res.send({ message: 'Client trouvé.', user: user, orders: orders });
         }
   } else {
@@ -45,10 +41,34 @@ router.post('/register', async (req, res) => {
     }    
 })
 
+router.get('/list', async (req, res) => {
+    console.log(req)
+    const offset = Number(req.query.offset);
+    const per_page = Number(req.query.per_page);
+    const users = await User.find().skip(offset).limit(per_page);
+    if (users) {
+        console.log(users)
+        res.send(users);
+    } else {
+        res.status(404).send({ message: 'Users non trouvés.' });
+    }
+})
+
+router.get('/count', async (req, res) => {
+    
+    const number = await User.countDocuments();
+    const data = { count: number }
+    if (data) {
+        console.log(data)
+        res.send(data);
+    } else {
+        res.status(404).send({ message: 'User count fail.' });
+  }
+})
+
 router.post('/login', async (req, res) => {
     //Checking if user is already in DB
     const user = await User.findOne({ email: req.body.email });
-    console.log(user)
     if (!user) {
         return res.status(400).send('Email or password is wrong.')
     }
@@ -113,14 +133,12 @@ router.put("/:id/updateusername", async (req, res) => {
 });
 
 router.put("/:id/updateinfos", async (req, res) => {
-    console.log(req.body)
     const user = await User.findById(req.params.id);
     if (user) {
         user.lastname = req.body.lastname,
         user.firstname = req.body.firstname,
         user.phone = req.body.phone,
         user.newsletter = req.body.newsletter
-        console.log(user)
         const updatedUser = await user.save();
         res.send({ message: 'User infos updated', user: updatedUser });
     } else {
