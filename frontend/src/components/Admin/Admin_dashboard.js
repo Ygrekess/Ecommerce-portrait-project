@@ -12,6 +12,7 @@ import Stats from './Stats'
 import Product_page from './Product_page'
 import AddProduct_page from './AddProduct_page'
 import Order_page from './Order_page'
+import User_page from './User_page'
 
 export default function Admin_dashboard(props) {
 
@@ -24,11 +25,13 @@ export default function Admin_dashboard(props) {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        if (Object.keys(userDetails).length === 0) {
-            dispatch(getInfos(userInfo._id))
-        }
         if (!userInfo) {
             props.history.push("/");
+        }
+        if (userInfo) {
+            if (Object.keys(userDetails).length === 0) {
+                dispatch(getInfos(userInfo._id))
+            }
         }
         return () => {
             dispatch(resetInfos())
@@ -45,7 +48,7 @@ export default function Admin_dashboard(props) {
                 <Route path="/admin/liste-commandes/:page?" exact component={Orders} />
                 <Route path="/admin/liste-commandes/commande/id=:id" component={Order_page} />
                 <Route path="/admin/liste-utilisateurs/:page?" exact component={Users} />
-				<Route path="/admin/liste-utilisateurs/utilisateur/id=:id" component={Users} />
+				<Route path="/admin/liste-utilisateurs/utilisateur/id=:id" component={User_page} />
                 <Route path="/admin/liste-produits/:page?" exact component={Products} />
 				<Route path="/admin/liste-produits/produit/id=:id" component={Product_page} />
                 <Route path="/admin/liste-produits/produit/ajouter-produit" component={AddProduct_page} />

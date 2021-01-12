@@ -6,6 +6,7 @@ import Pagination from '../Pagination';
 import { ImSpinner8 } from "react-icons/im";
 import '../css/Admin.css'
 import { Link } from 'react-router-dom';
+import { GoTrashcan } from 'react-icons/go';
 
 export default function Products(props) {
 
@@ -18,7 +19,7 @@ export default function Products(props) {
     const { count } = countDb;
     const totalProductsInDb = count.count;
     const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
-    const per_page = 1;
+    const per_page = 8;
     const skip = (page * per_page) - per_page
 
 	const dispatch = useDispatch();
@@ -46,8 +47,7 @@ export default function Products(props) {
 				<table className="table table-striped">
 				<thead>
 					<tr>
-					<th scope="col">#</th>
-					<th scope="col">_id</th>
+					<th scope="col">ID</th>
 					<th scope="col">Montant</th>
 					<th scope="col">Nom</th>
 					<th scope="col"></th>
@@ -58,7 +58,6 @@ export default function Products(props) {
 					{
 						products.map((product, i) => (
 						<tr key={i}>
-						<th scope="row">{i + 1}</th>
 						<td>{product._id}</td>
 						<td>{product.price}</td>
 						<td>{product.name}</td>
@@ -66,7 +65,7 @@ export default function Products(props) {
 							<Link to={`/admin/liste-produits/produit/id=${product._id}`} className="btn btn-outline-dark">Détails</Link >
 						</td>
 						<td>
-							<button className="btn btn-outline-danger" onClick={() => onDelete(product._id)}>Supprimer</button>
+							<button className="btn btn-outline-danger" onClick={() => onDelete(product._id)}><GoTrashcan size={20}/></button>
 						</td>
 						</tr>							
 						))

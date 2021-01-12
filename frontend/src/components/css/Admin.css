@@ -1,4 +1,4 @@
-.products-page{
+.products-page, .users-page, .orders-page{
 	min-height: 50rem;
 }
 

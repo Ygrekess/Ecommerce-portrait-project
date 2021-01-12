@@ -86,11 +86,11 @@ export default function Account() {
                 <form id="username-update-form" className="d-flex flex-column col-8" onSubmit={handleSubmit1(onSubmitUsername)}>
                     <div className="input-group row flex-column align-items-center">
                         <div className="col-8 d-flex flex-column my-2">
-                            <label htmlFor="email" className="text-left">Identifiant de connexion<span className="text-danger">*</span></label>
+                            <label htmlFor="username" className="text-left">Identifiant de connexion<span className="text-danger">*</span></label>
                             <input
-                                className={"p-2 " + ( errors1.email ? "border-danger" : "")}
-                                defaultValue={userDetails.email}
-                                name="email"
+                                className={"p-2 " + ( errors1.username ? "border-danger" : "")}
+                                defaultValue={userDetails.username}
+                                name="username"
                                 disabled={updateUsername ? false : true}
                                 onChange={() => { setSuccessUsernameUpdate(""); setErrorUsernameUpdate("")}}
                                 placeholder=""
@@ -98,7 +98,7 @@ export default function Account() {
                                 validate: value => value !== ""
                                 })}
                             />
-                            {errors1.email && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger  size={20}/><p className="m-0 ml-1">Merci de renseigner votre nom.</p></div>}
+                            {errors1.username && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger  size={20}/><p className="m-0 ml-1">Merci de renseigner votre nom.</p></div>}
                         </div>
                     </div>
                     {successUsernameUpdate && <div className="row my-2 pt-1 text-success "><p className="m-auto">{successUsernameUpdate}</p></div>}

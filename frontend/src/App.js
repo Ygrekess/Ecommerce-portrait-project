@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Connexion_Page from './components/Connexion/Connexion_Page';
 import Home_Page from './components/Home_Page';
 import Modeles_Page from './components/Modele/Modeles_Page';
 import { logout } from './actions/userActions';
@@ -11,7 +10,6 @@ import Modele_Page from './components/Modele/Modele_Page';
 import { useEffect, useState } from 'react';
 import Cart from './components/Cart/Cart';
 import Dashboard from './components/Dashboard/Dashboard';
-import OrderDetails_Page from './components/Dashboard/OrderDetails_Page';
 import useVisible from "./components/Cart/useVisible"
 import PlaceOrder_Page from './components/Order/PlaceOrder_Page';
 import { loadStripe } from '@stripe/stripe-js';
@@ -19,6 +17,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import Upload_Page from './components/Order/Upload_Page';
 import { recupCartDetails } from './actions/cartActions';
 import Admin_dashboard from './components/Admin/Admin_dashboard';
+import Connexion from './components/Connexion/Connexion';
 
 const stripePromise = loadStripe('pk_test_51I5SwjCkP1aIaUis7r9xPfgttfwYd9Dbz6joX9VcgV4KX1PnxFofxQS0Z1vSHZ1Q4UMUqO5ZIVBMiNYLFuILznKd00ElOrsevC');
 
@@ -109,7 +108,7 @@ function App() {
 
         <div className="page-content d-flex justify-content-center align-items-start">
           <Route path="/" exact component={Home_Page} />
-          <Route path="/connexion" component={Connexion_Page} />
+          <Route path="/connexion" component={Connexion} />
           <Route path="/modeles/:page?" component={Modeles_Page} />
           <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
           <Route path="/commande" component={PlaceOrder_Page} />

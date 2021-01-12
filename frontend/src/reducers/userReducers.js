@@ -12,6 +12,18 @@ function userInfosReducer(state = { loading: true, userDetails: {}, userOrders: 
   }
 }
 
+function userDetailsReducer(state = { loading: true, user: {}, orders: [] }, action) {
+  switch (action.type) {
+    case "USER_DETAILS_REQUEST":
+      return { loading: true, user: {} };
+    case "USER_DETAILS_SUCCESS":
+      return { loading: false, user: action.payload.user, orders: action.payload.orders };
+    case "USER_DETAILS_FAIL":
+      return { loading: false, error: action.payload };
+    default: return state;
+  }
+}
+
 function userInfosUpdateReducer(state = { loading: true, success : false }, action) {
   switch (action.type) {
     case "USER_UPDATE_INFOS_REQUEST":
@@ -108,4 +120,4 @@ function userNameUpdateReducer(state = { success : false}, action) {
     default: return state;
   }
 }
-export { userListReducer, userInfosReducer, userInfosUpdateReducer, userSigninReducer, userRegisterReducer, passwordCheckReducer, passwordUpdateReducer, userNameUpdateReducer };
+export { userListReducer, userInfosReducer, userDetailsReducer, userInfosUpdateReducer, userSigninReducer, userRegisterReducer, passwordCheckReducer, passwordUpdateReducer, userNameUpdateReducer };

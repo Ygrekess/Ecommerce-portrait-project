@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        max: 255
+    },
     lastname: {
         type: String,
         max: 255

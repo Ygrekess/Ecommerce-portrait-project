@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
-import { passwordCheckReducer, passwordUpdateReducer, userInfosReducer, userInfosUpdateReducer, userListReducer, userNameUpdateReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { passwordCheckReducer, passwordUpdateReducer, userDetailsReducer, userInfosReducer, userInfosUpdateReducer, userListReducer, userNameUpdateReducer, userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 import { recupProductDetails, recupProductsReducer } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { recupCountReducer } from './reducers/dataReducers';
@@ -39,6 +39,7 @@ const reducer = combineReducers({
     countData: recupCountReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
+    userDetails: userDetailsReducer,
     payOrder: orderPayReducer,
     photoImport: orderImageReducer,
     listOrders: orderListReducer,

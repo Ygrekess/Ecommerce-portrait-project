@@ -14,6 +14,9 @@ import { ImSpinner8 } from "react-icons/im"
 
 export default function PlaceOrder_Page(props) {
 
+    const userSignin = useSelector(state => state.userSignin);
+    const { userInfo } = userSignin;
+    
     const orderCreate = useSelector((state) => state.orderCreate);
     const { order } = orderCreate;
 
@@ -141,7 +144,9 @@ export default function PlaceOrder_Page(props) {
     
     
     useEffect(() => {
-        console.log(order)
+        if (!userInfo) {
+            props.history.push('/connexion?redirect=commande')
+        }
         const addPaypalScript = async () => {
             const { data } = await Axios.get('http://localhost:5000/api/config/paypal');
             const script = document.createElement('script');
@@ -165,7 +170,7 @@ export default function PlaceOrder_Page(props) {
         }
         return () => {
         }
-    }, [orderIsValidate, sdkReady, order, cartItems])
+    }, [userInfo, orderIsValidate, sdkReady, order, cartItems])
 
     return (
         <div className="checkout-page container">
@@ -212,7 +217,7 @@ export default function PlaceOrder_Page(props) {
             </div>
             <div className="order-content row mt-5">
                 <div className="shipping-form col-7">
-                    <form id="shipping-form" className="d-flex flex-column" onSubmit={handleSubmit(onSubmit)}>
+                    <form id="shipping-form" className="d-flex flex-column p-0" onSubmit={handleSubmit(onSubmit)}>
                         <h4 className="text-left px-3 font-weight-light">Détails de livraison</h4>
                         <div className="input-group row">
                             <div className="col-8 d-flex flex-column my-2">

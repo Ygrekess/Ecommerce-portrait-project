@@ -34,5 +34,6 @@ app.get('/api/config/paypal', (req, res) => {
 const __dirname = path.resolve(); 
 app.use('/product-images', express.static(path.join(__dirname, '/product-images')))
 app.use('/orders', express.static(path.join(__dirname, '/orders')))
+app.use('/photos-site', express.static(path.join(__dirname, '/photos-site')))
 
 app.listen(5000, () => console.log('API server start'))

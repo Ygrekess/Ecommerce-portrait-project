@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
 import { listUsers, resetListUsers } from '../../actions/userActions';
 import { ImSpinner8 } from "react-icons/im";
 import Pagination from '../Pagination';
+import { Link } from 'react-router-dom';
 
 export default function Users(props) {
 
@@ -16,7 +17,7 @@ export default function Users(props) {
 	
     const totalUsersInDb = count.count;
     const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
-    const per_page = 1;
+    const per_page = 8;
     const skip = (page * per_page) - per_page
 
 	const dispatch = useDispatch();
@@ -30,15 +31,14 @@ export default function Users(props) {
 	}, [page]);
 	
 	return (
-		<div className="col-8">
+		<div className="col-8 d-flex flex-column users-page">
 			<h4 className="text-left mb-5">Liste utilisateurs</h4>
 			{
 			loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60} /></div> :
-			<Fragment>
 			<table className="table table-striped">
 			<thead>
 				<tr>
-				<th scope="col">#</th>
+				<th scope="col">ID</th>
 				<th scope="col">Prénom</th>
 				<th scope="col">Nom</th>
 				<th scope="col">Statut</th>
@@ -49,21 +49,20 @@ export default function Users(props) {
 				{
 					users.map((user, i)=> (
 					<tr key={i}>
-						<th scope="row">{user._id}</th>
+						<td>{user._id}</td>
 						<td>{user.lastname}</td>
 						<td>{user.firstname}</td>
 						<td>Client</td>
 						<td>
-							<button className="btn btn-outline-dark">Détails</button>
+							<Link to={`/admin/liste-utilisateurs/utilisateur/id=${user._id}`} className="btn btn-outline-dark">Détails</Link>
 						</td>
 					</tr>
 					))
 				}
 			</tbody>
 			</table>
-            <Pagination pageName={"admin/liste-utilisateurs"} page={page} totalInDb={totalUsersInDb} per_page={per_page}/>
-			</Fragment>
 			}
+            <Pagination pageName={"admin/liste-utilisateurs"} page={page} totalInDb={totalUsersInDb} per_page={per_page}/>
 		</div>
 	)
 }

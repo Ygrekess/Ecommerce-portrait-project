@@ -31,14 +31,13 @@ export default function Orders(props) {
 	}, [page, ]);
 
 	return (
-		<div className="col-8">
+		<div className="col-8 d-flex flex-column orders-page">
 			<h4 className="text-left mb-5">Liste commandes</h4>
 			{
 				<table className="table table-striped">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">_id</th>
+							<th scope="col">ID</th>
 							<th scope="col">Montant</th>
 							<th scope="col">Date</th>
 							<th scope="col"></th>
@@ -48,7 +47,6 @@ export default function Orders(props) {
 						{
 							orders.map((order, i) => (
 							<tr key={i}>
-								<th scope="row">{i + 1}</th>
 								<td>{order._id}</td>
 								<td>{order.totalPrice}€</td>
 								<td>{order.created_at.split('T')[0]}</td>

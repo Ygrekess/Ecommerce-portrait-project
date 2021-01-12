@@ -24,7 +24,7 @@ export default function Infos(props) {
 
     const onSubmit = data => {
         console.log(data)
-        dispatch(updateInfos(userDetails._id, data.lastname, data.firstname, data.phone, newsletter))
+        dispatch(updateInfos(userDetails._id, data.lastname, data.firstname, data.email, data.phone, newsletter))
     };
 
     useEffect(() => { 
@@ -91,7 +91,6 @@ export default function Infos(props) {
                                     className={"p-2 " + ( errors.email ? "border-danger" : "")}
                                     defaultValue={ userDetails.email }
                                     name="email"
-                                    disabled={true}
                                     type="email"
                                     ref={register({
                                     validate: value => value !== ""

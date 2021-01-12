@@ -32,7 +32,7 @@ export default function Modele_Page(props) {
     }, [props.match.params.faceNumber])
 
     return ( loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="model-page-container d-flex align-items-center">
+        <div className="model-page-container d-flex align-items-center w-100">
             { add ? 
                 <div className="add-test rounded d-flex justify-content-center align-items-center">
                     <div className="add-border rounded border-success">
@@ -51,13 +51,21 @@ export default function Modele_Page(props) {
                 <div className="modele-page-img col-4 p-2 align-self-start">
                     <img src={product.image}></img>
                 </div>
-                <div className="modele-page-details col-5 d-flex flex-column align-items-start justify-content-around">
-                    <div className="row text-left"><h2 className="m-O font-weight-bold text-uppercase">{product.name} <span className="font-weight-lighter text-lowercase">- {product.faceNumber} pers.</span></h2></div>
+                <div className="modele-page-details col-5 py-5 d-flex flex-column align-items-start justify-content-around">
+                    <div className="row text-left m-0"><h2 className="m-0 font-weight-bold text-uppercase">{product.name} <span className="font-weight-lighter text-uppercase">- {product.category.style}</span></h2></div>
+{/*                     <div className="row text-left category-style">
                     {product.category.style.map((category, i ) => (
-                        <div key={i} className="row text-left"><span className="badge badge-warning m-O">{category}</span></div>
+                        <span key={i} className="badge badge-warning m-0 p-2 rounded-0 text-uppercase">{category}</span>
                     ))}
+                    </div> */}
+                    <div className="row text-left m-0"><h2 className="m-0 font-weight-lighter text-lowercase">{product.faceNumber} pers.</h2></div>
+                    <div className="row text-left category-colors">
+                    {product.category.colors.map((color, i ) => (
+                        <div key={i} className="m-0 mr-1 p-2 text-uppercase" style={{ backgroundColor: `${color}`, height:"1.5rem", width:"1.5rem", borderRadius:"50%"}}></div>
+                    ))}
+                    </div>
                     <div className="row text-left">
-                        <h2 className="m-0 card-price">{String(product.price).split('.')[0]}<span>.{String(product.price).split('.')[1]}€</span></h2>
+                        <h2 className="m-0 price">{String(product.price).split('.')[0]}<span>.{String(product.price).split('.')[1]}€</span></h2>
                     </div>
                     {faceNumber.length > 0 &&
                     <div className="row align-items-center">
@@ -67,7 +75,7 @@ export default function Modele_Page(props) {
                         ))}
                     </div>
                     }
-                    <div className="d-flex justify-content-between align-items-center w-100 my-4">
+                    <div className="d-flex justify-content-between align-items-center w-100">
                         <div className="modele-page-cart-button row justify-content-center align-items-center" onClick={() => handleAddToCart()}>
                             <FiShoppingCart className="cart-icon text-white" size={20} />
                             <h6 className="add-to-cart text-uppercase m-0 text-white ml-4">Ajouter au panier</h6>

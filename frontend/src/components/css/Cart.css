@@ -4,7 +4,7 @@
     height: auto;
     top: 15%;
     right: 1rem;
-    z-index: 3;
+    z-index: 2000;
     background-color: white;
     box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
 }

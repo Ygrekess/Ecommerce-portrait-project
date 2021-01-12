@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import RegisterPage from './Register_Page'
-import SigninPage from './Signin_Page'
-import '../css/Connexion_Page.css'
+import RegisterPage from '../Register_Page'
+import SigninPage from '../Signin_Page'
 
 export default function Connexion_Page(props) {
 

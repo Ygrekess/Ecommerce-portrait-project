@@ -3,6 +3,10 @@
 /*   min-height: 100vh;
  */}
 .header{
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  min-width: 95vw;
   height: 15vh;
 }
 .header-links ul{
@@ -40,16 +44,16 @@
   position: relative;
 }
 .numbitemscart{
-  background-color: red;
+  background-color: rgb(244, 255, 94);
   font-size: smaller;
   font-weight: 500;
-  width: 1rem;
-  height: 1rem;
-  color: white;
+  width: 1.3rem;
+  height: 1.3rem;
+  color: #343A40;
   border-radius: 50%;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -5.5px;
+  right: -5.5px;
   display: flex;
   justify-content: center;
   align-items: center;

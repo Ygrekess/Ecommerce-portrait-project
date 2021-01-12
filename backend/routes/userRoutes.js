@@ -16,18 +16,34 @@ router.get('/user/:id', async (req, res) => {
   } else {
     res.status(404).send({ message: 'Impossible de trouver le client.' })
   }
- 
+})
+
+router.get('/user/details/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    const orders = await Order.find( { user: req.params.id } );
+    if (user) {
+        if (orders) {
+            res.send({ message: 'Client trouvé.', user: user, orders: orders });
+        }
+  } else {
+    res.status(404).send({ message: 'Impossible de trouver le client.' })
+  }
 })
 
 router.post('/register', async (req, res) => {
+
+    const userExistByEmail = await User.find({ email: req.body.email });
+    if (userExistByEmail.length !== 0) {
+        res.status(400).send({message : "Email déjà existant."});
+    }
+    
     //Hash the password
     const salt = await bcrypt.genSaltSync(10)
     const hashedPassword = await bcrypt.hashSync(req.body.password, salt);
 
     //Create new User
     const user = new User({
-        lastname: req.body.lastname,
-        firstname: req.body.firstname,
+        username: req.body.username,
         email: req.body.email,
         isAdmin: false,
         newsletter: req.body.newsletter,
@@ -68,7 +84,7 @@ router.get('/count', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     //Checking if user is already in DB
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ username: req.body.username });
     if (!user) {
         return res.status(400).send('Email or password is wrong.')
     }
@@ -137,6 +153,7 @@ router.put("/:id/updateinfos", async (req, res) => {
     if (user) {
         user.lastname = req.body.lastname,
         user.firstname = req.body.firstname,
+        user.email = req.body.email,
         user.phone = req.body.phone,
         user.newsletter = req.body.newsletter
         const updatedUser = await user.save();
