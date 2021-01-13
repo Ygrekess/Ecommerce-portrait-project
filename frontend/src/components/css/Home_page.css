@@ -1,0 +1,340 @@
+/*--------------------------------------------------------------
+# Intro Section
+--------------------------------------------------------------*/
+#intro {
+  width: 100%;
+  height: 821px;
+  margin: auto;
+  position: relative;
+/*   background-size: 100vw;
+  background-position: center;
+  background-repeat: no-repeat; */
+}
+#intro::before{
+	content: '';
+  	background-image: linear-gradient(-45deg, #f88bf8 0%, #e966f5 100%);
+	height: 100vw;
+	width: 100vw;
+	border-radius: 50%;
+	position: absolute;
+	top: -75%;
+	left: -40%;
+	z-index: -1;
+}
+
+.intro-content {
+  position: absolute;
+  width: 550px;
+  top: 200px;
+  right: 0;
+  left: 10%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+.intro-content h1 {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 30px;
+  font-size: 40px;
+  text-align: left;
+}
+
+.intro-content p {
+  color: white;
+  font-size: 18px;
+  text-align: left;
+}
+
+#intro_btn_creerMonModele{
+text-decoration: none;
+margin: 0px auto 0px auto;
+padding: 10px 20px 10px 20px;
+font-family: arial;
+font-size: 20px;
+color: white;
+background-color: black;
+border:none;
+border-radius: 24px;
+-webkit-border-radius: 24px;
+-moz-border-radius: 24px;
+}
+
+
+#intro_btn_creerMonModÃ¨le:hover {
+padding: 10px 20px 10px 20px;
+color: black;
+background-color: white;
+border: 1px solid black;
+}
+
+#photo_intro{
+  position: absolute;
+  height: 850px;
+  top: 50px;
+  right: -150px;
+}
+
+#div_presentation{
+  position: absolute;
+  text-align: center;
+  color: black;
+  display: flex;
+  top: 85%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: auto;
+  width: 1200px;
+  background-color: white;
+  box-shadow: 0 0 1.6rem 0 rgba(49,49,49,.1);
+}
+
+#div_presentation img{
+  height: 40px;
+}
+
+#div_presentation h1{
+  margin: 10px;
+  font-size: 20px;
+}
+
+#div_presentation p{
+  margin: 20px;
+}
+
+.div_presentation_1{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+.div_presentation_2{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+  border-left: 4px solid rgba(153, 216, 187, 1);
+}
+
+.div_presentation_3{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+  border-left: 4px solid rgba(153, 216, 187, 1);
+}
+
+
+
+/* Boutique Section
+--------------------------------*/
+#boutique-header{
+  text-align: center;
+  height: auto;
+  margin: 150px 0px 20px 0px;
+}
+
+#boutique-header h2{
+  color: black;
+}
+
+#boutique-header p{
+  color: black;
+}
+
+#photo_boutique_content{
+  position: relative;
+  height: 600px;
+}
+
+#photo_boutique_1{
+  position: absolute;
+  top: 100px;
+  left: 125px;
+  height: 400px;
+}
+
+#photo_boutique_2{
+  position: absolute;
+  top: 100px;
+  right: 125px;
+  height: 400px;  
+}
+
+#photo_boutique_3{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin:auto; 
+  height: 400px;  
+}
+
+#boutique_btn_voirplus{
+text-decoration: none;
+margin: 0px auto 0px auto;
+padding: 10px 20px 10px 20px;
+font-family: arial;
+font-size: 20px;
+color: white;
+background-color: black;
+border:none;
+border-radius: 24px;
+-webkit-border-radius: 24px;
+-moz-border-radius: 24px;
+}
+
+
+#boutique_btn_voirplus:hover {
+padding: 10px 20px 10px 20px;
+color: black;
+background-color: white;
+border: 1px solid black;
+}
+
+/* Avis Section
+--------------------------------*/
+
+#reviews{
+  height: 300px;
+  padding: 50px 0px 50px 0px;
+  background-color: #f3f3f3;
+}
+
+#reviews h2{
+  color: black;
+}
+
+
+/* A propos Section
+--------------------------------*/
+
+#about{
+  padding: 50px 0px 50px 0px;
+  height: auto;
+}
+
+#about h2{
+  color: black;
+}
+
+#about p{
+  color: black;
+}
+
+.section-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#about_photo{
+  margin: auto;
+  /* background-image: url('../img/equipe.jpg'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+#about_photoFilter{
+  background-color: #F2ADA7;
+  opacity: 25%;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+#about_presentation{
+  text-align: center;
+  margin: 25px auto;
+  height: auto;
+  width: 600px;
+}
+
+
+/*--------------------------------------------------------------
+# preFooter
+--------------------------------------------------------------*/
+
+#prefooter{
+  height: auto;
+  padding: 0px 100px 0px 100px; 
+}
+
+#prefooter h1{
+  color: black;
+  margin: 10px auto;
+  font-size: 20px;
+}
+
+#prefooter p{
+  color: black;
+}
+
+#div_prefooter{
+  display: flex;
+  justify-content: space-around;
+  padding-top: 25px;
+  text-align: center;
+  border-top: 4px solid rgba(153, 216, 187, 1);
+}
+#div_prefooter img{
+  height: 40px;
+}
+
+.div_prefooter_1{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+.div_prefooter_2{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+.div_prefooter_3{
+  height: auto;
+  width: 33%;
+  padding: 10px 10px 10px 10px;
+
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+  background: #fcd5d2;
+  padding: 0 0 30px 0;
+  font-size: 14px;
+  color: black;
+}
+
+#footer .copyright {
+  text-align: center;
+  padding-top: 30px;
+  color: black;
+}
+
+#footer .credits {
+  text-align: center;
+  font-size: 13px;
+  color: black;
+  margin-top: 8px;
+}
+
+#footer .credits a {
+  color: black;
+}
+.owl-carousel .owl-item img {
+    display: block;
+    width: auto;
+    height: 70px;
+    margin: 0 auto;
+}

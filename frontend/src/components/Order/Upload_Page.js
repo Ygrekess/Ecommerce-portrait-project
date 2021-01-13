@@ -18,7 +18,8 @@ export default function Upload_Page(props) {
 	const { loading, order } = orderDetails;
 
 	const [ orderPhotoToUpload, setOrderPhotoToUpload ] = useState(null)
-
+	const [allUpload, setAllUpload] = useState(false)
+	
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -30,7 +31,7 @@ export default function Upload_Page(props) {
 		}
 		if (orderPhotoToUpload) {
 			if (orderPhotoToUpload.length === 0) {
-				setTimeout(() => props.history.push('/mon-compte/mes-commandes'), 3000)
+				setAllUpload(true)
 			}
 		}
 		return () => {
@@ -71,9 +72,16 @@ export default function Upload_Page(props) {
 					<Upload_Part order={order} key={i} item={item} orderId={order._id} userId={order.user}/>
 				))
 			}
-			<div className="d-flex justify-content-center">
-				<Link to="/mon-compte/envoyer-photo">Envoyer mes photos plus tard.</Link>
-			</div>
+			{
+				allUpload ?
+				<div className="d-flex justify-content-center">
+					<Link to="/mon-compte/mes-commandes">Accéder à mon compte client.</Link>
+				</div>					
+					:
+				<div className="d-flex justify-content-center">
+					<Link to="/mon-compte/mes-commandes">Envoyer mes photos plus tard.</Link>
+				</div>
+			}
 		</div>
 	)
 }

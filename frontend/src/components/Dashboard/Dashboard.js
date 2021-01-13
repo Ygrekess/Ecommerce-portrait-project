@@ -23,15 +23,19 @@ export default function Dashboard(props) {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        if (Object.keys(userDetails).length === 0) {
-            dispatch(getInfos(userInfo._id))
-        }
         if (!userInfo) {
             props.history.push("/");
         }
-        return () => {
-            dispatch(resetInfos())
+        if (userInfo) {
+/*             console.log("getInfos")
+            if (Object.keys(userDetails).length === 0) {
+                
+            } */
+            dispatch(getInfos(userInfo._id))
         }
+        return () => {
+/*             dispatch(resetInfos())
+ */        }
     }, [userInfo])
 
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :

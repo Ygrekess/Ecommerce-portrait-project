@@ -40,9 +40,10 @@ export default function Infos(props) {
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
         <div className="user-infos-page-update col-8">
             <div className="form d-flex flex-column justify-content-start col-12">
+                        <h4 className="text-left font-weight-light">Infos personnelles</h4>
+
                 <div className="user-form col-12">
                     <form id="user-form" className="d-flex flex-column" onSubmit={handleSubmit(onSubmit)}>
-                        <h4 className="text-left font-weight-light">Infos personnelles</h4>
                         <div className="input-group row">
                             <div className="col-8 d-flex flex-column my-2">
                                 <label htmlFor="lastname" className="text-left">Nom <span className="text-danger">*</span></label>

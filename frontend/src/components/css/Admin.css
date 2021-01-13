@@ -32,6 +32,10 @@ input[type="color"]{
 .color-badge{
 	cursor: pointer;
 }
+.input-image-import{
+	width: 8.5rem;
+	overflow: hidden;
+}
 
 
 /* ORDER PAGE */
@@ -39,15 +43,18 @@ input[type="color"]{
 	background-color: #F8F8F8;
 }
 .order-item-img{
-	height: 7rem;
-	width: 7rem;
+	height: 9rem;
+	width: 9rem;
 }
 .order-item-img img{
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
 }
-
+.item-photos-container{
+	max-width: 850px;
+	overflow-x: scroll;
+}
 .item-photos-img{
 	height: 10rem;
 	width: 10rem;

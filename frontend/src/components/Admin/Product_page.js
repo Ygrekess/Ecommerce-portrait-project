@@ -211,10 +211,10 @@ export default function Product_page(props) {
 							<img src={ Object.keys(file).length === 0 ? product.image : file.preview } />
 						</div>
 					</div>
-					<div className="col-4 d-flex flex-column my-2">
+					<div className=" col-4 d-flex flex-column my-2">
 						<label htmlFor="image" className="text-left">Changer l'image :<span className="text-danger">*</span></label>
 						<input
-							className={( errors.image ? "border-danger" : "")}
+							className={"input-image-import " + ( errors.image ? "border-danger" : "")}
 							name="image"
 							onChange={(e) => addFile(e)}
 							

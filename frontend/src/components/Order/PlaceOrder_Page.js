@@ -142,7 +142,6 @@ export default function PlaceOrder_Page(props) {
     }
 /* ///////////////////////////// */
     
-    
     useEffect(() => {
         if (!userInfo) {
             props.history.push('/connexion?redirect=commande')
@@ -408,11 +407,11 @@ export default function PlaceOrder_Page(props) {
                                 {
                                 paymentMethod === "Carte bancaire" && 
                                     <div className="credit-card-input d-flex flex-wrap align-items-center justify-content-around my-3 w-100">
-                                        <form className="d-flex flex-wrap align-items-center" onSubmit={onSubmitCheckout}>
-                                        <div className="col-12">
-                                            <p className="text-left px-0 mb-1">Numéro de carte 4242 4242 4242 4242<span className="text-danger">*</span></p>
+                                        <form className="d-flex flex-wrap align-items-center justify-content-center p-0 w-100" onSubmit={onSubmitCheckout}>
+                                        <div className="col-12  ">
+                                            <p className="mx-auto col-11 text-left px-0 mb-1">Numéro de carte 4242 4242 4242 4242<span className="text-danger">*</span></p>
                                                 <CardNumberElement  
-                                                className={"border col-12 p-2 bg-white " + (!checkErrorMessage &&  "mb-4")}
+                                                className={"border col-11 p-2 bg-white mx-auto " + (!checkErrorMessage &&  "mb-4")}
                                                 options={{
                                                     style: {
                                                         base: {
@@ -432,49 +431,51 @@ export default function PlaceOrder_Page(props) {
                                                 />
                                             {checkErrorMessage && <div className="d-flex align-items-center text-danger mb-3 my-1"><CgDanger  size={20}/><p className="m-0 ml-1">{checkErrorMessage}</p></div>}
                                         </div>
-                                        <div className="d-flex flex-column col-6">
-                                            <p className="text-left px-0 mb-1">Date d'expiration <span className="text-danger">*</span></p>
-                                                <CardExpiryElement
-                                                className="border col-12 p-2 mr-auto bg-white mb-3"
-                                                options={{
-                                                    style: {
-                                                        base: {
-                                                            fontSize: '16px',
-                                                            color: '#424770',
-                                                            '::placeholder': {
-                                                                fontWeight: "200",
-                                                                color: '#aab7c4',
+                                        <div className="d-flex col-12">
+                                            <div className="d-flex flex-column col-6">
+                                                <p className="text-left px-0 mb-1">Date d'expiration <span className="text-danger">*</span></p>
+                                                    <CardExpiryElement
+                                                    className="border col-12 p-2 mr-auto bg-white mb-3"
+                                                    options={{
+                                                        style: {
+                                                            base: {
+                                                                fontSize: '16px',
+                                                                color: '#424770',
+                                                                '::placeholder': {
+                                                                    fontWeight: "200",
+                                                                    color: '#aab7c4',
+                                                                },
+                                                            },
+                                                            invalid: {
+                                                                color: '#9e2146',
                                                             },
                                                         },
-                                                        invalid: {
-                                                            color: '#9e2146',
+                                                    }}
+                                                    />
+                                            </div>
+                                            <div className="d-flex flex-column col-6">
+                                                <p className="text-left px-0 mb-1">Cryptogramme visuel <span className="text-danger">*</span></p>
+                                                    <CardCvcElement
+                                                    className="border col-12 p-2 bg-white mb-3"
+                                                    options={{
+                                                        style: {
+                                                            base: {
+                                                                fontSize: '16px',
+                                                                color: '#424770',
+                                                                '::placeholder': {
+                                                                    fontWeight: "200",
+                                                                    color: '#aab7c4',
+                                                                },
+                                                            },
+                                                            invalid: {
+                                                                color: '#9e2146',
+                                                            },
                                                         },
-                                                    },
-                                                }}
-                                                />
+                                                    }}
+                                                    />
+                                            </div> 
                                         </div>
-                                        <div className="d-flex flex-column col-6">
-                                            <p className="text-left px-0 mb-1">Cryptogramme visuel <span className="text-danger">*</span></p>
-                                                <CardCvcElement
-                                                className="border col-12 p-2 bg-white mb-3"
-                                                options={{
-                                                    style: {
-                                                        base: {
-                                                            fontSize: '16px',
-                                                            color: '#424770',
-                                                            '::placeholder': {
-                                                                fontWeight: "200",
-                                                                color: '#aab7c4',
-                                                            },
-                                                        },
-                                                        invalid: {
-                                                            color: '#9e2146',
-                                                        },
-                                                    },
-                                                }}
-                                                />
-                                        </div> 
-                                        <div className="d-flex flex-column col-12">
+                                        <div className="d-flex flex-column col-11">
                                             <button disabled={isProcessingCard} className="btn btn-dark rounded-0 col-12 my-3" type="submit">{!isProcessingCard ? "Payer" : "Paiement en cours..."}</button>
                                         </div> 
                                         {

@@ -51,7 +51,7 @@ function App() {
   return (
     <BrowserRouter>
       <Elements stripe={stripePromise}>
-      <div className="app container-fluid px-5 d-flex flex-column justify-content-start min-vh-100">
+      <div className="app container-fluid d-flex flex-column justify-content-start min-vh-100">
         <header className="header row justify-content-between ">
           <div className="brand">
             <Link to="/">amazona</Link>

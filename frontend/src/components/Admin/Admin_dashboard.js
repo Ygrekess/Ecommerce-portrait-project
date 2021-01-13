@@ -29,13 +29,14 @@ export default function Admin_dashboard(props) {
             props.history.push("/");
         }
         if (userInfo) {
+            console.log("getInfos")
             if (Object.keys(userDetails).length === 0) {
                 dispatch(getInfos(userInfo._id))
             }
         }
         return () => {
-            dispatch(resetInfos())
-        }
+/*             dispatch(resetInfos())
+ */        }
 	}, [userInfo])
 	
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :

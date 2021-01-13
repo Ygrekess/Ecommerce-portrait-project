@@ -12,9 +12,9 @@
     overflow: scroll;
 }
 .user-order img{
-    min-height: 9rem;
-    min-width: 9rem;
-    object-fit: cover;
+    height: 9rem;
+    width: 9rem;
+    object-fit: contain;
 }
 
 .user-order p{

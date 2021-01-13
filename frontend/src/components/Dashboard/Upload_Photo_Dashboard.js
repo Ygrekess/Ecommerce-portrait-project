@@ -28,7 +28,7 @@ export default function Upload_Photo() {
 	}, [])
 	
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100 h-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-		<div className="col-8 h-100">
+		<div className="col-8 h-100 m-auto">
 			{ photoToUpload > 0 ?
             <div className="d-flex flex-column justify-content-start col-12">
                 <h4 className="text-left font-weight-light">Envoyer mes photos</h4>
