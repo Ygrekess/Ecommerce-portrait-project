@@ -52,42 +52,51 @@ function App() {
     <BrowserRouter>
       <Elements stripe={stripePromise}>
       <div className="app container-fluid d-flex flex-column justify-content-start min-vh-100">
-        <header className="header row justify-content-between ">
-          <div className="brand">
-            <Link to="/">amazona</Link>
-          </div>
-          <div className="header-links col-6">
-            <ul className="d-flex justify-content-around justify-content-center align-items-center">
-              <li>
-                <NavLink exact to="/" activeClassName="selected">Accueil</NavLink>
-              </li>
-              <li>
-                <NavLink to="/modeles" activeClassName="selected">Nos modèles</NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact" activeClassName="selected">Nous contacter</NavLink>
-              </li>
-              <li>
-                <NavLink to="/admin" activeClassName="selected">Admin</NavLink>
-              </li>
-              {
-              userInfo ?
-              <li>
-                <NavLink to="/mon-compte" activeClassName="selected"><VscAccount size={22} /></NavLink>
-              </li> 
-              : null
-              }
-              <li>
-                <div className="cart d-flex flex-column align-items-center" onClick={e => setIsVisible(!isVisible)}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
-              </li>
-              {userInfo ? 
-              <li>
-                <Link to="#" onClick={handleLogout}>Déconnexion</Link>
-              </li> :
-              <li>
-                <NavLink to="/connexion" activeClassName="selected">Connexion</NavLink>
-              </li> }
-            </ul>
+        <header className="header justify-content-between w-100">
+            <nav className="navbar navbar-expand-lg navbar-light row ">
+              <a className="navbar-brand col-6 text-left" href="#">Navbar</a>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse col-md-5 col-12 p-0 m-auto" id="navbarNav">
+              <ul className="navbar-nav w-100  d-flex justify-content-around">
+                <li className="nav-item active d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <NavLink exact to="/" className="" activeClassName="selected">Accueil</NavLink>
+                </li>
+                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <NavLink to="/modeles" className="" activeClassName="selected ">Nos modèles</NavLink>
+                </li>
+                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <NavLink to="/contact" className="" activeClassName="selected ">Nous contacter</NavLink>
+                </li>
+                {
+                userInfo ?
+                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <NavLink to="/admin" className="" activeClassName="selected ">Admin</NavLink>
+                </li>
+                : null
+                }
+                {
+                userInfo ?
+                <li className="d-flex align-items-center col-md-1 col-3 ml-auto p-0">
+                  <NavLink to="/mon-compte" className="" activeClassName="selected "><VscAccount size={22} /></NavLink>
+                </li> 
+                : null
+                }
+                <li className="nav-item d-flex align-items-center col-md-1 col-3 ml-auto p-0">
+                  <div className="cart p-0 d-flex flex-column align-items-center " onClick={e => setIsVisible(!isVisible)}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
+                </li>
+                {userInfo ? 
+                <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <Link className="" to="#" onClick={handleLogout}>Déconnexion</Link>
+                </li> :
+                <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                  <NavLink to="/connexion" className="" activeClassName="selected ">Connexion</NavLink>
+                </li> }
+              </ul>
+              </div>
+            </nav>
+
 {/*             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <a href="#">Admin</a>
@@ -99,15 +108,15 @@ function App() {
                 </ul>
               </div>
             )} */}
-          </div>
         </header>
 
       {isVisible && <div ref={ref}>
         <Cart isVisible={isVisible} setIsVisible={setIsVisible} />
       </div>}
 
-        <div className="page-content d-flex justify-content-center align-items-start">
           <Route path="/" exact component={Home_Page} />
+        <div className="page-content d-flex justify-content-center align-items-start">
+          
           <Route path="/connexion" component={Connexion} />
           <Route path="/modeles/:page?" component={Modeles_Page} />
           <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
@@ -116,7 +125,16 @@ function App() {
           <Route path="/mon-compte" component={Dashboard} />
           <Route path="/admin" component={Admin_dashboard} />
         </div>
-        <footer className="footer">All right reserved.</footer>
+        <footer id="footer">
+            <div className="container">
+            <div className="copyright">
+                &copy; Copyright <strong>Topperr</strong>. All Rights Reserved
+            </div>
+            <div className="credits"> 
+                Template by <a href="https://webthemez.com/consulting/">WebThemez</a>
+            </div>
+            </div>
+        </footer>
       </div>
     </Elements>
     </BrowserRouter>
