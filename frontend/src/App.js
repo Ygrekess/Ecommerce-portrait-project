@@ -58,7 +58,7 @@ function App() {
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
-              <div className="collapse navbar-collapse col-md-5 col-12 p-0 m-auto" id="navbarNav">
+              <div className="collapse navbar-collapse col-lg-5 col-md-6 col-12 p-0 m-auto" id="navbarNav">
               <ul className="navbar-nav w-100  d-flex justify-content-around">
                 <li className="nav-item active d-flex align-items-center col-md-2 col-3 ml-auto p-0">
                   <NavLink exact to="/" className="" activeClassName="selected">Accueil</NavLink>
@@ -118,7 +118,7 @@ function App() {
         <div className="page-content d-flex justify-content-center align-items-start">
           
           <Route path="/connexion" component={Connexion} />
-          <Route path="/modeles/:page?" component={Modeles_Page} />
+          <Route path="/modeles/:page?/:style?/:size?" component={Modeles_Page} />
           <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
           <Route path="/commande" component={PlaceOrder_Page} />
           <Route path="/envoyer-photos/:id" component={Upload_Page} />

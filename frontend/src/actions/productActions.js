@@ -1,15 +1,24 @@
 import { DataSync } from 'aws-sdk';
 import Axios from 'axios';
 
-const listProducts = (offset, per_page) => async (dispatch) => {
+const listProducts = (offset, per_page, style , size , color = null, max = 0, min = 0) => async (dispatch) => {
     dispatch({ type: "PRODUCT_LIST_REQUEST" });
     try {
-      const { data } = await Axios.get('/api/products/list', { params: { offset: offset, per_page: per_page } });
+      const { data } = await Axios.get('/api/products/list', { params: { style: style, size: size, color: color, max: max, min: min, offset: offset, per_page: per_page } });
       dispatch({ type: "PRODUCT_LIST_SUCCESS", payload: data });
   } catch (error) {
       dispatch({ type: "PRODUCT_LIST_FAIL", payload: error.message });
   }
 }
+
+/* const sortListProducts = async (style, size, color, max, min) => {
+    try {
+        const { data } = await Axios.get('/api/products/sort', { style: style, size: size, color: color, max: max, min: min })
+        console.log(data)
+    } catch (error) {
+        console.log(error)
+    }
+} */
 
 const resetListProducts = () => (dispatch) => {
     dispatch({ type: "PRODUCT_LIST_RESET" });
@@ -72,4 +81,4 @@ const importProductImage = (file) => async (dispatch) => {
     }      
 }
 
-export { listProducts, productDetails, resetListProducts, addProduct, importProductImage, updateProduct, deleteProduct };
+export { listProducts, productDetails, resetListProducts, addProduct, importProductImage, updateProduct, deleteProduct, /* sortListProducts */ };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { countCollection } from '../../actions/dataActions';
 import { listProducts, resetListProducts } from '../../actions/productActions';
@@ -7,6 +7,7 @@ import Modele_Card from './Modele_Card';
 import { ImSpinner8 } from "react-icons/im";
 import '../css/Modeles_Page.css'
 import Pagination from '../Pagination';
+import Filter from './Filter';
 
 export default function Modeles_Page(props) {
 
@@ -14,25 +15,37 @@ export default function Modeles_Page(props) {
     const { error, loading, products } = productList;
     const [add, setAdd] = useState(false)
 
+    /* Filter */
+    const { 
+        page = 'page=1', 
+        style = 'style=all', 
+        size = 'size=all'
+    } = useParams();
+
+    const pageQuery = Number(page.split("=")[1]);
+    const styleQuery = style.split("=")[1];
+    const sizeQuery = size.split("=")[1]; 
+
     /** Pagination */ 
     const countDb = useSelector(state => state.countData)
     const { count } = countDb;
     const totalProductsInDb = count.count;
-    const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
-    const per_page = 6;
+    const per_page = 3;
     const skip = (page * per_page) - per_page
-
+/*     const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
+ */
+    
     const dispatch = useDispatch();
     
     useEffect(() => {
+        console.log(pageQuery, styleQuery, sizeQuery)
         dispatch(countCollection("products"));
-        dispatch(listProducts(skip, per_page));
+        dispatch(listProducts(skip, per_page, styleQuery, sizeQuery));
         return () => {
         dispatch(resetListProducts());
         };
-    }, [page]);
-
-
+    }, [page, style, size]);
+    
     return (
         <div className="container modeles-page-container">
             { add ? 
@@ -46,6 +59,7 @@ export default function Modeles_Page(props) {
             }
             
             <div className="modeles-page-content">
+                <Filter props={props} page={pageQuery} productStyle={styleQuery} productSize={sizeQuery}/>
                 <h1 className="text-left">Nos modèles</h1>
                 <div className="row">
                     {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }

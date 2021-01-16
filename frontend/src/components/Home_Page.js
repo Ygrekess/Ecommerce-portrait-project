@@ -7,6 +7,7 @@ import { resetListProducts } from '../actions/productActions';
 import { useDispatch } from 'react-redux';
 import './css/Home_page.css'
 import { BsChatSquareDots } from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
 export default function Home_Page() {
     
@@ -97,25 +98,83 @@ export default function Home_Page() {
                         <h2 className="m-auto"> Nos modèles </h2>
                     </div>    
                     <div className="modele-content row">
-                        <div className="left-content col-lg-4 col-md-4 col-10">
+                        <div className="left-content">
                             <div className="top">
-                            
+                                <div className="mt-4 card card-product m-auto">
+                                    <Link to={`#`}>
+                                    <div className="p-2 card-image row">
+                                        <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
+                                    </div>
+                                    <div className="card-content row">
+                                        <div className="card-title text-left text-capitalize my-2 row w-100 justify-content-between">
+                                            <h2 className="m-0 p-0 text-left card-product-name col-9">Testeeeeeeeeeeeee <span>- Pop art</span></h2>
+                                            <h2 className="m-0 p-0 text-right card-price col-3">19<span>.99€</span></h2>
+                                        </div>
+                                        <div className="card-description text-left col-12 p-0">50x70cm</div>
+                                    </div>
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="bottom">
-                                
+                            <div className="bottom mt-5">
+                                <div className="mt-4 card card-product m-auto">
+                                    <Link to={`#`}>
+                                    <div className="p-2 card-image row">
+                                        <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
+                                    </div>
+                                    <div className="card-content row">
+                                        <div className="card-title text-left text-capitalize my-2 row w-100 justify-content-between">
+                                            <h2 className="m-0 p-0 text-left card-product-name col-9">Testeeeeeeeeeeeee <span>- Pop art</span></h2>
+                                            <h2 className="m-0 p-0 text-right card-price col-3">19<span>.99€</span></h2>
+                                        </div>
+                                        <div className="card-description text-left col-12 p-0">50x70cm</div>
+                                    </div>
+                                    </Link>
+                                </div>                                
                             </div>
                         </div>
-                        <div className="middle-content col-lg-4 col-md-4 col-10"></div>
-                        <div className="right-content col-lg-4 col-md-4 col-10">
-                            <div className="top">
-                            
+                        <div className="middle-content d-flex flex-column justify-content-center">
+                            <div className="p-2 card-image mb-0">
+                                <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
                             </div>
-                            <div className="bottom">
-                                
+                            <div className="p-2 card-image mt-0">
+                                <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
+                            </div>
+                        </div>
+                        <div className="right-content">
+                            <div className="top">
+                                <div className="mt-4 card card-product m-auto">
+                                    <Link to={`#`}>
+                                    <div className="p-2 card-image row">
+                                        <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
+                                    </div>
+                                    <div className="card-content row">
+                                        <div className="card-title text-left text-capitalize my-2 row w-100 justify-content-between">
+                                            <h2 className="m-0 p-0 text-left card-product-name col-9">Testeeeeeeeeeeeee <span>- Pop art</span></h2>
+                                            <h2 className="m-0 p-0 text-right card-price col-3">19<span>.99€</span></h2>
+                                        </div>
+                                        <div className="card-description text-left col-12 p-0">50x70cm</div>
+                                    </div>
+                                    </Link>
+                                </div>                        
+                            </div>
+                            <div className="bottom mt-5">
+                                <div className="mt-4 card card-product m-auto">
+                                    <Link to={`#`}>
+                                    <div className="p-2 card-image row">
+                                        <img className="img" alt="" src={`product-images/kjrl0zbu.jpg`}/>
+                                    </div>
+                                    <div className="card-content row">
+                                        <div className="card-title text-left text-capitalize my-2 row w-100 justify-content-between">
+                                            <h2 className="m-0 p-0 text-left card-product-name col-9">Testeeeeeeeeeeeee <span>- Pop art</span></h2>
+                                            <h2 className="m-0 p-0 text-right card-price col-3">19<span>.99€</span></h2>
+                                        </div>
+                                        <div className="card-description text-left col-12 p-0">50x70cm</div>
+                                    </div>
+                                    </Link>
+                                </div>   
                             </div>
                         </div>
                     </div>
-
                 </section>
             
                 <section id="reviews" className="my-5">

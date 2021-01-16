@@ -5,9 +5,23 @@ import multer from 'multer';
 const router = express.Router();
 
 router.get('/list', async (req, res) => {
+
   const offset = Number(req.query.offset);
   const per_page = Number(req.query.per_page);
-  const products = await Product.find().skip(offset).limit(per_page);
+
+  const style = req.query.style && req.query.style !== 'all' ? req.query.style : '';
+  const size = req.query.size && req.query.size !== 'all' ? req.query.size : '';
+  const color = req.query.color || '';
+  const min = req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+  const max = req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+
+  const styleFilter = style ? { 'category.style': style } : {};
+  const styleSize = size ? { 'category.size': size } : {};
+  const styleColor = color ? { 'category.color': color } : {};
+  const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+  
+  const products = await Product.find({ ...styleFilter, ...styleSize, ...styleColor, ...priceFilter }).skip(offset).limit(per_page);
+
   if (products) {
     res.send(products);
   } else {
@@ -55,6 +69,20 @@ router.get('/cartDetails', async (req, res) => {
   }    
 
 })
+
+/* router.get('/sort', async (req, res) => {
+
+
+  const query = req.query.category
+  const products = await Product.find( { ...styleFilter, ...styleSize, ...styleColor, ...priceFilter } );
+
+  if (products) {
+    res.send({products : products,});
+  } else {
+      res.status(404).send({ message: 'Modèle non trouvé.' });
+  }    
+
+}) */
 
 router.put('/:id', async (req, res) => {
   const product = await Product.findById(req.params.id)

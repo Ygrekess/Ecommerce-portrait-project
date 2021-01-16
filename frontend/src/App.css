@@ -3,6 +3,7 @@
   min-width: 350px;
 /*   min-height: 100vh;
  */}
+
 .header{
   position: absolute;
   top: 0;
@@ -41,27 +42,12 @@
   color: black;
 }
 
-@media only screen and (max-width: 990px) {
-  .navbar-toggler{
-    outline: none;
-    background-color: #F8F9FA;
-  }
-  .navbar ul li {
-    min-width: 10rem;
-  }
-  .navbar ul li a, .navbar ul li div{
-    margin: 0;
-    text-align: right;
-    margin-left: auto;
-  }
-  .navbar ul li{
-    background-color: #F8F9FA;
-  }
-}
+
 
 .cart{
   padding: .5rem;
   position: relative;
+  cursor: pointer;
 }
 .numbitemscart{
   background-color: rgb(244, 255, 94);
@@ -78,6 +64,36 @@
   justify-content: center;
   align-items: center;
 }
+
+@media only screen and (max-width: 990px) {
+  .navbar-toggler{
+    outline: none;
+    background-color: #F8F9FA;
+  }
+  .navbar ul li {
+    min-width: 10rem;
+  }
+  .navbar ul li a, .navbar ul li div{
+    margin: 0;
+    text-align: right;
+    margin-left: auto;
+  }
+  .navbar ul li{
+    background-color: #F8F9FA;
+  }
+  .numbitemscart{
+    top: 25%;
+    left: -50%;
+  }
+}
+
+
+
+
+
+
+
+
 
 .modal-background{
   position: fixed;
