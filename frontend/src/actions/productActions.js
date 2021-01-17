@@ -1,7 +1,7 @@
 import { DataSync } from 'aws-sdk';
 import Axios from 'axios';
 
-const listProducts = (offset, per_page, style , size , color = null, max = 0, min = 0) => async (dispatch) => {
+const listProducts = (offset, per_page, style = 'all' , size = 'all' , color = null, max = 100, min = 0) => async (dispatch) => {
     dispatch({ type: "PRODUCT_LIST_REQUEST" });
     try {
       const { data } = await Axios.get('/api/products/list', { params: { style: style, size: size, color: color, max: max, min: min, offset: offset, per_page: per_page } });
@@ -11,6 +11,15 @@ const listProducts = (offset, per_page, style , size , color = null, max = 0, mi
   }
 }
 
+const countProducts = (style , size , color = null, max = 100, min = 0) => async (dispatch) => {
+    dispatch({ type: "DATA_COUNT_REQUEST" });
+    try {
+        const { data } = await Axios.get(`/api/products/count`, { params: { style: style, size: size, color: color, max: max, min: min } });
+        dispatch({ type: "DATA_COUNT_SUCCESS", payload: data });
+    } catch (error) {
+        dispatch({ type: "DATA_COUNT_FAIL", payload: error.message });
+  }
+}
 /* const sortListProducts = async (style, size, color, max, min) => {
     try {
         const { data } = await Axios.get('/api/products/sort', { style: style, size: size, color: color, max: max, min: min })
@@ -81,4 +90,4 @@ const importProductImage = (file) => async (dispatch) => {
     }      
 }
 
-export { listProducts, productDetails, resetListProducts, addProduct, importProductImage, updateProduct, deleteProduct, /* sortListProducts */ };
+export { listProducts, productDetails, resetListProducts, countProducts, addProduct, importProductImage, updateProduct, deleteProduct, /* sortListProducts */ };

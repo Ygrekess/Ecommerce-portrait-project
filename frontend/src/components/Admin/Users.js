@@ -62,7 +62,7 @@ export default function Users(props) {
 			</tbody>
 			</table>
 			}
-            <Pagination pageName={"admin/liste-utilisateurs"} page={page} totalInDb={totalUsersInDb} per_page={per_page}/>
+            <Pagination url={props.location.pathname} pageName={"admin/liste-utilisateurs"} page={page} totalInDb={totalUsersInDb} per_page={per_page}/>
 		</div>
 	)
 }

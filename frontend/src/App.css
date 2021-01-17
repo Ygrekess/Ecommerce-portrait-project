@@ -20,6 +20,8 @@
 }
 
 .navbar ul li a, .navbar ul li div{
+  position: relative;
+  z-index: 1000;
   margin: auto;
   padding: .5rem;
   font-weight: 500;

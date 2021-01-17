@@ -1,3 +1,40 @@
 .modeles-page-container{
 /* 	min-width: 60rem;
  */}
+
+.pop-art-filter{
+	position: relative;
+	cursor: pointer;
+	height: 10rem;
+}
+.pop-art-filter img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+.cartoon-filter{
+	position: relative;
+	cursor: pointer;
+	height: 10rem;
+}
+.cartoon-filter img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+.funny-filter{
+	position: relative;
+	cursor: pointer;
+	height: 10rem;
+}
+.funny-filter img{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+.div-title{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+}

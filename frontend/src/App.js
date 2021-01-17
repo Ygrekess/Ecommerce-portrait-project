@@ -118,7 +118,7 @@ function App() {
         <div className="page-content d-flex justify-content-center align-items-start">
           
           <Route path="/connexion" component={Connexion} />
-          <Route path="/modeles/:page?/:style?/:size?" component={Modeles_Page} />
+          <Route path="/modeles/:page?/:style?/:size?/:max?/:min?" component={Modeles_Page} />
           <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
           <Route path="/commande" component={PlaceOrder_Page} />
           <Route path="/envoyer-photos/:id" component={Upload_Page} />

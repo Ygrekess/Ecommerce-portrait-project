@@ -1,0 +1,88 @@
+.filter-component{
+	
+}
+.filter-component.filter-display-false{
+
+	height: 1rem;
+	animation: heightFilterHide .5s forwards;
+}
+.filter-component.filter-display-true{
+	height: auto;
+	animation: heightFilterShow .5s forwards;
+}
+.filter-component svg{
+	cursor: pointer;
+}
+.button-display-filter{
+	cursor: pointer;
+}
+
+.filter-input-container.filter-display-true{
+	position: relative;
+	z-index: 1000;
+	animation: showFilter .5s forwards;
+}
+
+.filter-input-container.filter-display-false{
+	display: none;
+	position: relative;
+	z-index: 1000;
+	animation: hideFilter .5s forwards;
+}
+.filter-input-row{
+	display: 'flex';
+	justify-content: 'space-around';
+	align-items: 'center';
+	position: 'relative';
+	z-index: 1000;
+	width: '100%'
+}
+
+@keyframes heightFilterShow {
+  0% {
+	height: 4rem;
+  }
+  100% {
+    height: 15rem;
+  }
+}
+
+@keyframes heightFilterHide {
+  0% {
+    height: 15rem;
+  }
+  100% {
+	height: 4rem;
+  }
+}
+
+@keyframes showFilter {
+  0% {
+	display: none;
+    transform: translateY(-15rem);
+    opacity: 0;
+  }
+  75%{
+	opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes hideFilter {
+  0% {
+	display: flex;
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  25%{
+	opacity: 0;
+  }
+  100% {
+	transform: translateY(-15rem);
+	opacity: 0;
+	display: none;
+  }
+}

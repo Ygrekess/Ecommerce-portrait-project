@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { ImSpinner8 } from "react-icons/im"
-import "../App.css"
-import { FiCheckSquare } from "react-icons/fi"
-import Axios from "axios";
-import { resetListProducts } from '../actions/productActions';
-import { useDispatch } from 'react-redux';
-import './css/Home_page.css'
-import { BsChatSquareDots } from 'react-icons/bs'
+import React from 'react';
+import "../App.css";
+import './css/Home_page.css';
+import { BsChatSquareDots } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 export default function Home_Page() {
     
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        return () => {
-        }
-    }, [])
-    
     return (
             <div className="homepage-content">
-                <section id="intro"  /* style={{backgroundImage:"url('/photos-site/homepagetest.png')"}} */>
+                <section id="intro">
                     <img id="banniere-img" src="photos-site/homepagetest.png"></img>
                     <div className="intro-content mb-5" >
                         <h1> Créez LE vêtement qui racontera votre histoire. </h1>
@@ -56,6 +44,9 @@ export default function Home_Page() {
                         <div className="m-auto d-flex flex-column justify-content-center align-items-center">
                             <div className="div_boutique_1">
                                 <img src="photos-site/metisse_cartoon.png"></img>
+                                <div className='div-title m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'12rem'}}>
+                                    <h4 className='m-auto'>Pop art</h4>
+                                </div>
                             </div> 
                             <p>Pour offrir à vos amis ou à vous même.</p> 
                             <ul>
@@ -67,8 +58,10 @@ export default function Home_Page() {
                         </div>
                         <div className="m-auto d-flex flex-column justify-content-center align-items-center">
                             <div className="div_boutique_2">
-{/*                                 <div className="mask"><h2 className="p-2">Pop art</h2></div>
- */}                                <img src="photos-site/woman.jpg"></img>
+                                <img src="photos-site/woman.jpg"></img>
+                                <div className='div-title m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'12rem'}}>
+                                    <h4 className='m-auto'>Cartoon</h4>
+                                </div>
                             </div>
                             <p className="">Pour offrir à vos amis ou à vous même.</p> 
                             <ul className="w-100">
@@ -81,6 +74,9 @@ export default function Home_Page() {
                         <div className="m-auto d-flex flex-column justify-content-center align-items-center">
                             <div className="div_boutique_3">
                                 <img src="photos-site/femme.jpg"></img>
+                                <div className='div-title m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundRepeat:'no-repeat', backgroundSize:'12rem'}}>
+                                    <h4 className='m-auto'>Autre</h4>
+                                </div>
                             </div>
                             <p>Pour offrir à vos amis ou à vous même.</p> 
                             <ul>

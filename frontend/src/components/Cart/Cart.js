@@ -7,9 +7,6 @@ import { BiMinus } from "react-icons/bi"
 import { GoTrashcan } from 'react-icons/go'
 import '../css/Cart.css'
 
-import CartItems from './delete/CartItems';
-import Axios from 'axios';
-
 export default function Cart({isVisible, setIsVisible}) {
 
     const dispatch = useDispatch();
@@ -33,8 +30,6 @@ export default function Cart({isVisible, setIsVisible}) {
     const tva = ((Number(totalCart()) / 120) * 20).toFixed(2);
     const shippingPrice = Number(totalCart()) > 50 ? 0 : 4.99;
     const total = (Number(totalCart()) + Number(shippingPrice)).toFixed(2);
-    
-
 
     useEffect(() => {
         return () => {
@@ -44,10 +39,6 @@ export default function Cart({isVisible, setIsVisible}) {
     const removeCartItem = (product) => {
         dispatch(removeFromCart(product))
     }
-
-/*     const checkoutHandler = () => {
-        props.history.push("/connexion?redirect=shipping");
-    } */
 
     return (
         <div className="cart-component row flex-column align-items-center p-0">
@@ -67,10 +58,12 @@ export default function Cart({isVisible, setIsVisible}) {
                     cartItems.map((product) => ( 
                         product.qty > 0 &&
                         <tr className="table-product-row" key={product.cartItemId}>
-                            <td className="cart-product-title d-flex align-items-center justify-content-around">
-                                <Link to={`/modele/${product.slug}/${product.faceNumber}-pers`} className="text-left text-uppercase">{product.name}
-                                    <span className="font-weight-light text-lowercase"><br/>- {product.faceNumber} pers.</span>
-                                </Link >
+                            <td className="cart-product-row d-flex align-items-center justify-content-around">
+                                <div className='cart-product-name'>
+                                    <Link to={`/modele/${product.slug}/${product.faceNumber}-pers`} className="text-left text-uppercase">{product.name}
+                                        <span className="font-weight-light text-lowercase"><br/>- {product.faceNumber} pers.</span>
+                                    </Link >
+                                </div>
                                 <span className="span-qty font-weight-bold">(x {product.qty})</span>
                                 <div className="cart-product-qty d-flex justify-content-around align-items-center p-0">
                                     <IoMdAdd size={40} className="add-icon" onClick={() => dispatch(setQty(product.cartItemId, 1))}/>

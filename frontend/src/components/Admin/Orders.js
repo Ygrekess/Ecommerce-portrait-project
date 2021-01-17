@@ -59,7 +59,7 @@ export default function Orders(props) {
 					</tbody>
 				</table>
 			}	
-            <Pagination pageName={"admin/liste-commandes"} page={page} totalInDb={totalOrdersInDb} per_page={per_page}/>
+            <Pagination url={props.location.pathname} pageName={"admin/liste-commandes"} page={page} totalInDb={totalOrdersInDb} per_page={per_page}/>
 		</div>
 	)
 }

@@ -222,6 +222,7 @@
 }
 
 .div_boutique_1{
+	position: relative;
 	height: 350px;
 	width: 350px;
   	background-color: red;
@@ -233,22 +234,9 @@
 	width: 350px;
 	background-color: red;
 }
-.div_boutique_2 .mask{
-	position: absolute;
-	margin: auto;
-	top:45%;
-	left: 0;
-	right: 0;
-	height: auto;
-	width: 10rem;
-	font-family: 'Barlow', sans-serif;
-	background-color: rgba(248, 246, 244, 0.9);
-}
-.div_boutique_2 .mask h2{
-	font-family: 'Barlow', sans-serif;
-	color: #2e2d2d;
-}
+
 .div_boutique_3{
+	position: relative;
 	height: 350px;
 	width: 350px;
 	background-color: red;  
