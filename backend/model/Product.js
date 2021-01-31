@@ -28,7 +28,11 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     category: categorySchema,
-    faceNumber: { 
+    person: { 
+        type: Number, 
+        required: true 
+    },
+    face: { 
         type: Number, 
         required: true 
     },

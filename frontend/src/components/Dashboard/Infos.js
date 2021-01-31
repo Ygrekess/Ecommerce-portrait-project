@@ -37,15 +37,15 @@ export default function Infos(props) {
     }, [userDetails, success])
 
 
-    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="user-infos-page-update col-8">
+    return ( loading ? <div className="col-md-8 col-12 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+        <div className="user-infos-page-update col-md-8 col-12">
             <div className="form d-flex flex-column justify-content-start col-12">
-                        <h4 className="text-left font-weight-light">Infos personnelles</h4>
+                <h4 className="text-left font-weight-light">Infos personnelles</h4>
 
                 <div className="user-form col-12">
                     <form id="user-form" className="d-flex flex-column" onSubmit={handleSubmit(onSubmit)}>
                         <div className="input-group row">
-                            <div className="col-8 d-flex flex-column my-2">
+                            <div className="col-md-8 col-12 d-flex flex-column my-2">
                                 <label htmlFor="lastname" className="text-left">Nom <span className="text-danger">*</span></label>
                                 <input
                                     className={"p-2 " + ( errors.lastname ? "border-danger" : "")}
@@ -58,7 +58,7 @@ export default function Infos(props) {
                                 />
                                 {errors.lastname && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger  size={20}/><p className="m-0 ml-1">Merci de renseigner votre nom.</p></div>}
                             </div>
-                            <div className="col-4 d-flex flex-column my-2">
+                            <div className="col-md-4 col-12 d-flex flex-column my-2">
                                 <label htmlFor="firstname" className="text-left">Prénom <span className="text-danger">*</span></label>
                                 <input
                                     className={"p-2 " + ( errors.firstname ? "border-danger" : "")}

@@ -17,9 +17,9 @@ export default function OrderDetails_page(props) {
 	}, [])
 
 	return (
-		<div className="col-8">
+		<div className="col-md-8 col-12">
 			{
-			loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+			loading ? <div className="col-md-8 col-12 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
 			<Fragment>
 				<div className="d-flex justify-content-between w-100">
 					<h4 className="text-left mb-5">Votre commande</h4>
@@ -58,7 +58,7 @@ export default function OrderDetails_page(props) {
 											<div key={k} className="m-0 mr-1 p-2 text-uppercase" style={{ backgroundColor: `${color}`, height:".5rem", width:".5rem", borderRadius:"50%"}}></div>
 										))}
 									</div>
-									<p className="order-item-facenumber m-0">{item.faceNumber} pers.</p>
+									<p className="order-item-facenumber m-0">{item.person} pers.</p>
 									<p className="order-item-qty m-0">Quantité : {item.qty}</p>
 									<p className="order-item-price m-0">Prix : {item.price}€</p>
 								</div>

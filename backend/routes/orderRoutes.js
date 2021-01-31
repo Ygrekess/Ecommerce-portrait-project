@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         shippingPrice: req.body.order.shippingPrice,
         totalPrice: req.body.order.total,
     })
-    try {
+  try {
       const savedOrder = await newOrder.save();
       res.status(201).send({ message: "New Order Created", data: savedOrder })
     } catch (error) {
@@ -58,7 +58,6 @@ router.post('/checkout', async (req, res) => {
       amount,
       currency: 'eur',
     })
-    console.log(paymentIntent)
     res.status(200).send(paymentIntent.client_secret)
   } catch (error) {
     res.status(500).json({
@@ -68,7 +67,6 @@ router.post('/checkout', async (req, res) => {
 })
 
 router.post('/upload', async (req, res) => {
-    console.log(req.files)
     if (req.files === null) {
         return res.status(400).json({ message: "No file uploaded"})
     }
@@ -120,8 +118,7 @@ router.get('/user/:id', async (req, res) => {
 }); */
 
 router.put("/photoupload/:orderId&:itemName", async (req, res) => {
-  console.log(req.body.filesName)
-	const cartItemId = req.params.itemName.split('-')[1];
+	const cartItemId = req.params.itemName.split('-')[2];
   const order = await Order.findById(req.params.orderId);
   if (order) {
     const cartItem = order.orderItems.find(x => x.cartItemId === cartItemId)

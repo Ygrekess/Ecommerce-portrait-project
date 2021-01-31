@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {BsPencil} from "react-icons/bs"
 import { useDispatch, useSelector } from 'react-redux';
 import { checkPassword, getInfos, passwordCheckReset, resetUpdateUserName, signin, updatePassword, updateUserName } from '../../actions/userActions';
 import { ImSpinner8 } from 'react-icons/im';
@@ -36,12 +35,10 @@ export default function Account() {
     const [newPassword2, setNewPassword2] = useState("")
 
     const onSubmitUsername = data => {
-        console.log(data)
-        dispatch(updateUserName(userInfo._id, data.email))
+        dispatch(updateUserName(userInfo._id, data.username))
     };
 
     const onSubmitPassword = data => {
-        console.log(data)
         if (data.newPassword1 === data.newPassword2) {
             console.log("OK")
             dispatch(checkPassword(userInfo._id, data.passwordCheck))
@@ -79,13 +76,13 @@ export default function Account() {
         }
     }, [validate, passwordVerifyError, usernameAlreadyUse, success, userInfo])
 
-    return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="user-account-page col-8">
+    return ( loading ? <div className="col-md-8 col-12 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
+        <div className="user-account-page col-md-8 col-12">
             <div className="form d-flex flex-column justify-content-start align-items-center col-12">
                 <h4 className="text-left font-weight-light align-self-start">Mon compte</h4>
-                <form id="username-update-form" className="d-flex flex-column col-8" onSubmit={handleSubmit1(onSubmitUsername)}>
+                <form id="username-update-form" className="d-flex flex-column col-md-8 col-12" onSubmit={handleSubmit1(onSubmitUsername)}>
                     <div className="input-group row flex-column align-items-center">
-                        <div className="col-8 d-flex flex-column my-2">
+                        <div className="col-md-8 col-12 d-flex flex-column my-2">
                             <label htmlFor="username" className="text-left">Identifiant de connexion<span className="text-danger">*</span></label>
                             <input
                                 className={"p-2 " + ( errors1.username ? "border-danger" : "")}
@@ -111,10 +108,10 @@ export default function Account() {
                     }
                     <Link className="mt-2" to="#" onClick={() => { setUpdateUsername(!updateUsername); setSuccessUsernameUpdate("")}}>{updateUsername ? "Annuler la modification." : "Modifier l'identifiant de connexion."}</Link>
                 </form>
-                <form id="password-update-form" className="d-flex flex-column col-8 px-4 py-2 mt-4" onSubmit={handleSubmit(onSubmitPassword)}>
+                <form id="password-update-form" className="d-flex flex-column col-md-8 col-12 px-4 py-2 mt-4" onSubmit={handleSubmit(onSubmitPassword)}>
                     <h6 className="font-weight-bold mb-3">Modifier mon mot de passe</h6>
                     <div className="input-group row flex-column align-items-center">
-                        <div className="col-8 d-flex flex-column my-2">
+                        <div className="col-md-8 col-12 d-flex flex-column my-2">
                             <label htmlFor="passwordCheck" className="text-left">Mot de passe actuel<span className="text-danger">*</span></label>
                             <input
                                 className={"p-2 " + ( errors.passwordCheck ? "border-danger" : "")}
@@ -128,7 +125,7 @@ export default function Account() {
                                 })}
                             />
                         </div>
-                        <div className="col-8 d-flex flex-column my-2">
+                        <div className="col-md-8 col-12 d-flex flex-column my-2">
                             <label htmlFor="newPassword1" className="text-left">Nouveau mot de passe<span className="text-danger">*</span></label>
                             <input
                                 className={"p-2 " + ( errors.newPassword1 ? "border-danger" : "")}
@@ -142,7 +139,7 @@ export default function Account() {
                             />
                             {errors.newPassword1 && <div className="d-flex align-items-center pt-1 text-danger"><CgDanger  size={20}/><p className="m-0 ml-1">Merci de saisir un mot de passe dans les deux champs.</p></div>}
                         </div>
-                        <div className="col-8 d-flex flex-column my-2">
+                        <div className="col-md-8 col-12 d-flex flex-column my-2">
                             <label htmlFor="newPassword2" className="text-left">Confirmation du nouveau mot de passe<span className="text-danger">*</span></label>
                             <input
                                 className={"p-2 " + ( errors.newPassword2 ? "border-danger" : "")}

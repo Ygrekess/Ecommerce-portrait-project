@@ -1,7 +1,7 @@
 import { DataSync } from 'aws-sdk';
 import Axios from 'axios';
 
-const listProducts = (offset, per_page, style = 'all' , size = 'all' , color = null, max = 100, min = 0) => async (dispatch) => {
+const listProducts = (offset = 0, per_page = 8, style = 'all' , size = 'all' , color = null, max = 100, min = 0) => async (dispatch) => {
     dispatch({ type: "PRODUCT_LIST_REQUEST" });
     try {
       const { data } = await Axios.get('/api/products/list', { params: { style: style, size: size, color: color, max: max, min: min, offset: offset, per_page: per_page } });
@@ -33,10 +33,10 @@ const resetListProducts = () => (dispatch) => {
     dispatch({ type: "PRODUCT_LIST_RESET" });
 }
 
-const productDetails = (productId, slug, faceNumber) => async (dispatch) => {
+const productDetails = (productId, slug) => async (dispatch) => {
     dispatch({ type: "PRODUCT_DETAILS_REQUEST" });
     try {
-        const { data } = await Axios.get('/api/products/details', { params: { productId: productId, slug: slug, faceNumber: faceNumber } });
+        const { data } = await Axios.get('/api/products/details', { params: { productId: productId, slug: slug} });
       dispatch({ type: "PRODUCT_DETAILS_SUCCESS", payload: data });
   } catch (error) {
       dispatch({ type: "PRODUCT_DETAILS_FAIL", payload: error.message });

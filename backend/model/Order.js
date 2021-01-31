@@ -17,7 +17,7 @@ const orderItemSchema = new mongoose.Schema({
   image: { type: String, required: true },
   price: { type: String, required: true },
   category: { type: Array, required: true },
-  faceNumber: { type: Number, required: true },
+  face: { type: Number, required: true },
   photo: { type: Array },
   photoUpload: { type: Boolean, default: false },
   cartItemId: { type: String, required: true },

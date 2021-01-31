@@ -1,40 +1,26 @@
 .modeles-page-container{
-/* 	min-width: 60rem;
- */}
+	min-height: 100vh;
+}
 
-.pop-art-filter{
+.filter-style{
 	position: relative;
 	cursor: pointer;
 	height: 10rem;
+	width: 15rem;
 }
-.pop-art-filter img{
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
-}
-.cartoon-filter{
-	position: relative;
-	cursor: pointer;
+.filter-style img{
 	height: 10rem;
-}
-.cartoon-filter img{
-	height: 100%;
 	width: 100%;
 	object-fit: cover;
-}
-.funny-filter{
-	position: relative;
-	cursor: pointer;
-	height: 10rem;
-}
-.funny-filter img{
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
 }
 .div-title{
 	position: absolute;
 	top: 0;
 	height: 100%;
 	width: 100%;
+}
+.div-title h4{
+	background-color: #5DB8F8;
 }

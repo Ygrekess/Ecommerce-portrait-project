@@ -41,8 +41,8 @@ export default function Connexion(props) {
               M'inscrire
             </button>
           </div>
-          <img src="/photos-site/tableau.png" className="image cartoon-tab" id="cartoon-tab" alt="" />
-        </div>
+{/*           <img src="/photos-site/tableau.png" className="image cartoon-tab" id="cartoon-tab" alt="" />
+ */}        </div>
         <div className="panel right-panel d-flex flex-column align-items-center">
           <div className="content">
             <h3>Déjà venu ?</h3>
@@ -53,8 +53,8 @@ export default function Connexion(props) {
               Me connecter
             </button>
           </div>
-          <img src="/photos-site/painttest.svg" className="image" alt="" />
-        </div>
+{/*           <img src="/photos-site/painttest.svg" className="image" alt="" />
+ */}        </div>
       </div>
     </div>
 	)

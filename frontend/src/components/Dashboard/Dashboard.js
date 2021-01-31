@@ -39,8 +39,8 @@ export default function Dashboard(props) {
     }, [userInfo])
 
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="container col-12 d-flex justify-content-center">
-            <div className="col-2 d-flex justify-content-center">
+        <div className="dashboard-container container mt-5">
+            <div className="dashboard-menu-container col-md-2 col-12">
                 <Menu props={props} />
             </div>
             { loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :

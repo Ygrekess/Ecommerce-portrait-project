@@ -19,7 +19,7 @@ export default function Products(props) {
     const { count } = countDb;
     const totalProductsInDb = count.count;
     const page = props.match.params.page ? props.match.params.page.split("=")[1] : 1;    
-    const per_page = 1;
+    const per_page = 8;
     const skip = (page * per_page) - per_page
 
 	const dispatch = useDispatch();

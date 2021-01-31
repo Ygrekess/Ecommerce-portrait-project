@@ -35,11 +35,11 @@ export default function Modeles_Page(props) {
     const countDb = useSelector(state => state.countData)
     const { count } = countDb;
     const totalProductsInDb = count.count;
-    const per_page = 1;
+    const per_page = 9;
     const skip = (pageQuery * per_page) - per_page
     
     useEffect(() => {
-        console.log(props.location.pathname)
+        console.log(products)
         dispatch(countProducts(styleQuery, sizeQuery, null, maxQuery, minQuery));
         dispatch(listProducts(skip, per_page, styleQuery, sizeQuery, null, maxQuery, minQuery));
         return () => {
@@ -50,30 +50,30 @@ export default function Modeles_Page(props) {
     return (
         <div className="container modeles-page-container">
             <div className="modeles-page-content">
-                <h2 className="text-left font-weight-light">Nos modèles</h2>
+                <h2 className="text-left font-weight-light ml-5 mt-5">Nos modèles</h2>
                 <div className="row justify-content-center my-5">
-                    <div className='pop-art-filter col-3' onClick={() => props.history.push('/modeles/page=1/style=pop%20art/size=all/max=100/min=0')}>
-                        <img src='/photos-site/femme.jpg'></img>
-                        <div className='div-title col-11 m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundSize:'cover'}}>
-                            <h4 className='m-auto'>Pop art</h4>
+                    <div className='filter-style pop-art-filter col-md-3 col-10' onClick={() => props.history.push('/modeles/page=1/style=pop%20art/size=all/max=100/min=0')}>
+                        <img src="/photos-site/pop-art.png"></img>
+                        <div className='div-title col-11 m-auto d-flex align-items-center'>
+                            <h4 className='m-auto text-white p-2'>Pop art</h4>
                         </div>
                     </div>
-                    <div className='cartoon-filter col-3' onClick={() => props.history.push('/modeles/page=1/style=cartoon/size=all/max=100/min=0')}>
-                        <img src='/photos-site/femme.jpg'></img>
-                        <div className='div-title col-11 m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundSize:'cover'}}>
-                            <h4 className='m-auto'>Cartoon</h4>
+                    <div className='filter-style cartoon-filter col-md-3 col-10' onClick={() => props.history.push('/modeles/page=1/style=cartoon/size=all/max=100/min=0')}>
+                        <img src="/photos-site/tete-cartoon-1.png"></img>
+                        <div className='div-title col-11 m-auto d-flex align-items-center'>
+                            <h4 className='m-auto text-white p-2'>Cartoon</h4>
                         </div>
                     </div>
-                    <div className='funny-filter col-3' onClick={() => props.history.push('/modeles/page=1/style=autre/size=all/max=100/min=0')}>
-                        <img src='/photos-site/femme.jpg'></img>
-                        <div className='div-title col-11 m-auto d-flex align-items-center' style={{backgroundImage:'url("/photos-site/testsvg.svg")', backgroundPosition:'center', backgroundSize:'cover'}}>
-                            <h4 className='m-auto'>Autre</h4>
+                    <div className='filter-style funny-filter col-md-3 col-10' onClick={() => props.history.push('/modeles/page=1/style=autre/size=all/max=100/min=0')}>
+                        <img src="/photos-site/portrait-design.jpeg"></img>
+                        <div className='div-title col-11 m-auto d-flex align-items-center'>
+                            <h4 className='m-auto text-white p-2'>Autres</h4>
                         </div>
                     </div>
                 </div>
                 <Filter props={props} productStyle={styleQuery} productSize={sizeQuery} />
                 <div className="row">
-                    {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> : null }
+                    {loading ? <div className="loading-spinner-div d-flex justify-content-center w-100">{/* <ImSpinner8 className="loading-spinner my-3" size={60}/> */}</div> : null }
                     {error && <h4 className="text-center mx-auto">{error}</h4>}
                 </div>
                 <div className="row d-flex justify-content-between align-items-start flex-wrap">

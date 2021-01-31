@@ -137,7 +137,7 @@ router.put("/:id/updateusername", async (req, res) => {
     if (!userNameExist) {
         const user = await User.findById(req.params.id);
         if (user) {
-            user.email = req.body.newUserName
+            user.username = req.body.newUserName
             const updatedUser = await user.save();
             res.send({ message: 'Username updated', user: updatedUser });
         } else {

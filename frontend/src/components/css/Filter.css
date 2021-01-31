@@ -1,5 +1,5 @@
 .filter-component{
-	
+	height: auto;
 }
 .filter-component.filter-display-false{
 
@@ -18,6 +18,7 @@
 }
 
 .filter-input-container.filter-display-true{
+	height: auto;
 	position: relative;
 	z-index: 1000;
 	animation: showFilter .5s forwards;
@@ -35,7 +36,7 @@
 	align-items: 'center';
 	position: 'relative';
 	z-index: 1000;
-	width: '100%'
+	width: 100%;
 }
 
 @keyframes heightFilterShow {
@@ -85,4 +86,55 @@
 	opacity: 0;
 	display: none;
   }
+}
+
+@media only screen and (max-width: 990px){
+@keyframes heightFilterShow {
+  0% {
+	height: 4rem;
+  }
+  100% {
+    height: 25rem;
+  }
+}
+
+@keyframes heightFilterHide {
+  0% {
+    height: 25rem;
+  }
+  100% {
+	height: 4rem;
+  }
+}
+
+@keyframes showFilter {
+  0% {
+	display: none;
+    transform: translateY(-25rem);
+    opacity: 0;
+  }
+  75%{
+	opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes hideFilter {
+  0% {
+	display: flex;
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  25%{
+	opacity: 0;
+  }
+  100% {
+	transform: translateY(-25rem);
+	opacity: 0;
+	display: none;
+  }
+}
 }

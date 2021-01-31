@@ -1,10 +1,22 @@
-/* DASHBOARD MENU */
+/* DASHBOARD */
 
+.dashboard-container{
+    display: flex;
+    justify-content: center;
+}
+.dashboard-menu-container{
+    display: flex;
+    justify-content: center;   
+}
 .dashboard-menu{
     min-height: 40rem;
     max-height: 40rem;
     width: 15rem;
 }
+
+/* DASHBOARD MENU */
+
+
 .dashboard-menu-links{
     min-height: 20rem;
     max-height: 20rem;
@@ -38,6 +50,7 @@
     color: white;
 }
 
+/* USER ACCOUNT */
 
 /* USER INFOS */
 
@@ -53,6 +66,16 @@
 }
 
 /* USER ACCOUNT */
+.user-account-page{
+    min-height: 40rem;
+    max-height: 40rem;
+    overflow: scroll;   
+}
+.user-account-page-update{
+    min-height: 40rem;
+    max-height: 40rem;
+    overflow: scroll;      
+}
 .submit-update-username{
     animation: display1 .5s linear normal;
 }
@@ -73,5 +96,89 @@
 #password-update-form{
     background-color: #F8F8F8;
 }
+/* USER ORDERS */
+.user-order{
+    display: flex;
+}
+.user-order img{
+    height: 9rem;
+    width: 9rem;
+    object-fit: contain;
+}
+.order-infos{
+    margin-left: 2rem;
+}
+.user-order p{
+    margin: 0;
+}
 
 /* ORDER DETAILS PAGE */
+
+.loading-spinner-div{
+    min-height: 35rem;
+    max-height: 35rem;  
+}
+.user-orders-page{
+    min-height: 40rem;
+    max-height: 40rem;
+}
+.user-orders-container{
+    min-height: 35rem;
+    max-height: 35rem;
+    overflow: scroll;
+}
+.item-photos-container{
+
+}
+
+/* USER INFOS */
+.user-infos-page{
+    min-height: 40rem;
+    max-height: 40rem;
+    overflow: scroll;     
+}
+.user-infos-page-update{
+    min-height: 40rem;
+    max-height: 40rem;
+    overflow: scroll;      
+}
+
+@media only screen and (max-width: 990px){
+    .dashboard-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }  
+    .dashboard-menu-container{
+        height: auto;
+        align-items: flex-start;  
+    }
+    .dashboard-menu{
+        min-height: auto;
+        max-height: none;
+        width: 15rem;
+    }
+    .user-account-page{
+        min-height: auto;
+        max-height: none;
+    }
+    .user-infos-page{
+        min-height: auto;
+        max-height: none;
+    }
+    .item-photos-container{
+        max-width: 90vw;
+        overflow-x: scroll;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .user-order{
+        flex-direction: column;
+    }
+    .order-infos{
+        margin-left: 0;
+    }
+
+}

@@ -15,7 +15,11 @@
 .brand img{
   object-fit: contain;
 } */
-.navbar-toggler{
+.logo{
+  height: 3rem;
+  width: 3rem;
+}
+.navbar-toggler:focus, .navbar-toggler.collapse{
   outline: none;
 }
 
@@ -165,6 +169,15 @@
   margin-top: 100px;
 }
 
-.footer{
-  height: 10vh;
+footer{
+  height: 10rem;
+  background-color: #E1D4E4;
+  padding: 0;
 }
+footer ul{
+  padding: 0;
+  margin: 0;
+}
+footer ul li{
+  list-style-type: none;
+} 

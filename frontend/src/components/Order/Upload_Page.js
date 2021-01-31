@@ -41,18 +41,18 @@ export default function Upload_Page(props) {
 
 	return ( loading ? <div className="loading-spinner-div d-flex justify-content-center"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :  
 		<div className="upload-container py-2 container d-flex flex-column align-items-center mb-5">
-			<div className="upload-advice d-flex w-100 align-items-around my-5">
+			<div className="upload-advice d-flex w-100 align-items-around my-5 border-bottom pb-5">
 				<div className="d-flex flex-column justify-content-center align-items-center col-8">
 					<div className="bad-way-upload d-flex align-items-center justify-content-around pb-3">
 						<div className="bad-way-photo">
-							<img></img>
+							<img src="/photos-site/bad-portrait.png"></img>
 						</div>
 						<AiOutlineArrowRight size={60} className="cross"/>
 						<ImCross size={40} className="sign-icon text-danger p-5" />
 					</div>
 					<div className="good-way-upload d-flex align-items-center justify-content-around">
 						<div className="good-way-photo">
-							<img src="https://cdn.pixabay.com/photo/2016/11/29/20/22/child-1871104__340.jpg"></img>
+							<img src="/photos-site/good-portrait.png"></img>
 						</div>
 						<AiOutlineArrowRight size={60} className="cross"/>
 						<TiTick size={140} className="sign-icon text-success p-3"/>

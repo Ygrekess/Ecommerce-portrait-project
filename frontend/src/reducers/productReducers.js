@@ -15,12 +15,12 @@ function recupProductsReducer(state = { loading: true, products: [] }, action) {
   }
 }
 
-function recupProductDetails(state = { loading: true, product: {}, faceNumber: [] }, action) {
+function recupProductDetails(state = { loading: true, product: {}, similarProducts: [] }, action) {
   switch (action.type) {
     case "PRODUCT_DETAILS_REQUEST":
       return { loading: true, product: {} };
     case "PRODUCT_DETAILS_SUCCESS":
-      return { loading: false, product: action.payload.product, faceNumber: action.payload.faceNumber.filter( faceNumb => faceNumb.faceNumber !== action.payload.product.faceNumber) };
+      return { loading: false, product: action.payload.product, similarProducts: action.payload.similarProducts.filter( similarProduct => similarProduct._id !== action.payload.product._id) };
     case "PRODUCT_DETAILS_FAIL":
       return { loading: false, error: action.payload };
     case "PRODUCT_UPDATE_SUCCESS":

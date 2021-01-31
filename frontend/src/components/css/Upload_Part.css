@@ -5,6 +5,7 @@
 
 
 .upload-part-order-resume{
+	display: flex;
 	height: auto;
 	background-color: #F8F8F8;
 }
@@ -23,7 +24,7 @@
 	border-radius: 5px;
 	height: 25rem;
 	outline: none;
-	border: 4px dashed #C7D4DA;
+	border: 2px dashed #C7D4DA;
 	color: #b6b6b6;
 	background-color: #FDFDFD;
 }
@@ -88,4 +89,20 @@
 
 .outlinedash-icon{
 	color: #EEEEEE;
+}
+
+@media only screen and (max-width: 990px){
+	.upload-part-order-resume{
+		flex-direction: column;
+	}
+	.upload-part-content{
+		flex-direction: column;
+	}
+	.upload-zone{
+		margin-bottom: 4rem;
+	}
+}
+
+@media only screen and (max-width: 500px){
+
 }

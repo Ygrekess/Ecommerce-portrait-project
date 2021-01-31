@@ -60,8 +60,8 @@ export default function Cart({isVisible, setIsVisible}) {
                         <tr className="table-product-row" key={product.cartItemId}>
                             <td className="cart-product-row d-flex align-items-center justify-content-around">
                                 <div className='cart-product-name'>
-                                    <Link to={`/modele/${product.slug}/${product.faceNumber}-pers`} className="text-left text-uppercase">{product.name}
-                                        <span className="font-weight-light text-lowercase"><br/>- {product.faceNumber} pers.</span>
+                                    <Link to={`/modele/${product.slug}/${product.person}-pers`} className="text-left text-uppercase">{product.name}
+                                        <span className="font-weight-light text-lowercase"><br/>- {product.person} pers.</span>
                                     </Link >
                                 </div>
                                 <span className="span-qty font-weight-bold">(x {product.qty})</span>
@@ -92,7 +92,7 @@ export default function Cart({isVisible, setIsVisible}) {
                     </tr>
                 </tbody>
             </table>     
-            <div className="cart-total col-12 p-0"><Link  to="/connexion?redirect=commande" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark text-white rounded-0 p-3 text-uppercase col-12">Valider mon panier</Link></div>
+            <div className="cart-total col-12 p-0"><Link  to="/connexion?redirect=commande" onClick={() => setIsVisible(!isVisible)} className="btn btn-dark border-0 text-white rounded-0 p-3 text-uppercase col-12">Valider mon panier</Link></div>
             </Fragment>
             :
             <h4 className="empty-cart col-12 m-0 my-5 font-weight-light text-center">Votre panier est vide.</h4>

@@ -40,7 +40,7 @@ const recupCartDetails = () => async (dispatch, getState) => {
                     cartItemId: x.cartItemId,
                     name: data.products[i].name,
                     slug: data.products[i].slug,
-                    faceNumber: data.products[i].faceNumber,
+                    face: data.products[i].face,
                     category: data.products[i].category,
                     image: data.products[i].image,
                     price: data.products[i].price,

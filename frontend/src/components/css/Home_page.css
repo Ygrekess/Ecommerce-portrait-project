@@ -6,14 +6,15 @@
   height: 100vh;
   margin: auto;
   position: relative;
+  background-color: #E1D4E4;
 }
 #intro #banniere-img {
 	position: absolute;
 	left: 0;
 	width: 100vw;
 	max-height: 100vh;
-	object-fit: cover;
-	object-position: bottom;
+	object-fit: contain;
+	object-position: bottom right;
 }
 
 .intro-content {
@@ -221,25 +222,13 @@
 	object-fit: cover;
 }
 
-.div_boutique_1{
+.div_boutique{
 	position: relative;
 	height: 350px;
 	width: 350px;
-  	background-color: red;
 }
-
-.div_boutique_2{
-	position: relative;
-	height: 350px;
-	width: 350px;
-	background-color: red;
-}
-
-.div_boutique_3{
-	position: relative;
-	height: 350px;
-	width: 350px;
-	background-color: red;  
+.div_boutique .div-title h4{
+	background-color: #5DB8F8;
 }
 
 .boutique_btn_voirplus{
@@ -250,6 +239,7 @@
 	border:none;
 	outline: none;
 	border-radius: 25px;
+	transition: .25s;
 	-webkit-border-radius: 25px;
 	-moz-border-radius: 25px;
 }
@@ -267,9 +257,7 @@
 		width: 100vw;
 		flex-direction: column;
 	}
-	.photo_boutique_content div p{
-		margin-top: 25px;
-	}
+
 }
 
 /* Modele Section */
@@ -321,7 +309,7 @@
 	}
 	.left-content, .middle-content, .right-content{
 		height: auto;
-		width: auto;
+		width: 100%;
 	}
 	.middle-content{
 		margin: 3rem auto;
@@ -344,14 +332,12 @@
 }
 
 #displayReviews{
-	background-color: thistle;
 	width: 400px;
 	height: 200px;
 }
 
 @media only screen and (max-width: 600px) {
 	#displayReviews{
-		background-color: thistle;
 		width: 80vw;
 		height: auto;
 	}	
@@ -478,35 +464,3 @@
 	}
 }
 
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
-#footer {
-  background: #E1D4E4;
-  padding: 0 0 30px 0;
-  font-size: 14px;
-  color: black;
-}
-
-#footer .copyright {
-  text-align: center;
-  padding-top: 30px;
-  color: black;
-}
-
-#footer .credits {
-  text-align: center;
-  font-size: 13px;
-  color: black;
-  margin-top: 8px;
-}
-
-#footer .credits a {
-  color: black;
-}
-.owl-carousel .owl-item img {
-    display: block;
-    width: auto;
-    height: 70px;
-    margin: 0 auto;
-}

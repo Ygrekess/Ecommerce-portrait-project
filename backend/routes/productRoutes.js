@@ -51,24 +51,15 @@ router.get('/count', async (req, res) => {
 })
 
 router.get('/details', async (req, res) => {
-  if (req.query.productId) {
     const product = await Product.findOne({ _id: req.query.productId });
+    const similarProducts = await Product.find({ slug: req.query.slug });
     if (product) {
-      res.send({product : product, faceNumber: []});
-    } else {
-        res.status(404).send({ message: 'Modèle non trouvé.' });
-    }    
-  } else {
-    const faceNumberReq = req.query.faceNumber.split('-')[0];
-    const product = await Product.findOne({ slug: req.query.slug, faceNumber: faceNumberReq });
-    const faceNumber = await Product.find({ slug: req.query.slug });
-    if (product) {
-      res.send({product : product, faceNumber: faceNumber});
+      res.send({ product: product, similarProducts: similarProducts });
     } else {
         res.status(404).send({ message: 'Modèle non trouvé.' });
     }
   }
-})
+)
 
 router.get('/cartDetails', async (req, res) => {
   const products = await Product.find({ _id: { $in: req.query.ids } });

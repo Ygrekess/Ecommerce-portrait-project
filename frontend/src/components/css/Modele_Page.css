@@ -1,6 +1,7 @@
 /* MODELES PAGE */
 .modeles-page-container{
-    min-height: 90vh;
+    min-height: 100vh;
+    max-width: 100vw;
 }
 
 
@@ -8,21 +9,24 @@
 /* MODELE PAGE */
 
 .model-page-container{
-    min-height: 70vh; 
+    min-height: 100vh; 
 }
 .modele-page-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     min-height: 100%; 
 }
 
 .modele-page-img{
    height: 30rem;
    width: 30rem; 
-   border: 10px solid black;
 }
 .modele-page-img img {
+    align-self: flex-start;
     height: 100%;
-width: 100%;
-    object-fit: cover;
+    width: 100%;
+    object-fit: contain;
 }
 
 .modele-page-details{
@@ -37,45 +41,38 @@ width: 100%;
     cursor: pointer;
     height: 3rem;
     width: 15rem;
-/*     box-shadow: 1px 1px 5px 1px rgba(133, 132, 132, 0.25);
- */}
+    transition: .25s;
+}
 .modele-page-cart-button:hover{
     background-color: #5DB8F8;
 }
 .cart-icon{
     color: black;    
 }
+.similar-products-container{
+    width: 90vw;
+    margin: auto;
+}
+.similar-products{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: auto;
+    overflow-x: scroll;
+}
+.similar-products .card{
+    min-width: auto;
+    margin: 0 1rem;
+}
 
-
-/* .modele-page-img:hover { 
-        background-color: aqua; 
-        animation-name: myanimation; 
-        animation-duration: 2s; 
-        animation-fill-mode: forwards; 
-    } 
-.modele-page-img { 
-animation-name: reverse; 
-animation-duration: 1s; 
-} 
-
-@keyframes myanimation { 
-from { 
-    transform: rotate(0deg) scale(1); 
-    border-radius: 0px; 
-} 
-to { 
-    border-radius: 100px; 
-    transform: rotate(360deg) scale(0.7); 
-} 
-} 
-
-@keyframes reverse { 
-from { 
-    border-radius: 100px; 
-    transform: rotate(360deg) scale(0.7); 
-} 
-to { 
-    border-radius: 0px; 
-    transform: rotate(0deg) scale(1); 
-} 
-}  */
+@media only screen and (max-width: 990px) {
+    .modele-page-img{
+        margin: auto;
+    }
+    .modele-page-content{
+        flex-direction: column;
+    }
+    .similar-products{
+        justify-content: start;
+    }
+}

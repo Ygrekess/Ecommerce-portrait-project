@@ -10,10 +10,8 @@ import { formatBytes } from '../../../helpers/formatBytes';
 import { MdPhotoSizeSelectActual } from 'react-icons/md'
 import { GrTextAlignLeft } from 'react-icons/gr';
 import { FiCheckSquare } from 'react-icons/fi';
-import { AiOutlineDash } from 'react-icons/ai';
-import { detailsOrder, importImage } from '../../../actions/orderActions';
+import { importImage } from '../../../actions/orderActions';
 import { useDispatch } from 'react-redux';
-import { getInfos, resetInfos } from '../../../actions/userActions';
 import '../../css/Upload_Part.css'
 
 
@@ -22,9 +20,8 @@ export default function Upload_Part({order, item, orderId, userId}) {
 	const dispatch = useDispatch();
 /* FILES */
 	const [files, setFiles] = useState([]);
-	const [compteur, setCompteur] = useState(item.photoUpload === true ? 0 : item.faceNumber);
+	const [compteur, setCompteur] = useState(item.photoUpload === true ? 0 : item.face);
 	const [progress, setProgress] = useState(item.photoUpload === true ? 100 : 0);
-	const [test, setTest] = useState(false)
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		accept: "image/*",
@@ -43,8 +40,8 @@ export default function Upload_Part({order, item, orderId, userId}) {
 
 	const images = files.map((file, i) => (
 		<div className="upload-zone-img d-flex justify-content-around align-items-center border-bottom" key={i}>
-			<img src={file.preview} className="col-4"/>
-			<div className="img-detail text-left col-6">
+			<img src={file.preview} className="col-md-4"/>
+			<div className="img-detail text-left col-md-6">
 				<h6 className="img-name">Nom : {file.name}</h6>
 				<h6 className="">Format : {file.type.split('/')[1]}</h6>
 				<h6>Taille : {formatBytes(file.size)}</h6>
@@ -63,7 +60,7 @@ export default function Upload_Part({order, item, orderId, userId}) {
 		})
 	
 		try {
-			const { data } = await Axios.post(`http://localhost:5000/api/upload/${orderId}&${folderName}`, bodyFormData, {
+			const { data } = await Axios.post(`/api/upload/${orderId}&${folderName}`, bodyFormData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
@@ -94,30 +91,20 @@ export default function Upload_Part({order, item, orderId, userId}) {
 	}
 	useEffect(() => {
 		if (!item.photoUpload) {
-			setCompteur(item.faceNumber - files.length)
+			setCompteur(item.face - files.length)
 		}
-	}, [files/*,  progress, test */])
+	}, [files])
 
 	return (
 		<Fragment>
 		<div className="upload-part w-100 d-flex flex-column align-items-center justify-content-center p-0 mb-5 border-bottom">
-{/* 			{ (progress === 100 || item.photoUpload === true) &&
-				<div className="validate-mask d-flex align-items-center justify-content-around w-100">
-					<div className="validate-modal m-auto rounded d-flex flex-column justify-content-center align-items-center p-3">
-                        <h3>{item.faceNumber > 1 ? "Vos photos ont été envoyées !" : "Votre photo a été envoyée !"}</h3>
-                        <div className="order-check-icon text-success my-3 d-flex justify-content-center w-100">
-							<FiCheckSquare size={60}/>
-						</div>
-                    </div>
-				</div>
-			} */}
 			<Fragment>
-				<div className="upload-part-order-resume d-flex w-100 p-3">
-					<div className="upload-part-order-resume-img ">
+				<div className="upload-part-order-resume d-flex p-3 mb-5">
+					<div className="upload-part-order-resume-img m-auto">
 						<img src={item.image} />
 					</div>
-					<div className="col-7 p-3 order-infos d-flex flex-column justify-content-center text-left ml-3">
-						<h4>{item.name}</h4>
+					<div className="col-md-7 col-12 p-3 order-infos d-flex flex-column justify-content-center text-left ml-3">
+						<h4>{item.name.split('-')[0]}<span className='font-weight-lighter text-capitalize'> - {item.name.split('-')[1]}</span></h4>
 						<p className="order-number m-1">Quantité : {item.qty}</p>
 						<p className="order-number m-1">Commande : {order._id}</p>
 						<p className="order-statut m-1">Statut : {!item.photoUpload ? <span className="text-danger">En attente</span> : <span className="text-success">Complet</span>}</p>
@@ -132,8 +119,8 @@ export default function Upload_Part({order, item, orderId, userId}) {
 				</div>
 				{
 				!item.photoUpload &&
-				<div className="upload-part-content d-flex align-items-center justify-content-between w-100 mx-0 my-5">
-					<div {...getRootProps()} onSubmit={() => console.log("submit")} className="upload-zone col-md-5 m-0 d-flex flex-column align-items-center justify-content-center">
+				<div className="upload-part-content d-flex align-items-center justify-content-between col-12 mx-0 my-5">
+					<div {...getRootProps()} onSubmit={() => console.log("submit")} className="upload-zone col-md-5 col-12 d-flex flex-column align-items-center justify-content-center">
 								
 					{ compteur === 0 ?
 						progress === 0 ?
@@ -145,23 +132,23 @@ export default function Upload_Part({order, item, orderId, userId}) {
 						<UploadBar progress={progress}/>
 						:
 						<Fragment>
-						<input {...getInputProps()} className=""/>
+						<input {...getInputProps()} className="col-12"/>
 						{
 							isDragActive ?
-							<p>Déposez {item.faceNumber > 1 ? "vos photos" : "votre photo"} ici.</p> :
+							<p>Déposez {item.face > 1 ? "vos photos" : "votre photo"} ici.</p> :
 							<Fragment>
 								<IoMdAdd size={80} className=""/>
-								<p>Cliquez ou déposez {item.faceNumber > 1 ? "vos photos" : "votre photo"} ici.</p>
-								<p>Photo{files.length > 1 && "s"} : {files.length}/{item.faceNumber}</p>
+								<p>Cliquez ou déposez {item.face > 1 ? "vos photos" : "votre photo"} ici.</p>
+								<p>Photo{files.length > 1 && "s"} : {files.length}/{item.face}</p>
 							</Fragment>
 						}
 						</Fragment>
 					}
 					</div>
 					
-					<div className="upload-details d-flex flex-column col-md-6 p-0">
+					<div className="upload-details d-flex flex-column col-md-6 col-12 p-0">
 						<div className="upload-title text-white p-2  bg-dark d-flex justify-content-between align-items-center">
-							<h2 className="text-uppercase font-weight-lighter">{item.name} <span className="span-number-file text-lowercase">{item.faceNumber > 1 ? `- (${item.faceNumber} photos)` : `- (${item.faceNumber} photo)` }</span></h2>
+							<h2 className="text-uppercase font-weight-lighter text-justify">{item.name.split('-')[0]}<span className='font-weight-lighter text-capitalize'> - {item.name.split('-')[1]}</span><br/><span className="span-number-file text-lowercase">{item.face > 1 ? `(${item.face} photos)` : `(${item.face} photo)` }</span></h2>
 							<h6 className={"m-0 " + (item.photoUpload ? "text-success" : "text-danger")}>{ item.photoUpload ? "Complet" : "En attente"}</h6>
 						</div>
 						<div className="upload-img-container d-flex flex-column align-self-stretch">

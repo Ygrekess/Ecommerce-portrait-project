@@ -53,47 +53,48 @@ function App() {
       <Elements stripe={stripePromise}>
       <div className="app container-fluid d-flex flex-column justify-content-start min-vh-100">
         <header className="header justify-content-between w-100">
-            <nav className="navbar navbar-expand-lg navbar-light row ">
-              <a className="navbar-brand col-6 text-left" href="#">Navbar</a>
+            <nav className="navbar navbar-expand-lg navbar-light row align-items-start">
+              <a className="navbar-brand col-3 text-left" href="/"><img className='logo' src='/photos-site/logo2.png'/></a>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
-              <div className="collapse navbar-collapse col-lg-5 col-md-6 col-12 p-0 m-auto" id="navbarNav">
-              <ul className="navbar-nav w-100  d-flex justify-content-around">
-                <li className="nav-item active d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <NavLink exact to="/" className="" activeClassName="selected">Accueil</NavLink>
-                </li>
-                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <NavLink to="/modeles" className="" activeClassName="selected ">Nos modèles</NavLink>
-                </li>
-                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <NavLink to="/contact" className="" activeClassName="selected ">Nous contacter</NavLink>
-                </li>
-                {
-                userInfo ?
-                <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <NavLink to="/admin" className="" activeClassName="selected ">Admin</NavLink>
-                </li>
-                : null
-                }
-                {
-                userInfo ?
-                <li className="d-flex align-items-center col-md-1 col-3 ml-auto p-0">
-                  <NavLink to="/mon-compte" className="" activeClassName="selected "><VscAccount size={22} /></NavLink>
-                </li> 
-                : null
-                }
-                <li className="nav-item d-flex align-items-center col-md-1 col-3 ml-auto p-0">
-                  <div className="cart p-0 d-flex flex-column align-items-center " onClick={e => setIsVisible(!isVisible)}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
-                </li>
-                {userInfo ? 
-                <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <Link className="" to="#" onClick={handleLogout}>Déconnexion</Link>
-                </li> :
-                <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
-                  <NavLink to="/connexion" className="" activeClassName="selected ">Connexion</NavLink>
-                </li> }
-              </ul>
+              <div className="collapse navbar-collapse col-9 p-0 ml-auto mt-2" id="navbarNav">
+                <ul className="navbar-nav col-md-12 d-flex justify-content-around align-items-start">
+                    <li className="nav-item active d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <NavLink exact to="/" className="" activeClassName="selected">Accueil</NavLink>
+                    </li>
+                    <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <NavLink to="/modeles" className="" activeClassName="selected ">Nos modèles</NavLink>
+                    </li>
+                    <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <NavLink to="/contact" className="" activeClassName="selected ">Nous contacter</NavLink>
+                    </li>
+                  {
+                  userInfo ?
+                    <li className="nav-item d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <NavLink to="/admin/liste-utilisateurs" className="" activeClassName="selected ">Admin</NavLink>
+                    </li>
+                    : null
+                  }
+                  {
+                  userInfo ?
+                    <li className="d-flex align-items-center col-md-1 col-3 ml-auto p-0">
+                      <NavLink to="/mon-compte" className="" activeClassName="selected "><VscAccount size={22} /></NavLink>
+                    </li> 
+                    : null
+                  }
+                    <li className="nav-item d-flex align-items-center col-md-1 col-3 ml-auto p-0">
+                      <div className="cart p-0 d-flex flex-column align-items-center " onClick={e => setIsVisible(!isVisible)}><div className="div-icon-cart"><FiShoppingCart size={22}/></div><span className="numbitemscart">{numbItemsCart()}</span></div>
+                    </li>
+                  {userInfo ? 
+                    <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <Link className="" to="#" onClick={handleLogout}>Déconnexion</Link>
+                    </li> :
+                    <li className="d-flex align-items-center col-md-2 col-3 ml-auto p-0">
+                      <NavLink to="/connexion" className="" activeClassName="selected ">Connexion</NavLink>
+                    </li>
+                    }
+                </ul>
               </div>
             </nav>
 
@@ -119,21 +120,28 @@ function App() {
           
           <Route path="/connexion" component={Connexion} />
           <Route path="/modeles/:page?/:style?/:size?/:max?/:min?" component={Modeles_Page} />
-          <Route path="/modele/:slug/:faceNumber" component={Modele_Page} />
+          <Route path="/modele/:slug/:person/:face/:id" component={Modele_Page} />
           <Route path="/commande" component={PlaceOrder_Page} />
           <Route path="/envoyer-photos/:id" component={Upload_Page} />
           <Route path="/mon-compte" component={Dashboard} />
           <Route path="/admin" component={Admin_dashboard} />
         </div>
-        <footer id="footer">
-            <div className="container">
-            <div className="copyright">
-                &copy; Copyright <strong>Topperr</strong>. All Rights Reserved
-            </div>
-            <div className="credits"> 
-                Template by <a href="https://webthemez.com/consulting/">WebThemez</a>
-            </div>
-            </div>
+        <footer id="footer" className='mt-auto d-flex align-items-center justify-content-around'>
+              <ul>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+              </ul>
+              <ul>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+              </ul>
+              <ul>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+                <li>Lorem ipsum</li>
+              </ul>
         </footer>
       </div>
     </Elements>

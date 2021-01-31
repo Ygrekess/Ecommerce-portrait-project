@@ -18,7 +18,7 @@ export default function PlaceOrder_Page(props) {
     const { userInfo } = userSignin;
     
     const orderCreate = useSelector((state) => state.orderCreate);
-    const { order } = orderCreate;
+    const { success, order } = orderCreate;
 
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false)
@@ -58,7 +58,7 @@ export default function PlaceOrder_Page(props) {
     const itemsNumb = numbItemsInCart();
     const tva = ((Number(totalItemsInCart()) / 120) * 20).toFixed(2);
     const shippingPrice = Number(totalItemsInCart()) > 50 ? 0 : 4.99;
-    const total = (Number(totalItemsInCart()) + Number(shippingPrice)).toFixed(2);
+    const total = ((Number(totalItemsInCart()) + Number(shippingPrice))).toFixed(2);
 /* ///////////////////////////// */
 /* PAIEMENT STRIPE */
     const stripe = useStripe();
@@ -77,10 +77,12 @@ export default function PlaceOrder_Page(props) {
     const onSubmitCheckout = async (e) => {
         e.preventDefault();
         setIsProcessingCard(true);
+        const amount = Number(total);
 
         try {
+            
             //Got our client secret
-            const paymentIntent = await Axios.post('http://localhost:5000/api/orders/checkout', { amount: total * 100 })
+            const paymentIntent = await Axios.post('/api/orders/checkout', { amount: amount * 100 })
 
             //Create PaymentMethod Object
             const paymentMethodObject = await stripe.createPaymentMethod({
@@ -107,7 +109,7 @@ export default function PlaceOrder_Page(props) {
                     shippingPrice, 
                     total
                 }))
-                setModal(true)
+                
                 //setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
             }
         } catch (error) {
@@ -129,7 +131,6 @@ export default function PlaceOrder_Page(props) {
             shippingPrice, 
             total
         }))
-        setModal(true)
         
     }
     
@@ -147,7 +148,7 @@ export default function PlaceOrder_Page(props) {
             props.history.push('/connexion?redirect=commande')
         }
         const addPaypalScript = async () => {
-            const { data } = await Axios.get('http://localhost:5000/api/config/paypal');
+            const { data } = await Axios.get('/api/config/paypal');
             const script = document.createElement('script');
             script.type = "text/javascript";
             script.src = `https://www.paypal.com/sdk/js?client-id=${data}&disable-funding=credit,card`;
@@ -167,9 +168,12 @@ export default function PlaceOrder_Page(props) {
                 setTimeout(() => props.history.push(`/envoyer-photos/${order._id}`), 4000)
             }
         }
+        if (success) {
+            setModal(true)
+        }
         return () => {
         }
-    }, [userInfo, orderIsValidate, sdkReady, order, cartItems])
+    }, [userInfo, orderIsValidate, sdkReady, order, cartItems, success])
 
     return (
         <div className="checkout-page container">
@@ -354,22 +358,22 @@ export default function PlaceOrder_Page(props) {
                             cartItems.map((product) => (  
                                 <tr className="table-product-row" key={product.cartItemId}>
                                     <td >{product.name} <span className="span-qty font-weight-bold">(x {product.qty})</span></td>
-                                    <td >{product.price}€</td>
+                                    <td >{product.price.toFixed(2)}€</td>
                                 </tr>
                                 ))
                             }
 
                             <tr>
                                 <th scope="row">Sous-total</th>
-                                <td>{total - shippingPrice}€</td>
+                                <td>{Number(total - shippingPrice).toFixed(2)}€</td>
                             </tr>
                             <tr>
                                 <th scope="row">Expédition</th>
-                                <td>{shippingPrice}€</td>
+                                <td>{shippingPrice.toFixed(2)}€</td>
                             </tr>
                             <tr>
                                 <th className="table-total-th" scope="row">Total</th>
-                                <td className="table-total-td font-weight-bold">{total}€ <br/><span className="span-tva">(dont {tva}€ TVA)</span></td>
+                                <td className="table-total-td font-weight-bold">{Number(total).toFixed(2)}€ <br/><span className="span-tva">(dont {Number(tva).toFixed(2)}€ TVA)</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -383,7 +387,7 @@ export default function PlaceOrder_Page(props) {
                                     <h6 className="m-0 mr-auto">Paypal</h6>
                                     {
                                         isProcessingPaypal &&
-                                        <div className="loading-spinner-div d-flex justify-content-center mr-4"><ImSpinner8 className="loading-spinner my-3" size={40} /></div>
+                                        <div className="loading-spinner-div d-flex justify-content-center"><ImSpinner8 className="loading-spinner my-3" size={40} /></div>
                                     }
                                     {
                                     paymentMethod === "Paypal" &&      
@@ -480,7 +484,7 @@ export default function PlaceOrder_Page(props) {
                                         </div> 
                                         {
                                             isProcessingCard &&
-                                            <div className="loading-spinner-div d-flex justify-content-center mr-4 col-12"><ImSpinner8 className="loading-spinner my-3" size={40} /></div>
+                                            <div className="loading-spinner-div d-flex justify-content-center col-12"><ImSpinner8 className="loading-spinner my-3" size={40} /></div>
                                         }
                                         </form>                                     
                                     </div>

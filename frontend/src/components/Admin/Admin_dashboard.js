@@ -40,7 +40,7 @@ export default function Admin_dashboard(props) {
 	}, [userInfo])
 	
     return ( loading ? <div className="col-8 loading-spinner-div d-flex justify-content-center align-items-center w-100"><ImSpinner8 className="loading-spinner my-3" size={60}/></div> :
-        <div className="container col-12 d-flex justify-content-center">
+        <div className="container col-12 d-flex justify-content-center mt-5">
             <div className="col-2 d-flex justify-content-center">
                 <Menu props={props} />
             </div>

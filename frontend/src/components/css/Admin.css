@@ -45,14 +45,17 @@ input[type="color"]{
 .order-item-img{
 	height: 9rem;
 	width: 9rem;
+	background-color: #ffff;
+	display: flex;
+	align-items: center;
 }
 .order-item-img img{
-	height: 100%;
+	height: auto;
 	width: 100%;
-	object-fit: cover;
+	object-fit: contain;
 }
 .item-photos-container{
-	max-width: 850px;
+	max-width: 90vw;
 	overflow-x: scroll;
 }
 .item-photos-img{
